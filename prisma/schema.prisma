@@ -22,6 +22,18 @@ model payment {
   createdAt DateTime 
   updatedAt DateTime 
 }  
+model Product {
+  id Int
+  
+  description String
+  name String
+  quantify Int
+  stock Float
+  maturity Date
+
+  createdAt DateTime
+  updatedAt DateTime
+}
 
 model User {
   id Int
