@@ -10,3 +10,16 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model payment {
+  id Int
+
+  card String
+  pix String
+  money Float
+  value Float
+  scheduling String
+  createdAt DateTime 
+  updatedAt DateTime 
+  
+}
