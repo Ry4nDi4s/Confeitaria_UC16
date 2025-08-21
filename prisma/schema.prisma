@@ -22,6 +22,7 @@ model payment {
   createdAt DateTime 
   updatedAt DateTime 
 }  
+
 model Product {
   id Int
   
