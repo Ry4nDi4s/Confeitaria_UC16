@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Order {
-  id Int
+  id Int @default(autoincremente())
 
   order String
   who_request String
@@ -21,10 +21,14 @@ model Order {
 
   createAt DateTime
   updateAt DataTime
+  createAt DateTime @map("Created_at") @default (now())
+  updateAt DataTime @map("updated_at") @updateAt
+
+
 }
 
 model payment {
-  id Int
+  id Int 
 
   card String
   pix String
@@ -37,6 +41,7 @@ model payment {
 
 model Product {
   id Int @id @default(autincremente())
+  id Int @id @default( autoincrement() )
   
   description String
   name String
@@ -45,6 +50,7 @@ model Product {
   maturity Date
 
   createdAt DateTime @map("created_at") @default(now())
+  createdAt DateTime @map("created_at") @default( now() )
   updatedAt DateTime @map("updated_at") @updatedAt
 }
 
