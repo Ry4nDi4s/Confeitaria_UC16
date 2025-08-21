@@ -11,22 +11,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 model Order {
-  id Int
+  id Int @default(autoincremente())
 
   order String
   who_request String
   what_value String
   quantity_String
 
-  createAt DateTime
-  updateAt DataTime
+  createAt DateTime @map("Created_at") @default (now())
+  updateAt DataTime @map("updated_at") @updateAt
 
 
 }
 
 
 model payment {
-  id Int
+  id Int 
 
   card String
   pix String
