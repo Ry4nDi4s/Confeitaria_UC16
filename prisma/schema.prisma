@@ -24,3 +24,41 @@ model Order {
 
 }
 
+
+model payment {
+  id Int
+
+  card String
+  pix String
+  money Float
+  value Float
+  scheduling String
+  createdAt DateTime 
+  updatedAt DateTime 
+}  
+model Product {
+  id Int
+  
+  description String
+  name String
+  quantify Int
+  stock Float
+  maturity Date
+
+  createdAt DateTime
+  updatedAt DateTime
+}
+
+model User {
+  id Int
+
+  name String
+  email String
+  password String
+  phone String
+  CPF String
+
+
+  createdAt DateTime
+  updatedAt DateTime
+}
