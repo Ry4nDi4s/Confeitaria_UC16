@@ -21,5 +21,18 @@ model payment {
   scheduling String
   createdAt DateTime 
   updatedAt DateTime 
-  
+}  
+
+model User {
+  id Int
+
+  name String
+  email String
+  password String
+  phone String
+  CPF String
+
+
+  createdAt DateTime
+  updatedAt DateTime
 }
