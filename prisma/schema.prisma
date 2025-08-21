@@ -36,7 +36,7 @@ model payment {
 }  
 
 model Product {
-  id Int
+  id Int @id @default(autincremente())
   
   description String
   name String
@@ -44,8 +44,8 @@ model Product {
   stock Float
   maturity Date
 
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @map("created_at") @default(now())
+  updatedAt DateTime @map("updated_at") @updatedAt
 }
 
 model User {
