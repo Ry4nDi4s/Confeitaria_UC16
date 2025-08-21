@@ -10,6 +10,7 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
 model Order {
   id Int
 
@@ -20,10 +21,7 @@ model Order {
 
   createAt DateTime
   updateAt DataTime
-
-
 }
-
 
 model payment {
   id Int
