@@ -14,10 +14,11 @@ datasource db {
 model Order {
   id Int @default(autoincremente())
 
-  order String
-  who_request String
-  what_value String
-  quantity_String
+  which_product String
+  who_order String
+  value Float
+  quantity Int
+  delivery Date
   
   createAt DateTime @map("Created_at") @default (now())
   updateAt DataTime @map("updated_at") @updateAt
