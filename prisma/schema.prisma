@@ -25,15 +25,16 @@ model Order {
 }
 
 model payment {
-  id Int 
+  id Int  @id @default(autincremente())
 
   card String
   pix String
   money Float
   value Float
   scheduling String
-  createdAt DateTime 
-  updatedAt DateTime 
+
+  createdAt DateTime @map("created_at") @default(now())
+  updatedAt DateTime  @map("updated_at") @updatedAt
 }  
 
 model Product {
@@ -42,12 +43,24 @@ model Product {
   
   description String
   name String
-  quantify Int
+  quantify Int 
   stock Float
   maturity Date
 
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime @map("updated_at") @updatedAt
+
+  // FK -> Product
+
+  productId     Int      @map("product_id")
+  carrihnoId    Int      @map("carrinho_id") 
+  receitaId     Int      @map("receita_id")
+  ingrediente   Int      @map("ingrediente_id")     
+
+  product       Product     @relations(fields: [productId], reference: [id])
+  carrinho      Product     @relations(fields: [carrihnoId], reference: [id])
+  receita       Product     @relations(fields: [receitaId], reference [id])     
+  ingrediente   receita     @relations(fields: [ingredienteid], reference [id])
 }
 
 
@@ -73,4 +86,5 @@ model User {
   pedidos User @relation(fields: [pedidosId], references: [id])
   pagamento User @relation(fields: [pagamentoId], references: [id])
 }
+
 
