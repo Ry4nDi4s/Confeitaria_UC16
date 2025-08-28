@@ -35,6 +35,14 @@ model payment {
 
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime  @map("updated_at") @updatedAt
+
+  // FK - Payment
+  paymentId Float @map("payment_id")
+  pedidosId int @map("pedidos_id")
+
+  payment Payment @relations(fields: [paymentId], reference [id])
+  pedidos Payment @relations(fields: [pedidosId], reference [id])
+
 }  
 
 model Product {
