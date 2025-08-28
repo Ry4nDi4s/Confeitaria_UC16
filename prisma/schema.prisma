@@ -87,7 +87,7 @@ model User {
   
   // Carregando o valor 1
   users User[]
-  @@map()
+  @@map("users")
   
   // FK -> User
 
@@ -98,6 +98,8 @@ model User {
   user User @relation(fields: [userId],references: [id], onDelete: Cascade)
   pedidos User @relation(fields: [pedidosId], references: [id])
   pagamento User @relation(fields: [pagamentoId], references: [id])
+
+  @@map("users")
 }
 
 
