@@ -24,7 +24,7 @@ model Order {
   updateAt DataTime @map("updated_at") @updateAt
 
   UserId int @map ("UserId")
-  User  User @relation(field: [UserId], references: [id])
+  User  User @relation(field: [UserId], references: [id])  
 
   @@ma("habits")
 }
