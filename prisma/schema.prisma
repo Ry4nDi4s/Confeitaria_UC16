@@ -50,6 +50,7 @@ model Product {
   updatedAt DateTime @map("updated_at") @updatedAt
 }
 
+
 model User {
   id Int @id @default( autoincrement() )
 
@@ -61,4 +62,15 @@ model User {
 
   createdAt DateTime @map("created_at") @default( now() )
   updatedAt DateTime @map("updated_at") @updatedAt
+  
+  // FK -> User
+
+  userId int @map("user_id")
+  pedidosId int @map("pedidos_id")
+  pagamentoId int @map("pagamento_id)
+
+  user User @relation(fields: [userId],references: [id], onDelete: Cascade)
+  pedidos User @relation(fields: [pedidosId], references: [id])
+  pagamento User @relation(fields: [pagamentoId], references: [id])
 }
+
