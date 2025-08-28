@@ -24,7 +24,7 @@ model Order {
   updateAt DataTime @map("updated_at") @updateAt
 }
 
-model payment {
+model Payment {
   id Int  @id @default(autincremente())
  
   card String
@@ -37,11 +37,11 @@ model payment {
   UpdatedAt DateTime  @map("updated_at") @updatedAt
 
   // FK - Payment
-  paymentId Float @map("payment_id")
-  OrderId int @map("Order_id")
+  paymentId Float @map("Payment_id")
+  orderId int @map("Order_id")
 
-  payment Payment @relations(fields: [paymentId], reference [id])
-  Order Payment @relations(fields: [OrderId], reference [id])
+  payment Payment @relations(fields: [PaymentId], reference [id])
+  order Payment @relations(fields: [OrderId], reference [id])
 
 }  
 
@@ -92,11 +92,11 @@ model User {
   // FK -> User
 
   userId int @map("user_id")
-  OrderId int @map("Order_id")
+  orderId int @map("order_id")
   paymentId int @map("payment_id)
 
   user User @relation(fields: [userId],references: [id], onDelete: Cascade)
-  Order User @relation(fields: [OrdersId], references: [id])
+  order User @relation(fields: [ordersId], references: [id])
   payment User @relation(fields: [paymentId], references: [id])
 }
 
