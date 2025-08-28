@@ -26,7 +26,7 @@ model Order {
 
 model payment {
   id Int  @id @default(autincremente())
-
+ 
   card String
   pix String
   money Float
@@ -76,13 +76,16 @@ model User {
   createdAt DateTime @map("created_at") @default( now() )
   updatedAt DateTime @map("updated_at") @updatedAt
   
+  
+  // Carregando o valor 1
+  users User[]
+  @@map()
+  
   // FK -> User
 
   userId int @map("user_id")
   pedidosId int @map("pedidos_id")
   pagamentoId int @map("pagamento_id)
-
-//teste
 
   user User @relation(fields: [userId],references: [id], onDelete: Cascade)
   pedidos User @relation(fields: [pedidosId], references: [id])
