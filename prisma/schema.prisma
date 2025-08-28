@@ -26,7 +26,7 @@ model Order {
 
 model payment {
   id Int  @id @default(autincremente())
-
+ 
   card String
   pix String
   money Float
@@ -83,6 +83,11 @@ model User {
 
   createdAt DateTime @map("created_at") @default( now() )
   UpdatedAt DateTime @map("updated_at") @updatedAt
+  
+  
+  // Carregando o valor 1
+  users User[]
+  @@map()
   
   // FK -> User
 
