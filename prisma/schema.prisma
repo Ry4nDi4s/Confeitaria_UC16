@@ -82,6 +82,8 @@ model User {
   pedidosId int @map("pedidos_id")
   pagamentoId int @map("pagamento_id)
 
+//teste
+
   user User @relation(fields: [userId],references: [id], onDelete: Cascade)
   pedidos User @relation(fields: [pedidosId], references: [id])
   pagamento User @relation(fields: [pagamentoId], references: [id])
