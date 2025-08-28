@@ -34,14 +34,14 @@ model payment {
   scheduling String
 
   createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime  @map("updated_at") @updatedAt
+  UpdatedAt DateTime  @map("updated_at") @updatedAt
 
   // FK - Payment
   paymentId Float @map("payment_id")
-  pedidosId int @map("pedidos_id")
+  OrderId int @map("Order_id")
 
   payment Payment @relations(fields: [paymentId], reference [id])
-  pedidos Payment @relations(fields: [pedidosId], reference [id])
+  Order Payment @relations(fields: [OrderId], reference [id])
 
 }  
 
@@ -56,7 +56,7 @@ model Product {
   maturity Date
 
   createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime @map("updated_at") @updatedAt
+  UpdatedAt DateTime @map("updated_at") @updatedAt
 
   // FK -> Product
 
@@ -82,17 +82,17 @@ model User {
   CPF String
 
   createdAt DateTime @map("created_at") @default( now() )
-  updatedAt DateTime @map("updated_at") @updatedAt
+  UpdatedAt DateTime @map("updated_at") @updatedAt
   
   // FK -> User
 
   userId int @map("user_id")
-  pedidosId int @map("pedidos_id")
-  pagamentoId int @map("pagamento_id)
+  OrderId int @map("Order_id")
+  paymentId int @map("payment_id)
 
   user User @relation(fields: [userId],references: [id], onDelete: Cascade)
-  pedidos User @relation(fields: [pedidosId], references: [id])
-  pagamento User @relation(fields: [pagamentoId], references: [id])
+  Order User @relation(fields: [OrdersId], references: [id])
+  payment User @relation(fields: [paymentId], references: [id])
 }
 
 
