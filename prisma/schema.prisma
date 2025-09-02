@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Order {
-  id Int @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   which_product String
   who_order String
@@ -31,7 +31,7 @@ model Order {
 }
 
 model Payment {
-  id Int  @id @default(autincrement())
+  id Int  @id @default(autoincrement())
  
   card String
   pix String
@@ -50,7 +50,7 @@ model Payment {
 }  
 
 model Product {
-  id Int @id @default(autincrement())
+  id Int @id @default(autoincrement())
   
   description String
   name String
