@@ -29,6 +29,8 @@ model Order {
   paymentId int @map ("payment_id")
   payment  Payment @relation(field: [paymentId], references: [id])  
 
+  carts Cart[]
+
   @@map("habits")
 }
 
@@ -44,11 +46,7 @@ model Payment {
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime  @map("updated_at") @updatedAt
 
-  // FK - Payment
-  paymentId Float @map("Payment_id")
-  orderId Int @map("Order_id")
-
-  payment Order? @relation("OrderparaPagamento", fields:[orderId], references: [id])
+  order Order?
 }  
 
 model Product {
@@ -63,23 +61,11 @@ model Product {
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime @map("updated_at") @updatedAt
 
-  carrinhos Carrinho[]
+  carts Cart[]
   receitas Receita[]
 }
 
-model Carrinho{
-  id Int @id @default(autoincrement())
 
-  // FK - Carrinho
-  carrinhoId Int @map("carrinho_id")
-  carrinho Product @relation(fields: [carrinhoId], references: [id])
-}
-
-model Receita{
-  id Int @id @default(autoincrement())
-  receitaId Int @map("receita_id")
-  receita Product @relation(fields: [receitaId], references: [id])
-}
 
 model User {
   id Int @id @default(autoincrement())
@@ -93,13 +79,58 @@ model User {
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime @map("updated_at") @updatedAt
   
-  // FK -> User
-  userId Int @map("user_id") 
-  user User @relation("UserToUsers", fields: [userId], references: [id], onDelete: Cascade)
-
-  users User[] @relation("UserToUsers")
   orders Order[]
-  payments Payment[]
 
   @@map("users")
+}
+
+model Cart{
+  id Int @id @default(autoincrement())
+
+  quantity Int
+
+  // FK - produtos
+  produtoId Int @map("produto_id")
+  produto Product @relation(fields: [produtoId], references: [id])
+ 
+  // FK - pedidos
+  pedidoId Int @map("pedido_id")
+  pedido Product @relation(fields: [pedidoId], references: [id])
+}
+ 
+model Receita{
+  id Int @id @default(autoincrement())
+
+  ingredientId Int @map("receita_id")
+  ingrediente Ingrediente @relation(fields: [ingredientId], references: [id])
+
+  produtoId int @map("receitas_id")
+  produto Product @relation(fields: [produtoId], references: [id])
+
+  description String
+  name String
+  quantify String
+  stock String
+  maturity DataTime
+  created_at DataTime @default(now())
+  updated_at DataTime @updateAt
+
+
+
+}
+
+model Ingrediente{
+  id Int @id @default(autoincrement())
+
+  description String
+  name String
+  quantify String
+  stock String
+  maturity DataTime
+  created_at DataTime @default(now())
+  updated_at DataTime @updateAt
+
+
+
+  receitas Receita[]
 }
