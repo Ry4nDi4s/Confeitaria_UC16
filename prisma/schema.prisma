@@ -12,13 +12,13 @@ datasource db {
 }
 
 model Order {
-  id Int @default(autoincremente())
+  id Int @id @default(autoincrement())
 
   which_product String
   who_order String
   value Float
   quantity Int
-  delivery_day Date
+  delivery_day DateTime
   
   createAt DateTime @map("created_at") @default (now())
   updateAt DataTime @map("updated_at") @updateAt
@@ -32,34 +32,57 @@ model Order {
   @@map("habits")
 }
 
-model payment {
-  id Int 
-
+model Payment {
+  id Int  @id @default(autoincrement())
+ 
   card String
   pix String
   money Float
   value Float
   scheduling String
-  createdAt DateTime 
-  updatedAt DateTime 
+
+  createdAt DateTime @map("created_at") @default(now())
+  updatedAt DateTime  @map("updated_at") @updatedAt
+
+  // FK - Payment
+  paymentId Float @map("Payment_id")
+  orderId Int @map("Order_id")
+
+  payment Order? @relation("OrderparaPagamento", fields:[orderId], references: [id])
 }  
 
 model Product {
-  id Int @id @default(autincremente())
-  
+  id Int @id @default(autoincrement())
   
   description String
   name String
-  quantify Int
+  quantify Int 
   stock Float
-  maturity Date
+  maturity DateTime
 
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime @map("updated_at") @updatedAt
+
+  carrinhos Carrinho[]
+  receitas Receita[]
+}
+
+model Carrinho{
+  id Int @id @default(autoincrement())
+
+  // FK - Carrinho
+  carrinhoId Int @map("carrinho_id")
+  carrinho Product @relation(fields: [carrinhoId], references: [id])
+}
+
+model Receita{
+  id Int @id @default(autoincrement())
+  receitaId Int @map("receita_id")
+  receita Product @relation(fields: [receitaId], references: [id])
 }
 
 model User {
-  id Int @id @default( autoincrement() )
+  id Int @id @default(autoincrement())
 
   name String
   email String
@@ -67,6 +90,16 @@ model User {
   phone String
   CPF String
 
-  createdAt DateTime @map("created_at") @default( now() )
+  createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime @map("updated_at") @updatedAt
+  
+  // FK -> User
+  userId Int @map("user_id") 
+  user User @relation("UserToUsers", fields: [userId], references: [id], onDelete: Cascade)
+
+  users User[] @relation("UserToUsers")
+  orders Order[]
+  payments Payment[]
+
+  @@map("users")
 }
