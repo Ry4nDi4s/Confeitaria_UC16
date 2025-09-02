@@ -20,13 +20,16 @@ model Order {
   quantity Int
   delivery_day Date
   
-  createAt DateTime @map("Created_at") @default (now())
+  createAt DateTime @map("created_at") @default (now())
   updateAt DataTime @map("updated_at") @updateAt
 
-  UserId int @map ("UserId")
-  User  User @relation(field: [UserId], references: [id])  
+  userId int @map ("user_id")
+  user  User @relation(field: [userId], references: [id])  
 
-  @@ma("habits")
+  paymentId int @map ("payment_id")
+  payment  Payment @relation(field: [paymentId], references: [id])  
+
+  @@map("habits")
 }
 
 model payment {
