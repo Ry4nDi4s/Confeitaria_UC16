@@ -22,6 +22,12 @@ model Order {
   
   createAt DateTime @map("Created_at") @default (now())
   updateAt DataTime @map("updated_at") @updateAt
+
+  // FK - Order
+  orderId Int @map("Order_id")
+  carrinhoId Int @map("carrinho_id") 
+  
+  carrinho Order @relations(fields: [carrinhoId], reference: [id])
 }
 
 model Payment {
@@ -46,7 +52,6 @@ model Payment {
 model Product {
   id Int @id @default(autincremente())
   
-  
   description String
   name String
   quantify Int 
@@ -56,17 +61,21 @@ model Product {
   createdAt DateTime @map("created_at") @default(now())
   UpdatedAt DateTime @map("updated_at") @updatedAt
 
+  // Carregando o valor 1
+  
+  products Product[]
+  @@map("products")
+
   // FK -> Product
 
-  productId     Int      @map("product_id")
-  carrihnoId    Int      @map("carrinho_id") 
-  receitaId     Int      @map("receita_id")
-  ingrediente   Int      @map("ingrediente_id")     
+  productId  Int @map("product_id")
+  carrinhoId Int @map("carrinho_id") 
+  receitaId  Int @map("receita_id")
 
   product       Product     @relations(fields: [productId], reference: [id])
-  carrinho      Product     @relations(fields: [carrihnoId], reference: [id])
-  receita       Product     @relations(fields: [receitaId], reference [id])     
-  ingrediente   receita     @relations(fields: [ingredienteid], reference [id])
+  carrinho      Product     @relations(fields: [carrinhoId], reference: [id])
+  receita       Product     @relations(fields: [receitaId], reference [id])
+  @@map("products")
 }
 
 
@@ -91,7 +100,7 @@ model User {
 
   userId int @map("user_id")
   orderId int @map("order_id")
-  paymentId int @map("payment_id)
+  paymentId int @map("payment_id")
 
   user User @relation(fields: [userId],references: [id], onDelete: Cascade)
   order User @relation(fields: [orderId], references: [id])
