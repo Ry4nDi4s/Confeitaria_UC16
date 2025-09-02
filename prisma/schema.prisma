@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Order {
-  id Int @default(autoincremente())
+  id Int @default(autoincrement())
 
   which_product String
   who_order String
@@ -20,18 +20,18 @@ model Order {
   quantity Int
   delivery_day Date
   
-  createAt DateTime @map("Created_at") @default (now())
-  updateAt DataTime @map("updated_at") @updateAt
+  createdAt DateTime @map("created_at") @default (now())
+  updatedAt DateTime @map("updated_at") @updateAt
 
   // FK - Order
   orderId Int @map("Order_id")
   carrinhoId Int @map("carrinho_id") 
   
-  carrinho Order @relations(fields: [carrinhoId], reference: [id])
+  carrinho Order @relation(fields: [carrinhoId], referencess: [id])
 }
 
 model Payment {
-  id Int  @id @default(autincremente())
+  id Int  @id @default(autincrement())
  
   card String
   pix String
@@ -40,7 +40,7 @@ model Payment {
   scheduling String
 
   createdAt DateTime @map("created_at") @default(now())
-  UpdatedAt DateTime  @map("updated_at") @updatedAt
+  updatedAt DateTime  @map("updated_at") @updatedAt
 
   // FK - Payment
   paymentId Float @map("Payment_id")
@@ -50,7 +50,7 @@ model Payment {
 }  
 
 model Product {
-  id Int @id @default(autincremente())
+  id Int @id @default(autincrement())
   
   description String
   name String
@@ -59,28 +59,26 @@ model Product {
   maturity Date
 
   createdAt DateTime @map("created_at") @default(now())
-  UpdatedAt DateTime @map("updated_at") @updatedAt
+  updatedAt DateTime @map("updated_at") @updatedAt
 
   // Carregando o valor 1
   
   products Product[]
-  @@map("products")
-
   // FK -> Product
 
   productId  Int @map("product_id")
   carrinhoId Int @map("carrinho_id") 
   receitaId  Int @map("receita_id")
 
-  product       Product     @relations(fields: [productId], reference: [id])
-  carrinho      Product     @relations(fields: [carrinhoId], reference: [id])
-  receita       Product     @relations(fields: [receitaId], reference [id])
+  product       Product     @relation(fields: [productId], referencess: [id])
+  carrinho      Product     @relation(fields: [carrinhoId], referencess: [id])
+  receita       Product     @relation(fields: [receitaId], referencess [id])
   @@map("products")
 }
 
 
 model User {
-  id Int @id @default( autoincrement() )
+  id Int @id @default(autoincrement())
 
   name String
   email String
@@ -88,23 +86,21 @@ model User {
   phone String
   CPF String
 
-  createdAt DateTime @map("created_at") @default( now() )
-  UpdatedAt DateTime @map("updated_at") @updatedAt
+  createdAt DateTime @map("created_at") @default(now())
+  updatedAt DateTime @map("updated_at") @updatedAt
   
   
   // Carregando o valor 1
-  users User[]
-  @@map("users")
-  
+  users User[]  
   // FK -> User
 
   userId int @map("user_id")
   orderId int @map("order_id")
   paymentId int @map("payment_id")
 
-  user User @relation(fields: [userId],references: [id], onDelete: Cascade)
-  order User @relation(fields: [orderId], references: [id])
-  payment User @relation(fields: [paymentId], references: [id])
+  user User @relation(fields: [userId], referencess: [id], onDelete: Cascade)
+  order User @relation(fields: [orderId], referencess: [id])
+  payment User @relation(fields: [paymentId], referencess: [id])
 
   @@map("users")
 }
