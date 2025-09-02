@@ -18,16 +18,16 @@ model Order {
   who_order String
   value Float
   quantity Int
-  delivery_day Date
+  delivery_day DateTime
   
   createdAt DateTime @map("created_at") @default (now())
-  updatedAt DateTime @map("updated_at") @updateAt
+  updatedAt DateTime @map("updated_at") @updatedAt
 
   // FK - Order
   orderId Int @map("Order_id")
   carrinhoId Int @map("carrinho_id") 
   
-  carrinho Order @relation(fields: [carrinhoId], referencess: [id])
+  carrinho Order @relation(fields: [carrinhoId], references: [id])
 }
 
 model Payment {
@@ -44,7 +44,7 @@ model Payment {
 
   // FK - Payment
   paymentId Float @map("Payment_id")
-  orderId int @map("Order_id")
+  orderId Int @map("Order_id")
 
   payment Order?
 }  
@@ -56,7 +56,7 @@ model Product {
   name String
   quantify Int 
   stock Float
-  maturity Date
+  maturity DateTime
 
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime @map("updated_at") @updatedAt
@@ -70,9 +70,9 @@ model Product {
   carrinhoId Int @map("carrinho_id") 
   receitaId  Int @map("receita_id")
 
-  product       Product     @relation(fields: [productId], referencess: [id])
-  carrinho      Product     @relation(fields: [carrinhoId], referencess: [id])
-  receita       Product     @relation(fields: [receitaId], referencess [id])
+  product       Product     @relation(fields: [productId], references: [id])
+  carrinho      Product     @relation(fields: [carrinhoId], references: [id])
+  receita       Product     @relation(fields: [receitaId], references: [id])
   @@map("products")
 }
 
@@ -91,16 +91,16 @@ model User {
   
   
   // Carregando o valor 1
-  users User[]  
+  users User[]
+
   // FK -> User
+  userId Int @map("user_id")
+  orderId Int @map("order_id")
+  paymentId Int @map("payment_id")
 
-  userId int @map("user_id")
-  orderId int @map("order_id")
-  paymentId int @map("payment_id")
-
-  user User @relation(fields: [userId], referencess: [id], onDelete: Cascade)
-  order User @relation(fields: [orderId], referencess: [id])
-  payment User @relation(fields: [paymentId], referencess: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order User @relation(fields: [orderId], references: [id])
+  payment User @relation(fields: [paymentId], references: [id])
 
   @@map("users")
 }
