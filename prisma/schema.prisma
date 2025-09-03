@@ -33,7 +33,7 @@ model Order {
 
   @@map("habits")
 }
-
+//iris
 model Payment {
   id Int  @id @default(autoincrement())
  
@@ -98,7 +98,7 @@ model Cart{
   order Order @relation(fields: [orderId], references: [id])
 
 }
- 
+//iris
 model Receita{
   id Int @id @default(autoincrement())
 
