@@ -10,6 +10,8 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+
 //Gabriel
 model Order {
   id Int @id @default(autoincrement())
@@ -31,8 +33,10 @@ model Order {
 
   carts Cart[]
 
-  @@map("habits")
+  @@map("orders")
 }
+
+
 //iris
 model Payment {
   id Int  @id @default(autoincrement())
@@ -49,6 +53,7 @@ model Payment {
   order Order?
 }  
 
+
 // Guilherme
 model Product {
   id Int @id @default(autoincrement())
@@ -64,6 +69,8 @@ model Product {
 
   carts Cart[]
   receitas Receita[]
+
+  @@map("products")
 }
 
 
@@ -85,6 +92,7 @@ model User {
   @@map("users")
 }
 
+
 // Guilherme
 model Cart{
   id Int @id @default(autoincrement())
@@ -99,7 +107,10 @@ model Cart{
   orderId Int @map("order_id")
   order Order @relation(fields: [orderId], references: [id])
 
+  @@map("carts")
 }
+
+
 //iris
 model Receita{
   id Int @id @default(autoincrement())
@@ -117,10 +128,9 @@ model Receita{
   maturity DateTime
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-
-
-
 }
+
+
 //Gabriel
 model Ingrediente{
   id Int @id @default(autoincrement())
@@ -133,7 +143,7 @@ model Ingrediente{
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-
-
   receitas Receita[]
+
+  @@map("ingredientes")
 }
