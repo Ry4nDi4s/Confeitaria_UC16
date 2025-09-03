@@ -49,6 +49,7 @@ model Payment {
   order Order?
 }  
 
+// Guilherme
 model Product {
   id Int @id @default(autoincrement())
   
@@ -84,6 +85,7 @@ model User {
   @@map("users")
 }
 
+// Guilherme
 model Cart{
   id Int @id @default(autoincrement())
 
