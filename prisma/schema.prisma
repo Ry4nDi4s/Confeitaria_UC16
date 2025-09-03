@@ -26,7 +26,7 @@ model Order {
   userId Int @map ("user_id")
   user  User @relation(fields: [userId], references: [id])  
 
-  paymentId Int @map ("payment_id")
+  paymentId Int @map ("payment_id") @unique
   payment  Payment @relation(fields: [paymentId], references: [id])  
 
   carts Cart[]
@@ -94,8 +94,9 @@ model Cart{
   produto Product @relation(fields: [produtoId], references: [id])
  
   // FK - pedidos
-  pedidoId Int @map("pedido_id")
-  pedido Product @relation(fields: [pedidoId], references: [id])
+  orderId Int @map("order_id")
+  order Order @relation(fields: [orderId], references: [id])
+
 }
  
 model Receita{
