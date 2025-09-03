@@ -47,6 +47,8 @@ model Payment {
   updatedAt DateTime  @map("updated_at") @updatedAt
 
   order Order?
+
+  @@map("payments")
 }  
 
 // Guilherme
@@ -118,9 +120,9 @@ model Receita{
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-
-
+  @@map("receitas")
 }
+
 //Gabriel
 model Ingrediente{
   id Int @id @default(autoincrement())
