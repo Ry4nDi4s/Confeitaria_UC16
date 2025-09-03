@@ -10,7 +10,7 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
-
+//Gabriel
 model Order {
   id Int @id @default(autoincrement())
 
@@ -49,6 +49,7 @@ model Payment {
   order Order?
 }  
 
+// Guilherme
 model Product {
   id Int @id @default(autoincrement())
   
@@ -84,6 +85,7 @@ model User {
   @@map("users")
 }
 
+// Guilherme
 model Cart{
   id Int @id @default(autoincrement())
 
@@ -119,7 +121,7 @@ model Receita{
 
 
 }
-
+//Gabriel
 model Ingrediente{
   id Int @id @default(autoincrement())
 
