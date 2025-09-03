@@ -51,6 +51,8 @@ model Payment {
   updatedAt DateTime  @map("updated_at") @updatedAt
 
   order Order?
+
+  @@map("payments")
 }  
 
 
@@ -128,9 +130,10 @@ model Receita{
   maturity DateTime
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+
+
 }
-
-
 //Gabriel
 model Ingrediente{
   id Int @id @default(autoincrement())
