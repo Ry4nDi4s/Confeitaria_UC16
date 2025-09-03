@@ -4,4 +4,5 @@ import {IngredienteController} from '../controllers/ingrediente'
 
 const route = Router ();
 
-route.post('/', IngredienteController.store);
+route.post('/', IngredienteController.store); 
+export default route;

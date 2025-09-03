@@ -8,13 +8,16 @@ app.use(express.json)
 
 import UserRoutes from './routes/user'
 import ProductRoutes from './routes/product';
-import cartRoutes from './routes/cart';
-
+import CartRoutes from './routes/cart';
+import OrderRoutes  from '.routes/order';
+import IngredienteRoutes from './routes/ingrediente';
 
 // Middleware de erro simples
 app.use("/users", UserRoutes)
 app.use('/products', ProductRoutes);
-app.use('/carts', cartRoutes);
+app.use('/carts', CartRoutes); 
+app.use ('/orders',OrderRoutes)
+app.use ('/ingrediente',IngredienteRoutes)
 
 app.use((err, _req, res, next) => {
     console.error(err);
