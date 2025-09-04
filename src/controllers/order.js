@@ -11,8 +11,8 @@ export const OrderController ={
                     value,
                     quantify,
                     delivery_day,
-                    userId,
-                    paymentId
+                    userId: Number (userIdId),
+                    paymentId: Number (paymantId)
                     
                 }
             });
