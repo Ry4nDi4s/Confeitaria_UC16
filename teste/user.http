@@ -1,0 +1,10 @@
+POST http://localhost:3000/users HTTP/1.1
+content-type: application/json
+
+{
+    "name" : "Marcius",
+    "email" : "Marcius@gmail.com",
+    "password" : "12345",
+    "phone" : "16 99999-1111",
+    "CPF" : "999.123.234-22",
+}

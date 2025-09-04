@@ -1,0 +1,10 @@
+POST http://localhost:3000/payment HTTP/1.1
+content-type: application/json
+
+{
+    "card":, 
+    "pix": 0, 
+    "money": 0, 
+    "value": 0, 
+    "scheduling": ""
+}
