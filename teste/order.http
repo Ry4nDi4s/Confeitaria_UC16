@@ -1,0 +1,12 @@
+POST http://localhost:3000/order HTTP/1.1
+content-type: application/json
+
+{
+    "wich_product":"",
+    "who_order":"",
+    "value":,
+    "quantify":,
+    "delivery_day":"",
+    "userId":"",
+    "paymentId":""
+}
