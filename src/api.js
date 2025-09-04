@@ -14,7 +14,6 @@ import IngredienteRoutes from './routes/ingrediente.js';
 import PaymentRoutes from "./routes/paymant.js";
 import ReceitaRoutes from "./routes/receita.js";
 
-// Middleware de erro simples
 app.use("/users", UserRoutes);
 app.use('/products', ProductRoutes);
 app.use('/carts', CartRoutes); 
@@ -23,6 +22,7 @@ app.use('/ingrediente', IngredienteRoutes);
 app.use('/payment', PaymentRoutes);
 app.use('/receita', ReceitaRoutes);
 
+// Middleware de erro simples
 app.use((err, _req, res, next) => {
     console.error(err);
     if (err.code === 'P2002'){

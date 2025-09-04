@@ -1,14 +1,22 @@
 {
   "name": "confeitaria",
   "version": "1.0.0",
+  "description": "",
+  "type": "module",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "scripts": {
+    "dev": "nodemon src/api.js",
+    "start": "node src/api.js",
+    "migrate": "prisma migrate dev",
+    "reset": "prisma migrate reset --force",
+    "push": "prisma db push",
+    "generate": "prisma generate",
+    "studio": "prisma studio",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "@prisma/client": "^6.14.0",
     "cors": "^2.8.5",
