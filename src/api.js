@@ -3,21 +3,25 @@ import express from "express";
 import cors from "cors";
 
 const app = express();
-app.use(cors())
-app.use(express.json)
+app.use(cors());
+app.use(express.json);
 
-import UserRoutes from './routes/user'
-import ProductRoutes from './routes/product';
-import CartRoutes from './routes/cart';
-import OrderRoutes  from '.routes/order';
-import IngredienteRoutes from './routes/ingrediente';
+import UserRoutes from './routes/user.js';
+import ProductRoutes from './routes/product.js';
+import CartRoutes from './routes/cart.js';
+import OrderRoutes from './routes/order.js';
+import IngredienteRoutes from './routes/ingrediente.js';
+import PaymentRoutes from "./routes/paymant.js";
+import ReceitaRoutes from "./routes/receita.js";
 
 // Middleware de erro simples
-app.use("/users", UserRoutes)
+app.use("/users", UserRoutes);
 app.use('/products', ProductRoutes);
 app.use('/carts', CartRoutes); 
-app.use ('/orders',OrderRoutes)
-app.use ('/ingrediente',IngredienteRoutes)
+app.use('/orders', OrderRoutes);
+app.use('/ingrediente', IngredienteRoutes);
+app.use('/payment', PaymentRoutes);
+app.use('/receita', ReceitaRoutes);
 
 app.use((err, _req, res, next) => {
     console.error(err);

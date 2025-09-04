@@ -1,4 +1,4 @@
-import prisma from '../prisma';
+import prisma from '../prisma.js';
 
 // Asincrono nome_da_função(recebendo, responder, próximo)
 // Asincrono = espera algum valor, por exemplo a function não

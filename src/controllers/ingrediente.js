@@ -1,4 +1,4 @@
-import prisma from '../prisma';
+import prisma from '../prisma.js';
 export const IngredienteController ={
     async store(req, res, next){
         try{

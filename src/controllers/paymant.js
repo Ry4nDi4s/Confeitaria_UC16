@@ -1,4 +1,4 @@
-import prisma from '../prisma'
+import prisma from '../prisma.js';
 
 //c- create, inset, post, set, store
 // asincrono nome_da_função (recebendo, responder, proximo)
