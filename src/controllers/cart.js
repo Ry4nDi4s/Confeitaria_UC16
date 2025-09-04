@@ -7,7 +7,7 @@ export const CartController = {
         const { quantity, orderId, produtoId } = req.body;
     
         const cartCreate = await prisma.cart.create({
-            data: {quantity, orderId, produtoId}
+            data: {quantity, orderId: Number (orderId), produtoId: Number (produtoId)}
         }
         );
 
