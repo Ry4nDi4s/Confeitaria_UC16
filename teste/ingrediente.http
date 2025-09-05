@@ -2,9 +2,9 @@ POST http://localhost:3000/ingrediente HTTP/1.1
 content-type: application/json
 
 {
-    "description":"",
-    "name":"",
-    "quantify":,
-    "stock":"", 
-    "maturity":"",
+    "description":"teste",
+    "name":"teste",
+    "quantify": 1,
+    "stock": 12, 
+    "maturity":"12/43/2133",
 }

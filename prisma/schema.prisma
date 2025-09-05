@@ -130,8 +130,7 @@ model Receita{
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-
-
+  @@map("Receitas")
 }
 //Gabriel
 model Ingrediente{

@@ -3,10 +3,10 @@ content-type: application/json
 
 {
     "wich_product":"",
-    "who_order":"",
-    "value":,
-    "quantify":,
-    "delivery_day":"",
-    "userId":"",
-    "paymentId":""
+    "who_order":"marcius",
+    "value": 49.99,
+    "quantify": 2,
+    "delivery_day":"18/09/2025",
+    "userId":1,
+    "paymentId":1
 }
