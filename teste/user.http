@@ -1,5 +1,7 @@
+### Criação de usuários
+
 POST http://localhost:3000/users HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
     "name" : "Marcius",
@@ -8,3 +10,8 @@ content-type: application/json
     "phone" : "16 99999-1111",
     "CPF" : "999.123.234-22",
 }
+
+### Leitura de todos os usuários
+
+GET http://localhost:3000/users HTTP/1.1
+Content-Type: application/json
