@@ -4,15 +4,15 @@ export const OrderController ={
         try{
             const {wich_product, who_order, value, quantify, delivery_day, userId, paymentId} =req.body;
         
-            const orderCreate = await prisma.ingrediente.create({
+            const orderCreate = await prisma.order.create({
                 data: {
                     wich_product,
                     who_order,
                     value,
                     quantify,
                     delivery_day,
-                    userId: Number (userIdId),
-                    paymentId: Number (paymantId)
+                    userId: Number (userId),
+                    paymentId: Number (paymentId)
                     
                 }
             });

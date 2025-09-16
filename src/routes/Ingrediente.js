@@ -1,8 +1,8 @@
-import {Router} from 'express';
+import { Router } from 'express';
+import { IngredienteController } from '../controllers/ingrediente.js'
 
-import {IngredienteController} from '../controllers/ingrediente.js'
+const route = Router();
 
-const route = Router ();
+route.post('/', IngredienteController.store);
 
-route.post('/', IngredienteController.store); 
 export default route;

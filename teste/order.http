@@ -6,7 +6,7 @@ content-type: application/json
     "who_order":"marcius",
     "value": 49.99,
     "quantify": 2,
-    "delivery_day":"18/09/2025",
+    "delivery_day":"2025-12-30",
     "userId":1,
     "paymentId":1
 }
