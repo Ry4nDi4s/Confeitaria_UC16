@@ -20,8 +20,13 @@ export const UserControler = {
         }
     },
     async index(req, res, next){
-        const users = await prisma.user.findMany()
 
+        if (req.query.name) query = {name: req.query.name}
+        
+
+        const users = await prisma.user.findMany({
+            where: query            
+        })
         res.status(200).json(users)
     }
 }
