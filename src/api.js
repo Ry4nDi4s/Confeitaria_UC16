@@ -1,11 +1,6 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-
-const app = express();
-app.use(cors());
-app.use(express.json);
-
 import UserRoutes from './routes/user.js';
 import ProductRoutes from './routes/product.js';
 import CartRoutes from './routes/cart.js';
@@ -14,13 +9,17 @@ import IngredienteRoutes from './routes/ingrediente.js';
 import PaymentRoutes from "./routes/paymant.js";
 import ReceitaRoutes from "./routes/receita.js";
 
+const app = express();
+app.use(cors());
+app.use(express.json());
+
 app.use("/users", UserRoutes);
 app.use('/products', ProductRoutes);
 app.use('/carts', CartRoutes); 
 app.use('/orders', OrderRoutes);
-app.use('/ingrediente', IngredienteRoutes);
-app.use('/payment', PaymentRoutes);
-app.use('/receita', ReceitaRoutes);
+app.use('/ingredientes', IngredienteRoutes);
+app.use('/payments', PaymentRoutes);
+app.use('/receitas', ReceitaRoutes);
 
 // Middleware de erro simples
 app.use((err, _req, res, next) => {

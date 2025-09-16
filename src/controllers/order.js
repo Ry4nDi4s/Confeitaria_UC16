@@ -1,19 +1,19 @@
 import prisma from '../prisma.js';
 export const OrderController ={
     async store(req, res, next){
+        console.log(req.body)
         try{
-            const {wich_product, who_order, value, quantify, delivery_day, userId, paymentId} =req.body;
+            const {which_product, who_order, value, quantity, delivery_day, userId, paymentId} =req.body;
         
             const orderCreate = await prisma.order.create({
                 data: {
-                    wich_product,
+                    which_product,
                     who_order,
                     value,
-                    quantify,
-                    delivery_day,
+                    quantity,
+                    delivery_day: ,
                     userId: Number (userId),
                     paymentId: Number (paymentId)
-                    
                 }
             });
 

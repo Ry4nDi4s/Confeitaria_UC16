@@ -9,3 +9,6 @@ npx prisma studio
 npm run generate 
 
 npm run dev
+
+// Caso de reset do banco
+npx prisma migrate reset

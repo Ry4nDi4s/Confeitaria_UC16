@@ -61,7 +61,7 @@ CREATE TABLE "carts" (
 );
 
 -- CreateTable
-CREATE TABLE "Receitas" (
+CREATE TABLE "receitas" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "receita_id" INTEGER NOT NULL,
     "receitas_id" INTEGER NOT NULL,
@@ -72,8 +72,8 @@ CREATE TABLE "Receitas" (
     "maturity" DATETIME NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" DATETIME NOT NULL,
-    CONSTRAINT "Receitas_receita_id_fkey" FOREIGN KEY ("receita_id") REFERENCES "ingredientes" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "Receitas_receitas_id_fkey" FOREIGN KEY ("receitas_id") REFERENCES "products" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "receitas_receita_id_fkey" FOREIGN KEY ("receita_id") REFERENCES "ingredientes" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "receitas_receitas_id_fkey" FOREIGN KEY ("receitas_id") REFERENCES "products" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
