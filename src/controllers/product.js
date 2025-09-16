@@ -10,12 +10,12 @@ export const  ProductController = {
         const {description, name, quantify, stock, maturity} = req.body;
     
         const productCreate = await prisma.product.create({
-            data: { description, name, quantify, stock, maturity : new Date(product)}
+            data: { description, name, quantify, stock, maturity : new Date(maturity)}
         }
         );
 
-        // respondendo 201-criado encapsulado_no_formato_json(ProductController)
-        res.status(201).jsaon(ProductController);
+        // respondendo 201-criado encapsulado_no_formato_json(productCreate)
+        res.status(201).json(productCreate);
         }catch(error){
             next(error);
         }

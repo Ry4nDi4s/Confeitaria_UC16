@@ -11,7 +11,7 @@ export const CartController = {
             }
             );
 
-            res.status(201).jsaon(cartCreate);
+            res.status(201).json(cartCreate);
         }catch(error){
             next(error);
         }
