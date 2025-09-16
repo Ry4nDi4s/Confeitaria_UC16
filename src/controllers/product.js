@@ -21,8 +21,21 @@ export const  ProductController = {
         }
     },
     async index(req, res, next) {
-        const products = await prisma.product.findMany()
 
-        res.status(200).json(products)
+        let query = {}
+        
+        // adicionar and(&&) no quantify,ex nome && quantify
+        // Adicionar Like em Where: quary
+        if (req.query.name) query = {name: req.query.name}
+        if (req.query.quantify) query = {quantify: req.query.quantify}
+        
+        
+        const products = await prisma.product.findMany({
+            where: query
+
+        }) 
+         res.status(200).json(products)
+        
+        }
     }
-}
+
