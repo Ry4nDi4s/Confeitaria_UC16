@@ -1,3 +1,5 @@
+### Criando carrinho
+
 POST http://localhost:3000/carts HTTP/1.1
 content-type: application/json
 
@@ -6,3 +8,8 @@ content-type: application/json
     "orderId": 1,
     "produtoId": 1  
 }       
+
+### Ler carrinho
+
+GET http://localhost:3000/carts HTTP/1.1
+Content-Type: application/json
