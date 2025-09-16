@@ -10,7 +10,7 @@ export const  ProductController = {
         const {description, name, quantify, stock, maturity} = req.body;
     
         const productCreate = await prisma.product.create({
-            data: { description, name, quantify, stock, maturity}
+            data: { description, name, quantify, stock, maturity : new Date(product)}
         }
         );
 
