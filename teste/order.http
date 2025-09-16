@@ -1,3 +1,5 @@
+##Criando os pedidos
+
 POST http://localhost:3000/orders HTTP/1.1
 Content-Type: application/json
 
@@ -10,3 +12,8 @@ Content-Type: application/json
     "userId":1,
     "paymentId":1
 }
+
+##lendo os pedidos
+GET http://localhost:3000/orders HTTP/1.1
+
+Content-Type: application/json

@@ -1,7 +1,6 @@
 import prisma from '../prisma.js';
 export const OrderController ={
     async store(req, res, next){
-        console.log(req.body)
         try{
             const {which_product, who_order, value, quantity, delivery_day, userId, paymentId} =req.body;
         
@@ -22,5 +21,9 @@ export const OrderController ={
             next(err);
         }
 
+    },
+    async index(req,res,next){
+        const order =await prisma.order.findMany()
+        res.status(200).json(order)
     }
 }
