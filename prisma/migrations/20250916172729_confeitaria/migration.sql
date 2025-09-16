@@ -87,6 +87,3 @@ CREATE TABLE "ingredientes" (
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" DATETIME NOT NULL
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "orders_payment_id_key" ON "orders"("payment_id");

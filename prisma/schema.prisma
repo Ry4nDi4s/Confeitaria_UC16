@@ -27,8 +27,8 @@ model Order {
   userId Int @map ("user_id")
   user  User @relation(fields: [userId], references: [id])  
 
-  paymentId Int @map ("payment_id") @unique
-  payment  Payment @relation(fields: [paymentId], references: [id])  
+  paymentId Int @map ("payment_id")
+  payment  Payment @relation(fields: [paymentId], references: [id])
 
   carts Cart[]
 
@@ -49,7 +49,7 @@ model Payment {
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime  @map("updated_at") @updatedAt
 
-  order Order?
+  order Order[]
 
   @@map("payments")
 }  

@@ -11,7 +11,7 @@ export const OrderController ={
                     who_order,
                     value,
                     quantity,
-                    delivery_day: ,
+                    delivery_day: new Date(delivery_day),
                     userId: Number (userId),
                     paymentId: Number (paymentId)
                 }
