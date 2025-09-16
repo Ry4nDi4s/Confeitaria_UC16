@@ -8,3 +8,6 @@ content-type: application/json
     "stock": 0, 
     "maturity": "teste"
 }
+
+GET http://localhost:3000/descartes HTTP/1.1
+Content-Type: application/json

@@ -15,5 +15,10 @@ export const ReceitaControler = {
         }catch(err){
             next(err);
         }
+    }, 
+    async index (req, res, next){
+        const receita = await prisma.receita.findMany()
+
+        res.status(200).json(receita)
     }
-}      
+}

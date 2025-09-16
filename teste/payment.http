@@ -1,3 +1,4 @@
+### cadastra um pagamneto
 POST http://localhost:3000/payments HTTP/1.1
 content-type: application/json
 
@@ -8,3 +9,7 @@ content-type: application/json
     "value": 0, 
     "scheduling": "05/09/2025"
 }
+
+### busca todo
+GET http://localhost:3000/payments HTTP/1.1
+Content-Type: application/json
