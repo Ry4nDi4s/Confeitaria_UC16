@@ -4,14 +4,14 @@ export const CartController = {
     async store(req, res, next){
         try{
 
-        const { quantity, orderId, produtoId } = req.body;
-    
-        const cartCreate = await prisma.cart.create({
-            data: {quantity, orderId: Number (orderId), produtoId: Number (produtoId)}
-        }
-        );
+            const { quantity, orderId, produtoId } = req.body;
+        
+            const cartCreate = await prisma.cart.create({
+                data: {quantity, orderId: Number (orderId), produtoId: Number (produtoId)}
+            }
+            );
 
-        res.status(201).jsaon(CartController);
+            res.status(201).jsaon(cartCreate);
         }catch(error){
             next(error);
         }
