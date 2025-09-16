@@ -10,15 +10,22 @@ export const IngredienteController ={
                     name,
                     quantify,
                     stock, 
-                    maturity
+                    maturity:new Date(maturity)
                 
                 }
 
             });
-            res.status(201).json(ingredienteCreateCreate);
+            res.status(201).json(ingredienteCreate);
         }catch(err){
-            next(error);
+            next(err);
         }
+    },
+        async index(req,res,next){
+            const ingredientes =await prisma.ingrediente.findMany()
+            res.status(200).json(ingredientes)
 
     }
 }
+
+    
+
