@@ -1,3 +1,5 @@
+### Criando Produto
+
 POST http://localhost:3000/products HTTP/1.1
 content-type: application/json
 
@@ -9,3 +11,8 @@ content-type: application/json
     "maturity": "teste"
 
 }
+
+### Ler Produto
+
+GET http://localhost:3000/products HTTP/1.1
+Content-Type: application/json
