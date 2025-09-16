@@ -21,5 +21,9 @@ export const OrderController ={
             next(err);
         }
 
+    },
+    async index(req,res,next){
+        const order =await prisma.order.findMany()
+        res.status(200).json(order)
     }
 }
