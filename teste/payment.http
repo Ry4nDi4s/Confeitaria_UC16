@@ -3,8 +3,8 @@ POST http://localhost:3000/payments HTTP/1.1
 content-type: application/json
 
 {
-    "card": 0, 
-    "pix": 0, 
+    "card": "tyr", 
+    "pix": "345", 
     "money": 0, 
     "value": 0, 
     "scheduling": "05/09/2025"

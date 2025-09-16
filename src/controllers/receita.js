@@ -9,7 +9,7 @@ export const ReceitaControler = {
             const {description, name, quantify, stock, maturity} = req.body;
         
             const r = prisma.receita.create({
-                    data : {description, name, quantify, stock, maturity}
+                    data : {description, name, quantify, stock, maturity: new Date(maturity)}
             });
             res.status(201).json(r);
         }catch(err){
