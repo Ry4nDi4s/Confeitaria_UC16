@@ -17,6 +17,10 @@ export const ReceitaControler = {
         }
     }, 
     async index(req, res, next) {
+ 
+        if (req.query.description) query = {description: req.query.description}
+        if (req.query.name) query = {name: req.query.name}
+        if (req.query.quantify) query = {quantify: req.query.quantify}
 
         let query = {}
         
