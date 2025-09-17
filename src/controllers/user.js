@@ -53,13 +53,15 @@ export const UserControler = {
 
     async del(req, res, _next){
         try{
+            const id = Number(req.params.id)
+    
             let user = await prisma.user.del({
                 where: {id}
             })
     
             res.status(200).json(user)
         }catch(error){
-            res.status(404).json({error: "Error em excluir"})
+            res.status(404).json({error: "Usuário não encontrado"})
         }
     }
 }
