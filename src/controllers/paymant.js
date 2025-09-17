@@ -16,7 +16,7 @@ export const PaymentControler = {
             next(err);
         }
     },
-    
+
     async index(req, res, next) {
 
         
@@ -32,15 +32,23 @@ export const PaymentControler = {
          res.status(200).json(payments)
         
         },
-        //new
+
         async show(req, res, next){
             try{
                 const id = Number (req.params.id)
                 const u = await prisma.payment.findFirstOrThrow({where:{id}});
                 res.status(200).json(u)
             }catch(err){
-                res.status(404).json("não encontrato")
-            } 
+                res.status(404).json("não encontrato")};
+        },
+
+        async delete(req, res, _next){
+            try{
+            const id = Number (req.params.id)
+            const u = await prisma.payment.delete({where:{id}});
+            res.status(200).json(u)
+        }catch(err){
+            res.status(404).json("não encontrato")};
         }
     }
 

@@ -37,7 +37,14 @@ export const ReceitaControler = {
                 const u = await prisma.receita.findFirstOrThrow({where:{id}});
                 res.status(200).json(u)
             }catch(err){
-                res.status(404).json("não encontrato")
-            } 
-    }
+                res.status(404).json("não encontrato")}; 
+    },
+    async delete(req, res, _next){
+        try{
+        const id = Number (req.params.id)
+        const u = await prisma.receita.delete({where:{id}});
+        res.status(200).json(u)
+    }catch(err){
+        res.status(404).json("não encontrato")};
+    }, 
 }
