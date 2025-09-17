@@ -5,10 +5,19 @@ content-type: application/json
 {
     "description":"teste",
     "name":"teste",
-    "quantify": "sad",
-    "stock": "sad", 
+    "quantify": 0,
+    "stock":0, 
     "maturity":"12/04/2133"
 }
+
+###
+GET http://localhost:3000/ingredientes HTTP/1.1
+Content-Type: application/json
+
 ###
 GET http://localhost:3000/ingredientes?name=teste HTTP/1.1
+Content-Type: application/json
+
+###
+GET http://localhost:3000/ingredientes/1 HTTP/1.1
 Content-Type: application/json

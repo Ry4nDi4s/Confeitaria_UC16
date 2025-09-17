@@ -5,6 +5,7 @@ const route = Router();
 
 route.post('/', IngredienteController.store);
 route.get('/', IngredienteController.index);
+route.get('/:id', IngredienteController.show);
 
 
 export default route;
