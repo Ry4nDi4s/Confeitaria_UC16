@@ -28,5 +28,16 @@ export const CartController = {
         }) 
          res.status(200).json(carts)
         
+        },
+        async show(req, res, _next) {
+            try{
+                const id = Number(req.params.id);
+                
+                let cart = await prisma.product.findFirstOrThrow(id);
+                
+                res.status(200).json(cart)
+            }catch(err){
+                res.status(404).json("Não encontrado")
+            }
         }
     }
