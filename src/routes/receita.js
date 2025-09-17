@@ -5,6 +5,7 @@ const route = Router();
 
 route.post('/', ReceitaControler.store);
 route.get('/:id', ReceitaControler.show);
+route.delete('/:id', ReceitaControler.delete);
 route.get('/', ReceitaControler.index);
 
 export default route;
