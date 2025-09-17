@@ -138,8 +138,8 @@ model Ingrediente{
 
   description String
   name String
-  quantify String
-  stock String
+  quantify Int
+  stock Int
   maturity DateTime
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
