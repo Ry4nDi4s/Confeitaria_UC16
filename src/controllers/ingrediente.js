@@ -34,11 +34,22 @@ export const IngredienteController ={
 
         }) 
          res.status(200).json(ingredientes)
+         
 
          
         
+    },
+    async Show(req, res, next){
+        try{ const id = Number(req.params.id);
+
+            let i = await prisma.ingrediente.findFirstOrThrow(id);
+
+            res.status (200).json(i);
+        }catch{err}{
+            res.status(400).json("Não encontrado")
         }
     }
+}
 
     
 
