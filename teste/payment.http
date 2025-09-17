@@ -3,7 +3,7 @@ POST http://localhost:3000/payments HTTP/1.1
 content-type: application/json
 
 {
-    "card": "tyr", 
+    "card": "lua", 
     "pix": "345", 
     "money": 0, 
     "value": 0, 
@@ -11,7 +11,7 @@ content-type: application/json
 }
 
 ### busca todo
-GET http://localhost:3000/payments? HTTP/1.1
+GET http://localhost:3000/payments HTTP/1.1
 Content-Type: application/json
 
 ### ler um usuario new
@@ -19,5 +19,5 @@ GET http://localhost:3000/payments/1 HTTP/1.1
 Content-Type: application/json
 
 ###
-DELETE http://localhost:3000/payments HTTP/1.1
+DELETE http://localhost:3000/payments/1 HTTP/1.1
 Content-Type: application/json

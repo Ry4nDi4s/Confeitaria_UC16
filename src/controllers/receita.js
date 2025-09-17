@@ -4,7 +4,7 @@ import prisma from '../prisma.js';
 // asincrono nome_da_função (recebendo, responder, proximo)
 
 export const ReceitaControler = {
-    async store(req, res, next){
+    async store(req, res, _next){
         try{
             const {description, name, quantify, stock, maturity} = req.body;
         
@@ -16,7 +16,7 @@ export const ReceitaControler = {
             next(err);
         }
     }, 
-    async index(req, res, next) {
+    async index(req, res, _next) {
         
         let query = {}
 
@@ -31,7 +31,7 @@ export const ReceitaControler = {
          res.status(200).json(receitas)
         
         },
-        async show(req, res, next){
+        async show(req, res, _next){
             try{
                 const id = Number (req.params.id)
                 const u = await prisma.receita.findFirstOrThrow({where:{id}});
