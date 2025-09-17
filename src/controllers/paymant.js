@@ -18,10 +18,11 @@ export const PaymentControler = {
     },
     async index(req, res, next) {
 
+        
+        let query = {}
+        
         if (req.query.value) query = {value: req.query.value}
         if (req.query.scheduling) query = {scheduling: req.query.scheduling}
-
-        let query = {}
         
         const payments = await prisma.payment.findMany({
             like: query

@@ -21,12 +21,13 @@ export const UserControler = {
     },
     async index(req, res, next){
 
+        let query = {}
+
         if (req.query.name) query = {name: req.query.name}
         if (req.query.email) query = {email: req.query.email}
         if (req.query.password) query = {password: req.query.password}
         if (req.query.phone) query = {phone: req.query.phone}
         if (req.query.CPF) query = {CPF: req.query.CPF}
-        
         
         const users = await prisma.user.findMany({
             where: query            

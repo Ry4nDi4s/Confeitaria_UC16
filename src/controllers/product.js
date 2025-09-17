@@ -23,7 +23,6 @@ export const  ProductController = {
     async index(req, res, next) {
 
         let query = {}
-        
         // adicionar and(&&) no quantify,ex nome && quantify
         // Adicionar Like em Where: query
         if (req.query.name) query = {name: req.query.name}
