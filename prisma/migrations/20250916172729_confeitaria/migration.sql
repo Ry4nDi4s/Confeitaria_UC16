@@ -81,8 +81,8 @@ CREATE TABLE "ingredientes" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "description" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "quantify" TEXT NOT NULL,
-    "stock" TEXT NOT NULL,
+    "quantify" INTEGER NOT NULL,
+    "stock" INTEGER NOT NULL,
     "maturity" DATETIME NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" DATETIME NOT NULL
