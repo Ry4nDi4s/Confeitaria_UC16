@@ -26,8 +26,14 @@ export const OrderController ={
 
         let query = {}
 
+        if (req.query.value) query = {value: req.query.value}
+        if (req.query.quantify) query = {quantify: req.query.quantify}
+        if (req.query.delivery_day) query = {delivery_day: req.query.delivery_day}
+        if (req.query.which_product) query = {which_product: req.query.which_product}
+
+
         const orders = await prisma.order.findMany({
-        like: query
+        where: query
 
         }) 
          res.status(200).json(orders)

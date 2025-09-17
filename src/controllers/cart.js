@@ -20,11 +20,10 @@ export const CartController = {
 
         let query = {}
 
-        if (req.query.name) query = {name: req.query.name}
         if (req.query.quantify) query = {quantify: req.query.quantify}
         
         const carts = await prisma.cart.findMany({
-            like: query
+            where: query
 
         }) 
          res.status(200).json(carts)

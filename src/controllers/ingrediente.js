@@ -23,9 +23,14 @@ export const IngredienteController ={
     async index(req, res, next) {
 
         let query = {}
+
+        
+        if (req.query.name) query = {name: req.query.name}
+        if (req.query.quantify) query = {quantify: req.query.quantify}
+        if (req.query.description) query = {description: req.query.description}
         
         const ingredientes = await prisma.ingrediente.findMany({
-            like: query
+            where: query
 
         }) 
          res.status(200).json(ingredientes)
