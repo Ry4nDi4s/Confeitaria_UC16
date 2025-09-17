@@ -46,7 +46,7 @@ export const  ProductController = {
                 
                 res.status(200).json(product)
             }catch(err){
-                res.status(404).json("Não encontrado")
+                res.status(404).json({error: "Não encontrado"})
             }
         }
     }
