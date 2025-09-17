@@ -40,7 +40,9 @@ export const  ProductController = {
             try{
                 const id = Number(req.params.id);
                 
-                let product = await prisma.product.findFirstOrThrow(id);
+                const product = await prisma.product.findFirstOrThrow({
+                    where: {id}
+                });
                 
                 res.status(200).json(product)
             }catch(err){
