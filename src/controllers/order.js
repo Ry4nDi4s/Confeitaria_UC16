@@ -39,13 +39,13 @@ export const OrderController ={
          res.status(200).json(orders)
         
     },
-    async Show(req, res, next){
+    async show(req, res, _next){
         try{ const id = Number(req.params.id);
 
-            let o = await prisma.order.findFirstOrThrow(id);
+            let o = await prisma.order.findFirstOrThrow({where:{id}});
 
             res.status (200).json(o);
-        }catch{err}{
+        }catch(err){
             res.status(400).json("Não encontrado")
         }
     }

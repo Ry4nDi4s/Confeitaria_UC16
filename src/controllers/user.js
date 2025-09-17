@@ -1,7 +1,7 @@
 import { json } from 'express';
 import prisma from '../prisma.js';
 
-// Asincrono nome_da_função(recebendo, responder, próximo)
+// Asincrono nome_da_função(req = eu estou mandando para o servidor uma informação, res = o servidor respondendo meu pedido, next = caso haja erro passe para o próximo)
 // Asincrono = espera algum valor, por exemplo a function não
 export const UserControler = {
     async store(req, res, next){
@@ -48,6 +48,18 @@ export const UserControler = {
             res.status(200).json(user)
         }catch(error){
             res.status(404).json({error: "Usuário não encontrado"})
+        }
+    },
+
+    async del(req, res, _next){
+        try{
+            let user = await prisma.user.del({
+                where: {id}
+            })
+    
+            res.status(200).json(user)
+        }catch(error){
+            res.status(404).json({error: "Error em excluir"})
         }
     }
 }
