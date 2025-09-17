@@ -3,7 +3,7 @@ import prisma from '../prisma.js';
 //c- create, inset, post, set, store
 // asincrono nome_da_função (recebendo, responder, proximo)
 export const PaymentControler = {
-    async store(req, res, next){
+    async store(req, res, _next){
         try{
             const {card, pix, money, value, scheduling} = req.body;
         
@@ -16,6 +16,7 @@ export const PaymentControler = {
             next(err);
         }
     },
+    
     async index(req, res, next) {
 
         
@@ -30,6 +31,16 @@ export const PaymentControler = {
         }) 
          res.status(200).json(payments)
         
+        },
+        //new
+        async show(req, res, next){
+            try{
+                const id = Number (req.params.id)
+                const u = await prisma.payment.findFirstOrThrow({where:{id}});
+                res.status(200).json(u)
+            }catch(err){
+                res.status(404).json("não encontrato")
+            } 
         }
     }
 
