@@ -25,7 +25,7 @@ export const PaymentControler = {
         if (req.query.scheduling) query = {scheduling: req.query.scheduling}
         
         const payments = await prisma.payment.findMany({
-            like: query
+            where: query
 
         }) 
          res.status(200).json(payments)
