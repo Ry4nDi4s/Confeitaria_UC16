@@ -6,6 +6,7 @@ const route = Router();
 route.post('/', UserControler.store);
 route.get('/', UserControler.index);
 route.get('/:id', UserControler.show);
+route.delete('/', UserControler.del)
 
 
 export default route;

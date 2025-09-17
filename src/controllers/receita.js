@@ -30,5 +30,14 @@ export const ReceitaControler = {
         }) 
          res.status(200).json(receitas)
         
-        }
+        },
+        async show(req, res, next){
+            try{
+                const id = Number (req.params.id)
+                const u = await prisma.receita.findFirstOrThrow({where:{id}});
+                res.status(200).json(u)
+            }catch(err){
+                res.status(404).json("não encontrato")
+            } 
     }
+}
