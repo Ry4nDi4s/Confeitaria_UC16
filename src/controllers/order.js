@@ -22,7 +22,7 @@ export const OrderController ={
         }
 
     },
-    async index(req, res, next) {
+    async index(req, res, next){
 
         let query = {}
 
@@ -38,5 +38,15 @@ export const OrderController ={
         }) 
          res.status(200).json(orders)
         
+    },
+    async Show(req, res, next){
+        try{ const id = Number(req.params.id);
+
+            let o = await prisma.order.findFirstOrThrow(id);
+
+            res.status (200).json(o);
+        }catch{err}{
+            res.status(400).json("Não encontrado")
         }
     }
+}

@@ -1,3 +1,4 @@
+import { json } from 'express';
 import prisma from '../prisma.js';
 
 // Asincrono nome_da_função(recebendo, responder, próximo)
@@ -19,6 +20,7 @@ export const UserControler = {
         next(error);
         }
     },
+
     async index(req, res, next){
 
         let query = {}
@@ -33,5 +35,19 @@ export const UserControler = {
             where: query            
         })
         res.status(200).json(users)
+    },
+
+    async show(req, res, _next){
+        try{
+            const id = Number(req.params.id)
+    
+            let user = await prisma.user.findFirstOrThrow({
+                where: {id}
+            })
+    
+            res.status(200).json(user)
+        }catch(error){
+            res.status(404).json({error: "Usuário não encontrado"})
+        }
     }
 }

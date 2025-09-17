@@ -34,6 +34,20 @@ export const  ProductController = {
         }) 
          res.status(200).json(products)
         
+        },
+
+        async show(req, res, _next) {
+            try{
+                const id = Number(req.params.id);
+                
+                const product = await prisma.product.findFirstOrThrow({
+                    where: {id}
+                });
+                
+                res.status(200).json(product)
+            }catch(err){
+                res.status(404).json({error: "Não encontrado"})
+            }
         }
     }
 
