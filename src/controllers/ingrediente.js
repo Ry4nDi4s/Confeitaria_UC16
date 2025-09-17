@@ -49,6 +49,19 @@ export const IngredienteController ={
         }catch(err){
             res.status(400).json("Não encontrado")
         }
+    },
+
+    async  del(req, res, _next){
+        try {
+            const id = Number (req.params.id);
+            const i = await prisma.ingrediente.delete({where: {id}});
+
+            res.status(200).json(i);
+        }catch (err) {
+            res.status (404).json({err: "ingrediente não encontrado"});
+        }
+
+
     }
 }
 
