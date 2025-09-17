@@ -34,6 +34,8 @@ export const IngredienteController ={
 
         }) 
          res.status(200).json(ingredientes)
+
+         
         
         }
     }
