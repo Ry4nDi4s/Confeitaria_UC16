@@ -33,11 +33,13 @@ export const CartController = {
             try{
                 const id = Number(req.params.id);
                 
-                let cart = await prisma.product.findFirstOrThrow(id);
+                const cart = await prisma.product.findFirstOrThrow({
+                    where: (id)
+                });
                 
                 res.status(200).json(cart)
             }catch(err){
-                res.status(404).json("Não encontrado")
+                res.status(404).json({error: "Não encontrado"})
             }
         }
     }
