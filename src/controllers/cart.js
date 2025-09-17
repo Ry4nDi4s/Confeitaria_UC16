@@ -17,8 +17,17 @@ export const CartController = {
         }
     },
     async index(req, res, next) {
-        const carts = await prisma.cart.findMany()
 
-        res.status(200).json(carts)
+        let query = {}
+
+        if (req.query.name) query = {name: req.query.name}
+        if (req.query.quantify) query = {quantify: req.query.quantify}
+        
+        const carts = await prisma.cart.findMany({
+            like: query
+
+        }) 
+         res.status(200).json(carts)
+        
+        }
     }
-}

@@ -22,8 +22,15 @@ export const OrderController ={
         }
 
     },
-    async index(req,res,next){
-        const order =await prisma.order.findMany()
-        res.status(200).json(order)
+    async index(req, res, next) {
+
+        let query = {}
+
+        const orders = await prisma.order.findMany({
+        like: query
+
+        }) 
+         res.status(200).json(orders)
+        
+        }
     }
-}

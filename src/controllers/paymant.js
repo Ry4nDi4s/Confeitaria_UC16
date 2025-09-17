@@ -16,10 +16,16 @@ export const PaymentControler = {
             next(err);
         }
     },
-    async index (req, res, next){
-        const paymants = await prisma.payment.findMany()
+    async index(req, res, next) {
 
-        res.status(200).json(paymants)
+        let query = {}
+        
+        const payments = await prisma.payment.findMany({
+            like: query
+
+        }) 
+         res.status(200).json(payments)
+        
+        }
     }
-}
 

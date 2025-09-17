@@ -20,12 +20,18 @@ export const IngredienteController ={
             next(err);
         }
     },
-        async index(req,res,next){
-            const ingredientes =await prisma.ingrediente.findMany()
-            res.status(200).json(ingredientes)
+    async index(req, res, next) {
 
+        let query = {}
+        
+        const ingredientes = await prisma.ingrediente.findMany({
+            like: query
+
+        }) 
+         res.status(200).json(ingredientes)
+        
+        }
     }
-}
 
     
 
