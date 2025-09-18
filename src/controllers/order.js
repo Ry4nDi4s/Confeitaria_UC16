@@ -39,6 +39,7 @@ export const OrderController ={
          res.status(200).json(orders)
         
     },
+
     async show(req, res, _next){
         try{ const id = Number(req.params.id);
 
@@ -47,6 +48,20 @@ export const OrderController ={
             res.status (200).json(o);
         }catch(err){
             res.status(400).json("Não encontrado")
+        
         }
+    },
+
+    async  del(req, res, _next){
+        try {
+            const id = Number (req.params.id);
+            const o = await prisma.order.delete({where: {id}});
+
+            res.status(200).json(o);
+        }catch (err) {
+            res.status (404).json({err: "Pedido não encontrado"});
+        }
+
+
     }
 }
