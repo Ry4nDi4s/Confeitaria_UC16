@@ -62,6 +62,10 @@ export const  ProductController = {
             }catch(err){
                 res.status(404).json({error: "Não encontrado"})
             }
+        },
+
+        async put(req, res, _next) {
+            
         }
     }
 

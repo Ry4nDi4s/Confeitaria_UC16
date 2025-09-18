@@ -6,6 +6,6 @@ const route = Router();
 route.post('/', CartController.store);
 route.get('/', CartController.index);
 route.get('/:id', CartController.index);
-route.delete('/', CartController.del);
+route.delete('/:id', CartController.del);
 
 export default route;
