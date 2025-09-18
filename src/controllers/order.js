@@ -67,6 +67,11 @@ export const OrderController ={
 
     async  put(req, res, _next){
         try {
+
+            let body = {}
+           
+
+
             const id = Number (req.params,id); 
             const o = await prisma.order.put({where:{id}});
 
