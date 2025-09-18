@@ -6,7 +6,7 @@ Content-Type: application/json
     "which_product":"teste",
     "who_order":"marcius",
     "value": 49.99,
-    "quantity": 2,
+    "quantify": 2,
     "delivery_day":"2025-12-30",
     "userId":1,
     "paymentId":1

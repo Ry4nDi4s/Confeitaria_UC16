@@ -3,21 +3,22 @@ import prisma from "../prisma.js";
 export const CartController = {
   async store(req, res, next) {
     try {
-      const { quantity, orderId, produtoId } = req.body;
+      const { quantify, orderId, produtoId } = req.body;
 
       const cartCreate = await prisma.cart.create({
         data: {
-          quantity,
+          quantify,
           orderId: Number(orderId),
           produtoId: Number(produtoId),
         },
       });
 
       res.status(201).json(cartCreate);
-    } catch (error) {
+    }catch(error) {
       next(error);
     }
   },
+
   async index(req, res, next) {
     let query = {};
 
@@ -28,6 +29,7 @@ export const CartController = {
     });
     res.status(200).json(carts);
   },
+
   async show(req, res, _next) {
     try {
       const id = Number(req.params.id);
@@ -55,7 +57,6 @@ export const CartController = {
       res.status(404).json({ error: "Não encontrado" });
     }
   },
-
 
   async update(req, res, _next) {
     try {

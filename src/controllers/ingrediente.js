@@ -9,9 +9,8 @@ export const IngredienteController ={
                     description,
                     name,
                     quantify: Number(quantify),
-                    stock: Number(stock), 
+                    stock: Number(stock),
                     maturity:new Date(maturity)
-                
                 }
 
             });
@@ -20,6 +19,7 @@ export const IngredienteController ={
             next(err);
         }
     },
+
     async index(req, res, next) {
 
         let query = {}
@@ -34,11 +34,8 @@ export const IngredienteController ={
 
         }) 
          res.status(200).json(ingredientes)
-         
-
-         
-        
     },
+
     async show(req, res, _next){
         try{ 
             const id = Number(req.params.id);
@@ -60,13 +57,10 @@ export const IngredienteController ={
         }catch (err) {
             res.status (404).json({err: "ingrediente não encontrado"});
         }
-
-
     },
 
     async  put(req, res, _next){
         try {
-
             let body = {}
             const id = Number (req.params,id);
             
@@ -82,7 +76,6 @@ export const IngredienteController ={
         }catch (err) {
             res.status(400).json({err:"Não encontrado"});
         }
-
     }
 }
 

@@ -18,7 +18,7 @@ model Order {
   which_product String
   who_order String
   value Float
-  quantity Int
+  quantify Int
   delivery_day DateTime
   
   createdAt DateTime @map("created_at") @default (now())
@@ -98,7 +98,7 @@ model User {
 model Cart{
   id Int @id @default(autoincrement())
 
-  quantity Int
+  quantify Int
 
   // FK - produtos
   produtoId Int @map("produto_id")
