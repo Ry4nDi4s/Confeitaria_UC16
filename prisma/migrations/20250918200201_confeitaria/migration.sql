@@ -4,7 +4,7 @@ CREATE TABLE "orders" (
     "which_product" TEXT NOT NULL,
     "who_order" TEXT NOT NULL,
     "value" REAL NOT NULL,
-    "quantity" INTEGER NOT NULL,
+    "quantify" INTEGER NOT NULL,
     "delivery_day" DATETIME NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" DATETIME NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE "users" (
 -- CreateTable
 CREATE TABLE "carts" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "quantity" INTEGER NOT NULL,
+    "quantify" INTEGER NOT NULL,
     "produto_id" INTEGER NOT NULL,
     "order_id" INTEGER NOT NULL,
     CONSTRAINT "carts_produto_id_fkey" FOREIGN KEY ("produto_id") REFERENCES "products" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
