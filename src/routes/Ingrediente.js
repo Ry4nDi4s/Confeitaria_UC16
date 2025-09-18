@@ -4,7 +4,10 @@ import { IngredienteController } from '../controllers/ingrediente.js'
 const route = Router();
 
 route.post('/', IngredienteController.store);
+route.get('/:id', IngredienteController.show);
 route.get('/', IngredienteController.index);
+route.delete('/:id',IngredienteController.del)
+
 
 
 export default route;

@@ -8,8 +8,8 @@ export const IngredienteController ={
                 data: {
                     description,
                     name,
-                    quantify,
-                    stock, 
+                    quantify: Number(quantify),
+                    stock: Number(stock), 
                     maturity:new Date(maturity)
                 
                 }
@@ -39,15 +39,29 @@ export const IngredienteController ={
          
         
     },
-    async Show(req, res, next){
-        try{ const id = Number(req.params.id);
+    async show(req, res, _next){
+        try{ 
+            const id = Number(req.params.id);
 
-            let i = await prisma.ingrediente.findFirstOrThrow(id);
+            let i = await prisma.ingrediente.findFirstOrThrow({where:{id}});
 
-            res.status (200).json(i);
-        }catch{err}{
+            res.status(200).json(i);
+        }catch(err){
             res.status(400).json("Não encontrado")
         }
+    },
+
+    async  del(req, res, _next){
+        try {
+            const id = Number (req.params.id);
+            const i = await prisma.ingrediente.delete({where: {id}});
+
+            res.status(200).json(i);
+        }catch (err) {
+            res.status (404).json({err: "ingrediente não encontrado"});
+        }
+
+
     }
 }
 

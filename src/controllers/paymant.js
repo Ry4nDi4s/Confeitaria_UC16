@@ -7,17 +7,17 @@ export const PaymentControler = {
         try{
             const {card, pix, money, value, scheduling} = req.body;
         
-            const p =  await prisma.payment.create({
+            const p = await prisma.payment.create({
                 data : {card, pix, money, value, scheduling}
             });
             //respondendo 201-criado encapsulado
             res.status(201).json(p);
         }catch(err){
-            next(err);
+            _next(err);
         }
     },
-    
-    async index(req, res, next) {
+
+    async index(req, res, _next) {
 
         
         let query = {}
@@ -32,15 +32,23 @@ export const PaymentControler = {
          res.status(200).json(payments)
         
         },
-        //new
-        async show(req, res, next){
+
+        async show(req, res, _next){
             try{
                 const id = Number (req.params.id)
                 const u = await prisma.payment.findFirstOrThrow({where:{id}});
                 res.status(200).json(u)
             }catch(err){
-                res.status(404).json("não encontrato")
-            } 
+                res.status(404).json("não encontrato")};
+        },
+
+        async delete(req, res, _next){
+            try{
+            const id = Number (req.params.id)
+            const u = await prisma.payment.delete({where:{id}});
+            res.status(200).json(u)
+        }catch(err){
+            res.status(404).json("não encontrato")};
         }
     }
 
