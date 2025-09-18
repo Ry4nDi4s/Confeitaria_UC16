@@ -69,11 +69,11 @@ export const OrderController ={
         try {
 
             let body = {}
-           
-
-
             const id = Number (req.params,id); 
-            const o = await prisma.order.put({where:{id}});
+            const o = await prisma.order.put({
+                where:{id},
+                
+            });
 
             res.status(200).json (o);
         }catch (err) {
