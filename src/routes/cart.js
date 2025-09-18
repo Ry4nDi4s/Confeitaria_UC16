@@ -7,5 +7,6 @@ route.post('/', CartController.store);
 route.get('/', CartController.index);
 route.get('/:id', CartController.index);
 route.delete('/:id', CartController.del);
+route.put('/:id', CartController.update);
 
 export default route;
