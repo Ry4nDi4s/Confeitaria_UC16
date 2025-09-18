@@ -29,3 +29,9 @@ Content-Type: application/json
 ###
 PUT  http://localhost:3000/orders/99 HTTP/1.1
 Content-Type: application/json
+
+
+{
+    "name":"Doce",
+    "quantify":20
+}
