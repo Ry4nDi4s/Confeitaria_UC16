@@ -66,8 +66,17 @@ export const IngredienteController ={
 
     async  put(req, res, _next){
         try {
-            const id = Number (req.params,id); 
-            const i = await prisma.ingrediente.put({where:{id}});
+
+            let body = {}
+            const id = Number (req.params,id);
+            
+            if(req.body.quanty) body.quantify = req.body.quantify
+            const i = await prisma.ingrediente.put({
+                
+                where:{id},
+                data: body
+            
+            });
 
             res.status(200).json (i);
         }catch (err) {
