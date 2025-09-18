@@ -62,8 +62,23 @@ export const UserControler = {
             next.status(404).json({error: "Usuário não encontrado"})
         }
     },
-    
-    async put(req, res, next){
-        
+    async update(req, res, next){
+        try{
+            const id = Number(req.params.id)
+            let body={}
+
+            if (req.body.name) body.name = (req.body.name)
+            if (req.body.email) body.email = (req.body.email) 
+            if (req.body.phone) body.phone = (req.body.phone) 
+
+            let user = await prisma.user.update({
+                where:{id},
+                data: body
+            })
+
+            res.status(200).json(user)
+        }catch(error){
+            next.status(404).json({error: "Error"})
+        }
     }
 }
