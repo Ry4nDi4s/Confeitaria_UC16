@@ -50,7 +50,7 @@ export const  ProductController = {
             }
         },
 
-        async del(req, res, _next) {
+        async delete(req, res, _next) {
             try{
                 const id = Number(req.params.id);
                 
