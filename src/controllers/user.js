@@ -62,6 +62,7 @@ export const UserControler = {
             next.status(404).json({error: "Usuário não encontrado"})
         }
     },
+    
     async update(req, res, next){
         try{
             const id = Number(req.params.id)
