@@ -50,7 +50,7 @@ export const  ProductController = {
             }
         },
 
-        async del(req, res, _next) {
+        async delete(req, res, _next) {
             try{
                 const id = Number(req.params.id);
                 
@@ -62,6 +62,10 @@ export const  ProductController = {
             }catch(err){
                 res.status(404).json({error: "Não encontrado"})
             }
+        },
+
+        async put(req, res, _next) {
+            
         }
     }
 

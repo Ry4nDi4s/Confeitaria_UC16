@@ -1,32 +1,35 @@
-### Criação de usuários
+### Criação de usuários = CREATE
 
 POST http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "marcius",
-    "email": "tio",
-    "password": "tio",
-    "phone": "123",
-    "CPF": "123"
+    "name": "Ryan",
+    "email": "ryanti43@gmail.com",
+    "password": "senac123",
+    "phone": "(16)92019-0291",
+    "CPF": "745.234.123.32"
 }
 
-### Leitura de todos os usuários
+### Leitura de todos os usuários = READ
 
 GET http://localhost:3000/users HTTP/1.1
 Content-Type: application/json 
 
-### Leitura de informações especificas(nome & email) - Aqui em users estamos usando apenas where
+### Leitura de informações especificas(nome & email) - Aqui em users estamos usando apenas where = READ
 
 GET http://localhost:3000/users?name=kleber&email=kriano@gmail.com HTTP/1.1
 Content-Type: application/json
 
-### Procura por id
+### Procura por id = READ
 
 GET http://localhost:3000/users/1 HTTP/1.1
 Content-Type: application/json
 
-### Delete
-
+### Delete = Delete
 DELETE http://localhost:3000/users/1 HTTP/1.1
+Content-Type: application/json
+
+### PUT
+PUT http://localhost:3000/users HTTP/1.1
 Content-Type: application/json

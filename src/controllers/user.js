@@ -37,11 +37,11 @@ export const UserControler = {
         res.status(200).json(users)
     },
 
-    async show(req, res, _next){
+    async show(req, res, next){
         try{
             const id = Number(req.params.id)
     
-            let user = await prisma.user.findFirstOrThrow({
+            const user = await prisma.user.findFirstOrThrow({
                 where: {id}
             })
     
@@ -51,15 +51,19 @@ export const UserControler = {
         }
     },
 
-    async del(req, res, _next){
+    async delete(req, res, next){
         try{
-            let user = await prisma.user.del({
-                where: {id}
-            })
+            const id = Number(req.params.id)
+    
+            const user = await prisma.user.delete({where:{id}})
     
             res.status(200).json(user)
         }catch(error){
-            res.status(404).json({error: "Error em excluir"})
+            next.status(404).json({error: "Usuário não encontrado"})
         }
+    },
+    
+    async put(req, res, next){
+        
     }
 }
