@@ -63,5 +63,19 @@ export const OrderController ={
         }
 
 
+    },
+
+    async  put(req, res, _next){
+        try {
+            const id = Number (req.params,id); 
+            const o = await prisma.order.put({where:{id}});
+
+            res.status(200).json (o);
+        }catch (err) {
+            res.status(400).json({err:"Não encontrado"})
+        }
+
     }
+
 }
+

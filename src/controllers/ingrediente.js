@@ -62,6 +62,18 @@ export const IngredienteController ={
         }
 
 
+    },
+
+    async  put(req, res, _next){
+        try {
+            const id = Number (req.params,id); 
+            const i = await prisma.ingrediente.put({where:{id}});
+
+            res.status(200).json (i);
+        }catch (err) {
+            res.status(400).json({err:"Não encontrado"})
+        }
+
     }
 }
 
