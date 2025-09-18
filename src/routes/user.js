@@ -9,5 +9,4 @@ route.get('/:id', UserControler.show);
 route.delete('/:id', UserControler.delete);
 route.put('/:id', UserControler.put);
 
-
 export default route;

@@ -4,7 +4,7 @@ POST http://localhost:3000/carts HTTP/1.1
 content-type: application/json
 
 {
-    "quantity":0,
+    "quantify":0,
     "orderId": 1,
     "produtoId": 1  
 }       
@@ -30,5 +30,5 @@ PUT http://localhost:3000/carts/2 HTTP/1.1
 Content-Type: application/json
 
 {
-    "quantity" : 100
+    "quantify" : 100
 }

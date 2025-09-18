@@ -67,7 +67,6 @@ export const UserControler = {
         try{
             const id = Number(req.params.id)
             let dados={}
-
             if (req.body.name) dados.name = (req.body.name)
             if (req.body.email) dados.email = (req.body.email) 
             if (req.body.phone) dados.phone = (req.body.phone) 
