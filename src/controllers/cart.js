@@ -5,6 +5,29 @@ export const CartController = {
     try {
       const { quantify, orderId, produtoId } = req.body;
 
+      let orderkey = await prisma.cart.findFirst({
+        where: {id: Number(orderId)}
+      });
+
+      let produtokey = await prisma.product.findFirst({
+        where: {id: Number(produtoId)}
+      });
+
+      
+      if(!orderkey){
+        res.status(301).json({
+          'error':'Pedido não encontrado'
+        });
+        return
+      }
+      
+      if(!produtokey){
+        res.status(301).json({
+          'error':'Produto não encontrado'
+        });
+        return
+      }
+      
       const cartCreate = await prisma.cart.create({
         data: {
           quantify,
