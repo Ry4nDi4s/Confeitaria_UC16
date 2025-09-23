@@ -7,6 +7,7 @@ route.post('/', PaymentControler.store);
 route.get('/', PaymentControler.index);
 route.get('/:id', PaymentControler.show);
 route.delete('/:id', PaymentControler.delete);
+route.put('/:id', PaymentControler.put);
 
 export default route;
 
