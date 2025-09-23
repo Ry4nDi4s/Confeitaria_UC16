@@ -21,7 +21,7 @@ export const UserControler = {
         }
     },
 
-    async index(req, res, next){
+    async index(req, res, _next){
 
         let query = {}
 
@@ -37,7 +37,7 @@ export const UserControler = {
         res.status(200).json(users)
     },
 
-    async show(req, res, next){
+    async show(req, res, _next){
         try{
             const id = Number(req.params.id)
     
