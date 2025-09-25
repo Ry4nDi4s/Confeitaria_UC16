@@ -7,11 +7,11 @@ export const PaymentControler = {
         try{
             const {card, pix, money, value, scheduling} = req.body;
         
-            const p = await prisma.payment.create({
+            const pay = await prisma.payment.create({
                 data : {card, pix, money, value, scheduling}
             });
             //respondendo 201-criado encapsulado
-            res.status(201).json(p);
+            res.status(201).json(pay);
         }catch(err){
             _next(err);
         }
@@ -36,8 +36,8 @@ export const PaymentControler = {
         async show(req, res, _next){
             try{
                 const id = Number (req.params.id)
-                const u = await prisma.payment.findFirstOrThrow({where:{id}});
-                res.status(200).json(u)
+                const pay = await prisma.payment.findFirstOrThrow({where:{id}});
+                res.status(200).json(pay)
             }catch(err){
                 res.status(404).json("não encontrato")};
         },
@@ -45,10 +45,30 @@ export const PaymentControler = {
         async delete(req, res, _next){
             try{
             const id = Number (req.params.id)
-            const u = await prisma.payment.delete({where:{id}});
-            res.status(200).json(u)
+            const pay = await prisma.payment.delete({where:{id}});
+            res.status(200).json(pay)
         }catch(err){
             res.status(404).json("não encontrato")};
+        },
+
+        async put(req, res, next){
+            try{
+                const id = Number(req.params.id)
+                let dados={}
+                if (req.body.pix) dados.pix = (req.body.pix)
+                if (req.body.money) dados.money = (req.body.money)
+                if (req.body.card) dados.card = (req.body.card)
+    
+                let payment = await prisma.payment.update({
+                    where:{id},
+                    data: body
+                })
+    
+                res.status(200).json(payment)
+            }catch(error){
+                next.status(404).json({error: "Error"})
+            }
         }
+
     }
 
