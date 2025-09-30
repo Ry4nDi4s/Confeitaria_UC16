@@ -8,6 +8,12 @@ export const ReceitaControler = {
         try{
             const {description, name, quantify, stock, maturity} = req.body;
 
+
+            //exemplos de regras de negocio/tamanhos(no visual so no front) tratamento
+            //if (description.length > 244){
+            //    res.status(401).json({'error':"quantidade de caracteres da descrição ultrapaçou o limite"})
+            //}
+
             //new
             let i = await prisma.ingredient.findfirts({
                 where:{id:Number( ingredientId)}
