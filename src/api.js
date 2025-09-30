@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import { verificaToken } from "./middlewares/aunt.js";
 import UserRoutes from './routes/user.js';
 import ProductRoutes from './routes/product.js';
 import CartRoutes from './routes/cart.js';
@@ -18,7 +19,7 @@ app.use('/products', ProductRoutes);
 app.use('/carts', CartRoutes); 
 app.use('/orders', OrderRoutes);
 app.use('/ingredientes', IngredienteRoutes);
-app.use('/payments', PaymentRoutes);
+app.use('/payments', verificaToken,PaymentRoutes);
 app.use('/receitas', ReceitaRoutes);
 
 // Middleware de erro simples
