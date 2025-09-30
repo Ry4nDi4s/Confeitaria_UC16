@@ -1,4 +1,5 @@
-import { json } from 'express';
+import bcrypt from 'bcrypt'
+import JsonWebToken from 'jsonwebtoken';
 import prisma from '../prisma.js';
 
 // Asincrono nome_da_função(req = eu estou mandando para o servidor uma informação, res = o servidor respondendo meu pedido, next = caso haja erro passe para o próximo)
@@ -36,10 +37,12 @@ export const UserControler = {
           
             return true; // CPF válido
           }
-          
+        
+        const hash = await bcrypt.hash(password, 10)
+
         const userCreated = await prisma.user.create({
             data: {
-                name, email, password, phone, CPF
+                name, email, password: hash, phone, CPF
             }
         });
 
@@ -108,6 +111,36 @@ export const UserControler = {
             res.status(200).json(user)
         }catch(error){
             next.status(404).json({error: "Error"})
+        }
+    },
+
+    async aunt(req, res, next){
+        try{
+            const {email, senha} = req.body
+
+            let u = await prisma.user.findFirst({
+                where:{email: email}
+            })
+
+            if(!u){
+                res.status(404).json({erro: "erro no Email"})
+                return;
+            }
+
+            const ok = await bcrypt.compare(senha, u.password)
+            if (!ok){
+                return res.status(401).json({erro: "Erro na senha"})
+            }
+
+            // Gerar JWT(payload minimo)
+            const token = JsonWebToken.sign(
+                {sub: u.id, email: u.email, name: u.name},
+                process.env.JWT_SECRET,
+                {expiresIn: "8h"}
+            );
+            return res.json({token});
+        }catch(erro){
+            next(erro)
         }
     }
 }
