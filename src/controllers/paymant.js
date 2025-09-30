@@ -6,7 +6,16 @@ export const PaymentControler = {
     async store(req, res, _next){
         try{
             const {card, pix, money, value, scheduling} = req.body;
-        
+
+            if (card && !validaCartao(card)) {
+                return res.status(400).json({error: "Cartão inválido"});
+            }
+
+            
+            //if(!validaCARTÃO(card)){
+            //     res.status(201).json({'error':"não existente"})
+            //}
+
             const pay = await prisma.payment.create({
                 data : {card, pix, money, value, scheduling}
             });
@@ -24,6 +33,8 @@ export const PaymentControler = {
         
         if (req.query.value) query = {value: {contains: req.query.value}}
         if (req.query.scheduling) query = {scheduling: {contains: req.query.scheduling}}
+
+        //where.userid=Reg.logado.id
         
         const payments = await prisma.payment.findMany({
             where: query
@@ -70,5 +81,26 @@ export const PaymentControler = {
             }
         }
 
+    }
+
+    function validaCartao(numero) {
+        if (!numero) return false;
+      
+        const digits = numero.replace(/\D/g, '');
+        if (digits.length < 13 || digits.length > 19) return false;
+      
+        let soma = 0;
+        let alterna = false;
+      
+        for (let i = digits.length - 1; i >= 0; i--) {
+          let n = parseInt(digits[i], 10);
+          if (alterna) {
+            n *= 2;
+            if (n > 9) n -= 9;
+          }
+          soma += n;
+          alterna = !alterna;
+        }
+        return (soma % 10 === 0);
     }
 
