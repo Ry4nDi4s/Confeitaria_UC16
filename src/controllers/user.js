@@ -8,35 +8,10 @@ export const UserControler = {
     async store(req, res, next){
     try{
         const {name, email, password, phone, CPF} = req.body
-    
-        function validarCPF(cpf) {
-            cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
-          
-            if (cpf.length !== 11) return false;
-          
-            // Elimina CPFs inválidos conhecidos (ex: 00000000000, 11111111111, etc.)
-            if (/^(\d)\1+$/.test(cpf)) return false;
-          
-            // Valida primeiro dígito verificador
-            let soma = 0;
-            for (let i = 0; i < 9; i++) {
-              soma += parseInt(cpf.charAt(i)) * (10 - i);
-            }
-            let primeiroDigito = 11 - (soma % 11);
-            if (primeiroDigito > 9) primeiroDigito = 0;
-            if (parseInt(cpf.charAt(9)) !== primeiroDigito) return false;
-          
-            // Valida segundo dígito verificador
-            soma = 0;
-            for (let i = 0; i < 10; i++) {
-              soma += parseInt(cpf.charAt(i)) * (11 - i);
-            }
-            let segundoDigito = 11 - (soma % 11);
-            if (segundoDigito > 9) segundoDigito = 0;
-            if (parseInt(cpf.charAt(10)) !== segundoDigito) return false;
-          
-            return true; // CPF válido
-          }
+
+        if (CPF && !validarCPF(CPF)) {
+            return res.status(400).json({error: "CPF Invalido"});
+        }
         
         const hash = await bcrypt.hash(password, 10)
 
@@ -144,3 +119,32 @@ export const UserControler = {
         }
     }
 }
+
+function validarCPF(cpf) {
+    cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
+  
+    if (cpf.length !== 11) return false;
+  
+    // Elimina CPFs inválidos conhecidos (ex: 00000000000, 11111111111, etc.)
+    if (/^(\d)\1+$/.test(cpf)) return false;
+  
+    // Valida primeiro dígito verificador
+    let soma = 0;
+    for (let i = 0; i < 9; i++) {
+      soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let primeiroDigito = 11 - (soma % 11);
+    if (primeiroDigito > 9) primeiroDigito = 0;
+    if (parseInt(cpf.charAt(9)) !== primeiroDigito) return false;
+  
+    // Valida segundo dígito verificador
+    soma = 0;
+    for (let i = 0; i < 10; i++) {
+      soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    let segundoDigito = 11 - (soma % 11);
+    if (segundoDigito > 9) segundoDigito = 0;
+    if (parseInt(cpf.charAt(10)) !== segundoDigito) return false;
+  
+    return true; // CPF válido
+  }

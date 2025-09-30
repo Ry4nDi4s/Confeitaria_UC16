@@ -27,16 +27,6 @@ export const OrderController ={
                 return
             }
 
-            let uId = await prisma.cart.findFirst({
-                where: {id: Number(req.logado.id)}
-              })
-        
-            let pId = await prisma.cart.findFirst({
-                where: {id: Number(req.logado.id)}
-            })
-
-
-        
             const orderCreate = await prisma.order.create({
                 data: {
                     which_product,
@@ -44,8 +34,8 @@ export const OrderController ={
                     value,
                     quantify,
                     delivery_day: new Date(delivery_day),
-                    userId: Number (uId.req.logado.id),
-                    paymentId: Number (pId.req.logado.id)
+                    userId: Number (userId),
+                    paymentId: Number (paymentId)
                 }
             });
 
