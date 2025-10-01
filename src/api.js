@@ -8,6 +8,8 @@ import OrderRoutes from './routes/order.js';
 import IngredienteRoutes from './routes/Ingrediente.js';
 import PaymentRoutes from "./routes/paymant.js";
 import ReceitaRoutes from "./routes/receita.js";
+import { verificaToken } from "./middlewares/aunt.js";
+
 
 const app = express();
 app.use(cors());
@@ -18,8 +20,8 @@ app.use('/products', ProductRoutes);
 app.use('/carts', CartRoutes); 
 app.use('/orders', OrderRoutes);
 app.use('/ingredientes', IngredienteRoutes);
-app.use('/payments', PaymentRoutes);
-app.use('/receitas', ReceitaRoutes);
+app.use('/payments', verificaToken, PaymentRoutes);
+app.use('/receitas', verificaToken, ReceitaRoutes);
 
 // Middleware de erro simples
 app.use((err, _req, res, _next) => {
