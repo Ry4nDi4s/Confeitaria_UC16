@@ -8,35 +8,22 @@ export const UserControler = {
     async store(req, res, next){
     try{
         const {name, email, password, phone, CPF} = req.body
-    
-        function validarCPF(cpf) {
-            cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
-          
-            if (cpf.length !== 11) return false;
-          
-            // Elimina CPFs inválidos conhecidos (ex: 00000000000, 11111111111, etc.)
-            if (/^(\d)\1+$/.test(cpf)) return false;
-          
-            // Valida primeiro dígito verificador
-            let soma = 0;
-            for (let i = 0; i < 9; i++) {
-              soma += parseInt(cpf.charAt(i)) * (10 - i);
-            }
-            let primeiroDigito = 11 - (soma % 11);
-            if (primeiroDigito > 9) primeiroDigito = 0;
-            if (parseInt(cpf.charAt(9)) !== primeiroDigito) return false;
-          
-            // Valida segundo dígito verificador
-            soma = 0;
-            for (let i = 0; i < 10; i++) {
-              soma += parseInt(cpf.charAt(i)) * (11 - i);
-            }
-            let segundoDigito = 11 - (soma % 11);
-            if (segundoDigito > 9) segundoDigito = 0;
-            if (parseInt(cpf.charAt(10)) !== segundoDigito) return false;
-          
-            return true; // CPF válido
+
+        if (!validarEmail(email)) {
+            return res.status(400).json({ error: "Email inválido" });
           }
+    
+        if (!validarSenha(password)) {
+            return res.status(400).json({ error: "Senha fraca. Use pelo menos 8 caracteres, incluindo letras e números." });
+        }
+    
+        if (!validarTelefone(phone)) {
+            return res.status(400).json({ error: "Telefone inválido. Use o formato (XX)XXXXX-XXXX" });
+        }
+    
+        if (CPF && !validarCPF(CPF)) {
+            return res.status(400).json({ error: "CPF inválido" });
+        }
         
         const hash = await bcrypt.hash(password, 10)
 
@@ -144,3 +131,48 @@ export const UserControler = {
         }
     }
 }
+
+function validarCPF(cpf) {
+    cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
+  
+    if (cpf.length !== 11) return false;
+  
+    // Elimina CPFs inválidos conhecidos (ex: 00000000000, 11111111111, etc.)
+    if (/^(\d)\1+$/.test(cpf)) return false;
+  
+    // Valida primeiro dígito verificador
+    let soma = 0;
+    for (let i = 0; i < 9; i++) {
+      soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let primeiroDigito = 11 - (soma % 11);
+    if (primeiroDigito > 9) primeiroDigito = 0;
+    if (parseInt(cpf.charAt(9)) !== primeiroDigito) return false;
+  
+    // Valida segundo dígito verificador
+    soma = 0;
+    for (let i = 0; i < 10; i++) {
+      soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    let segundoDigito = 11 - (soma % 11);
+    if (segundoDigito > 9) segundoDigito = 0;
+    if (parseInt(cpf.charAt(10)) !== segundoDigito) return false;
+  
+    return true; // CPF válido
+  }
+
+  function validarEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+  
+  function validarSenha(senha) {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(senha);
+  }
+  
+  function validarTelefone(telefone) {
+    const regex = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+    return regex.test(telefone);
+  }
+  

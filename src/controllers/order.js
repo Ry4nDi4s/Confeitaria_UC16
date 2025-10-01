@@ -36,8 +36,8 @@ export const OrderController ={
                     value,
                     quantify,
                     delivery_day: new Date(delivery_day),
-                    userId: Number (uId.req.logado.id),
-                    paymentId: Number (pId.req.logado.id)
+                    userId: Number (userId),
+                    paymentId: Number (paymentId)
                 }
             });
 
@@ -86,8 +86,6 @@ export const OrderController ={
         }catch (err) {
             res.status (404).json({err: "Pedido não encontrado"});
         }
-
-
     },
 
     async  put(req, res, _next){
@@ -104,8 +102,6 @@ export const OrderController ={
         }catch (err) {
             res.status(400).json({err:"Não encontrado"})
         }
-
     }
-
 }
 

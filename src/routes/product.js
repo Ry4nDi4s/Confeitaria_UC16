@@ -1,14 +1,13 @@
 import { Router } from 'express';
-import { ProductController } from '../controllers/product.js'
-import { verificaToken } from '../middlewares/aunt.js';
+import { ProductController } from '../controllers/product.js';
 
 const route = Router();
 
-route.post('/', verificaToken,ProductController.store);
+route.post('/',ProductController.store);
 route.get('/', ProductController.index);
 route.get('/:id', ProductController.show);
-route.delete('/:id', verificaToken,ProductController.delete);
-route.put('/:id', verificaToken,ProductController.update);
+route.delete('/:id',ProductController.delete);
+route.put('/:id',ProductController.update);
 
 
 export default route ; 
