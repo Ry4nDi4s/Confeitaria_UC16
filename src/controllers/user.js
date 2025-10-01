@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import JsonWebToken from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import prisma from '../prisma.js';
 
 // Asincrono nome_da_função(req = eu estou mandando para o servidor uma informação, res = o servidor respondendo meu pedido, next = caso haja erro passe para o próximo)
@@ -120,7 +120,7 @@ export const UserControler = {
             }
 
             // Gerar JWT(payload minimo)
-            const token = JsonWebToken.sign(
+            const token = jwt.sign(
                 {sub: u.id, email: u.email, name: u.name},
                 process.env.JWT_SECRET,
                 {expiresIn: "8h"}

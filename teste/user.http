@@ -10,7 +10,7 @@ Content-Type: application/json
     "email": "ryanti43@gmail.com",
     "password": "senac123",
     "phone": "(16)92019-0291",
-    "CPF": "745.234.123.32"
+    "CPF": "521.417.198.60"
 }
 
 ### Leitura de todos os usuários = READ

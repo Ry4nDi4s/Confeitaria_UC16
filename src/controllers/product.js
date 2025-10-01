@@ -6,7 +6,8 @@ import prisma from "../prisma.js";
 export const ProductController = {
   async store(req, res, next) {
     try {
-      const { description, name, quantify, stock, maturity } = req.body;
+      const { description, name, quantify,stock, maturity, 
+        foto, preco } = req.body;
 
       const productCreate = await prisma.product.create({
         data: {
