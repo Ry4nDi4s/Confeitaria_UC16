@@ -4,37 +4,29 @@ export const OrderController ={
         try{
             const {which_product, who_order, value, quantify, delivery_day, userId, paymentId} =req.body;
 
-            let paymentkey = await prisma.payment.findFirst({
-                where : {id: Number(paymentId)}
-            });
+            if (paymentId){
+                let paymentkey = await prisma.payment.findFirst({
+                    where : {id: Number(paymentId)}
+                });
+                if(!paymentkey){ 
+                    res.status(301).json({
+                        'error':"Pedido informado não existe"
+                    });
+                    return
+                }
 
+            }
+           
+            
             let userkey = await prisma.user.findFirst({
                 where : {id: Number(userId)}
             });
-            
-            
-            if(!paymentkey){ 
-                res.status(301).json({
-                    'error':"Pedido informado não existe"
-                });
-                return
-            }
-
             if(!userkey){ 
                 res.status(301).json({
                     'error':"Pedido informado não existe"
                 });
                 return
             }
-
-            let uId = await prisma.cart.findFirst({
-                where: {id: Number(req.logado.id)}
-              })
-        
-            let pId = await prisma.cart.findFirst({
-                where: {id: Number(req.logado.id)}
-            })
-
 
         
             const orderCreate = await prisma.order.create({
