@@ -10,7 +10,7 @@ export function verificaToken(req, res, next){
 
         try{
             const payload = JsonWebToken.verify(token, process.env.JWT_SECRET);
-            req.usuario = {
+            req.logado = {
                 id: payload.sub,
                 email: payload.email,
                 name: payload.name

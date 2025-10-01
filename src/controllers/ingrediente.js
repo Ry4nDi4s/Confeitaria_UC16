@@ -24,7 +24,6 @@ export const IngredienteController ={
 
         let query = {}
 
-        
         if (req.query.name) query = {name: req.query.name}
         if (req.query.quantify) query = {quantify: req.query.quantify}
         if (req.query.description) query = {description: req.query.description}

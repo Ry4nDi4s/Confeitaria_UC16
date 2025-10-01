@@ -27,7 +27,7 @@ export const CartController = {
         });
         return
       }
-      
+
       const cartCreate = await prisma.cart.create({
         data: {
           quantify,

@@ -27,8 +27,6 @@ export const OrderController ={
                 return
             }
 
-
-        
             const orderCreate = await prisma.order.create({
                 data: {
                     which_product,
@@ -86,8 +84,6 @@ export const OrderController ={
         }catch (err) {
             res.status (404).json({err: "Pedido não encontrado"});
         }
-
-
     },
 
     async  put(req, res, _next){
@@ -104,8 +100,6 @@ export const OrderController ={
         }catch (err) {
             res.status(400).json({err:"Não encontrado"})
         }
-
     }
-
 }
 
