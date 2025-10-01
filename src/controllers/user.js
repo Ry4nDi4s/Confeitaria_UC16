@@ -13,17 +13,17 @@ export const UserControler = {
             return res.status(400).json({ error: "Email inválido" });
           }
     
-          if (!validarSenha(password)) {
+        if (!validarSenha(password)) {
             return res.status(400).json({ error: "Senha fraca. Use pelo menos 8 caracteres, incluindo letras e números." });
-          }
+        }
     
-          if (!validarTelefone(phone)) {
+        if (!validarTelefone(phone)) {
             return res.status(400).json({ error: "Telefone inválido. Use o formato (XX)XXXXX-XXXX" });
-          }
+        }
     
-          if (CPF && !validarCPF(CPF)) {
+        if (CPF && !validarCPF(CPF)) {
             return res.status(400).json({ error: "CPF inválido" });
-          }
+        }
         
         const hash = await bcrypt.hash(password, 10)
 
