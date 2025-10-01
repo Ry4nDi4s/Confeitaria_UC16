@@ -9,9 +9,21 @@ export const UserControler = {
     try{
         const {name, email, password, phone, CPF} = req.body
 
-        if (CPF && !validarCPF(CPF)) {
-            return res.status(400).json({error: "CPF Invalido"});
-        }
+        if (!validarEmail(email)) {
+            return res.status(400).json({ error: "Email inválido" });
+          }
+    
+          if (!validarSenha(password)) {
+            return res.status(400).json({ error: "Senha fraca. Use pelo menos 8 caracteres, incluindo letras e números." });
+          }
+    
+          if (!validarTelefone(phone)) {
+            return res.status(400).json({ error: "Telefone inválido. Use o formato (XX)XXXXX-XXXX" });
+          }
+    
+          if (CPF && !validarCPF(CPF)) {
+            return res.status(400).json({ error: "CPF inválido" });
+          }
         
         const hash = await bcrypt.hash(password, 10)
 
@@ -148,3 +160,19 @@ function validarCPF(cpf) {
   
     return true; // CPF válido
   }
+
+  function validarEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+  
+  function validarSenha(senha) {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(senha);
+  }
+  
+  function validarTelefone(telefone) {
+    const regex = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+    return regex.test(telefone);
+  }
+  
