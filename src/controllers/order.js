@@ -4,6 +4,13 @@ export const OrderController ={
         try{
             const {which_product, who_order, value, quantify, delivery_day, userId, paymentId} =req.body;
 
+            let data = {
+                which_product,
+                who_order,
+                value,
+                quantify,
+                delivery_day: new Date(delivery_day)
+            }
             if (paymentId){
                 let paymentkey = await prisma.payment.findFirst({
                     where : {id: Number(paymentId)}
@@ -14,31 +21,28 @@ export const OrderController ={
                     });
                     return
                 }
+                data.paymentId=Number (paymentId)
 
             }
            
-            
-            let userkey = await prisma.user.findFirst({
-                where : {id: Number(userId)}
-            });
-            if(!userkey){ 
-                res.status(301).json({
-                    'error':"Pedido informado não existe"
+            if(userId) {
+                let userkey = await prisma.user.findFirst({
+                    where : {id: Number(userId)}
                 });
-                return
+                if(!userkey){ 
+                    res.status(301).json({
+                        'error':"Pedido informado não existe"
+                    });
+                    return
+                }
+                data.userId=Number (userId)
             }
+            
+           
 
         
             const orderCreate = await prisma.order.create({
-                data: {
-                    which_product,
-                    who_order,
-                    value,
-                    quantify,
-                    delivery_day: new Date(delivery_day),
-                    userId: Number (userId),
-                    paymentId: Number (paymentId)
-                }
+                data: data
             });
 
             res.status(201).json(orderCreate)
@@ -55,10 +59,11 @@ export const OrderController ={
         if (req.query.quantify) query = {quantify: req.query.quantify}
         if (req.query.delivery_day) query = {delivery_day: req.query.delivery_day}
         if (req.query.which_product) query = {which_product: req.query.which_product}
-
+        
+        query.userId=req.logado.id
 
         const orders = await prisma.order.findMany({
-        where: query
+            where: query
 
         }) 
          res.status(200).json(orders)
@@ -68,7 +73,10 @@ export const OrderController ={
     async show(req, res, _next){
         try{ const id = Number(req.params.id);
 
-            let o = await prisma.order.findFirstOrThrow({where:{id}});
+            let o = await prisma.order.findFirstOrThrow({where:{
+                id:id,
+                userId: req.logado.id
+            }});
 
             res.status (200).json(o);
         }catch(err){
@@ -80,7 +88,10 @@ export const OrderController ={
     async  del(req, res, _next){
         try {
             const id = Number (req.params.id);
-            const o = await prisma.order.delete({where: {id}});
+            const o = await prisma.order.delete({where: {
+                id:id,
+                userId:req.logado.id
+            }});
 
             res.status(200).json(o);
         }catch (err) {
@@ -94,8 +105,10 @@ export const OrderController ={
             let body = {}
             const id = Number (req.params,id); 
             const o = await prisma.order.put({
-                where:{id},
-                
+                where:{
+                    id:id,
+                    userId:req.logado.id
+                },
             });
 
             res.status(200).json (o);
