@@ -16,7 +16,7 @@ export const ProductController = {
           quantify,
           stock,
           maturity: new Date(maturity),
-          foto,
+          fotoUrl,
           preco: Number(preco)
         },
       });
