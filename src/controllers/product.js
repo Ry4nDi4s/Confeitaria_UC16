@@ -32,8 +32,7 @@ export const ProductController = {
     // Adicionar Like em Where: query
     if (req.query.description) query = { description: { contains: req.query.description } };
     if (req.query.name) query = { name: { contains: req.query.name } };
-    if (req.query.quantify)
-      query = { quantify: { contains: req.query.quantify } };
+    if (req.query.quantify) query = { quantify: { contains: req.query.quantify } };
 
     const products = await prisma.product.findMany({
       where: query
