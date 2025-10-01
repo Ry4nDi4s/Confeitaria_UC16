@@ -21,8 +21,8 @@ app.use('/products', verificaToken, ProductRoutes);
 app.use('/carts', CartRoutes); 
 app.use('/orders', OrderRoutes);
 app.use('/ingredientes', IngredienteRoutes);
-app.use('/payments', verificaToken,PaymentRoutes);
-app.use('/receitas', ReceitaRoutes);
+app.use('/payments', verificaToken, PaymentRoutes);
+app.use('/receitas', verificaToken, ReceitaRoutes);
 
 // Middleware de erro simples
 app.use((err, _req, res, _next) => {
