@@ -9,7 +9,7 @@ import OrderRoutes from './routes/order.js';
 import IngredienteRoutes from './routes/Ingrediente.js';
 import PaymentRoutes from "./routes/paymant.js";
 import ReceitaRoutes from "./routes/receita.js";
-import { verificaToken } from "./middlewares/aunt.js";
+
 
 
 const app = express();
