@@ -1,15 +1,19 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoicnlhbnRpNDNAZ21haWwuY29tIiwibmFtZSI6IlJ5YW4iLCJpYXQiOjE3NTkzNTA2ODIsImV4cCI6MTc1OTM3OTQ4Mn0.u5gKCOPrUgK3pfqzq-z9TletE3PtMvu9oyqd2F_n8ng
+
 ### Criando Produto
 
 POST http://localhost:3000/products HTTP/1.1
 content-type: application/json
+Authorization: Bearer {{@token}}
 
 {
-    "description": "teste",
-    "name": "teste",
-    "quantify":0,
-    "stock":0,
-    "maturity": "2025-05-05"
-
+    "description": "chocolate",
+    "name": "Bolo",
+    "quantify":2,
+    "stock":5,
+    "maturity": "1970-01-01T00:00:00.000Z",
+    "foto": "chico",
+    "preco": 5.90
 }
 
 ### Ler todos os produtos
