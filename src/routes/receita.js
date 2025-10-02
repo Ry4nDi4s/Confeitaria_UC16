@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { ReceitaControler } from '../controllers/receita.js';
-import { verificaToken } from '../middlewares/aunt.js';
+import { verificaToken } from '../middlewares/auth.js';
 
 const route = Router();
 

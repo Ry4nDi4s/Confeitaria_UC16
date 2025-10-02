@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UserControler } from "../controllers/user.js";
-import { verificaToken } from "../middlewares/aunt.js";
+import { verificaToken } from "../middlewares/auth.js";
 
 const route = Router();
 

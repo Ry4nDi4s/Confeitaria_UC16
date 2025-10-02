@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { IngredienteController } from '../controllers/ingrediente.js'
-import { verificaToken } from '../middlewares/aunt.js';
+import { verificaToken } from '../middlewares/auth.js';
 
 const route = Router();
 
