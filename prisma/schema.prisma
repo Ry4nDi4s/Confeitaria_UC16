@@ -65,7 +65,7 @@ model Product {
   stock Float
   maturity DateTime
   foto String
-  preco Int
+  preco Float
 
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime @map("updated_at") @updatedAt
