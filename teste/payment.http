@@ -1,6 +1,9 @@
+@token = ""
+
 ### cadastra um pagamento
 POST http://localhost:3000/payments HTTP/1.1
 content-type: application/json
+Authorization: Bearer {{@token}}
 
 {
     "card": "lua", 
