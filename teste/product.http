@@ -4,7 +4,7 @@
 
 POST http://localhost:3000/products HTTP/1.1
 content-type: application/json
-Authorization: Bearer {{@token}}
+Authorization: Bearer {{token}}
 
 {
     "description": "chocolate",
