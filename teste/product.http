@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoicnlhbnRpNDNAZ21haWwuY29tIiwibmFtZSI6IlJ5YW4iLCJpYXQiOjE3NTkzNTA2ODIsImV4cCI6MTc1OTM3OTQ4Mn0.u5gKCOPrUgK3pfqzq-z9TletE3PtMvu9oyqd2F_n8ng
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoicnlhbnRpNDRAZ21haWwuY29tIiwibmFtZSI6IlJ5YW4iLCJpYXQiOjE3NTk0MzMyNjYsImV4cCI6MTc1OTQ2MjA2Nn0.OS0u1_MX_nhNmDo6Jjt4uwsxfJp_fy4EiSRnfNK8do4
 
 ### Criando Produto
 
@@ -53,4 +53,6 @@ Content-Type: application/json
     "stock" : 250,
     "matutiy" : "2027-07-09"
 }
+
+
 

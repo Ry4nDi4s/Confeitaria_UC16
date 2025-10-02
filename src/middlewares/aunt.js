@@ -1,4 +1,4 @@
-import JsonWebToken from "jsonwebtoken";
+import jwt from 'jsonwebtoken'
 
 export function verificaToken(req, res, next){
     const aunt = req.headers.authorization || "";
@@ -9,7 +9,7 @@ export function verificaToken(req, res, next){
     }
 
         try{
-            const payload = JsonWebToken.verify(token, process.env.JWT_SECRET);
+            const payload = jwt.verify(token, process.env.JWT_SECRET);
             req.logado = {
                 id: payload.sub,
                 email: payload.email,
