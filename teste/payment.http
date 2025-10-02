@@ -1,4 +1,4 @@
-@token = 
+@token = ""
 
 ### cadastra um pagamento
 POST http://localhost:3000/payments HTTP/1.1

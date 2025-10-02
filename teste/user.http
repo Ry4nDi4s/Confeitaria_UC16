@@ -1,5 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoicnlhbnRpNDNAZ21haWwuY29tIiwibmFtZSI6IlJ5YW4iLCJpYXQiOjE3NTkyNTk4ODEsImV4cCI6MTc1OTI4ODY4MX0.jP0tT4EMARCeyxW3wSdqLyxM2WVdK2q_VZubYdjaol0
-
+@token = ""
 ### Criação de usuários = CREATE
 
 POST http://localhost:3000/users HTTP/1.1
@@ -7,7 +6,7 @@ Content-Type: application/json
 
 {
     "name": "Ryan",
-    "email": "ryanti43@gmail.com",
+    "email": "ryanti44@gmail.com",
     "password": "senac123",
     "phone": "(16)92019-0291",
     "CPF": "521.417.198.60"
@@ -17,6 +16,8 @@ Content-Type: application/json
 
 GET http://localhost:3000/users HTTP/1.1
 Content-Type: application/json 
+Authorization: Bearer {{@token}}
+
 
 ### Leitura de informações especificas(nome & email) - Aqui em users estamos usando apenas where = READ
 
@@ -48,6 +49,6 @@ POST http://localhost:3000/users/aunt HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "ryanti43@gmail.com",
+    "email": "ryanti44@gmail.com",
     "senha": "senac123"
 }
