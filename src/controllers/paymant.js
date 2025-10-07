@@ -85,6 +85,7 @@ export const PaymentControler = {
 
     function validaCartao(numero) {
         if (!numero) return false;
+        console.log(numero)
       
         const digits = numero.replace(/\D/g, '');
         if (digits.length < 13 || digits.length > 19) return false;

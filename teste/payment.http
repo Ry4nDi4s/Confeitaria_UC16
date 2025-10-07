@@ -1,4 +1,4 @@
-@token = ""
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoicnlhbnRpNDRAZ21haWwuY29tIiwibmFtZSI6IlJ5YW4iLCJpYXQiOjE3NTk0MzI4MDMsImV4cCI6MTc1OTQ2MTYwM30.fh97bZ30mhu9a_nvZpu-cp_S5xBJbg_fRXb2WGmwqL0
 
 ### cadastra um pagamento
 POST http://localhost:3000/payments HTTP/1.1
@@ -6,7 +6,7 @@ content-type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "card": "lua", 
+    "card": "5290 1560 8424 2344",
     "pix": "345", 
     "money": 0, 
     "value": 0, 
@@ -16,16 +16,20 @@ Authorization: Bearer {{token}}
 ### busca todo
 GET http://localhost:3000/payments HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ### ler um usuario new
 GET http://localhost:3000/payments/1 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 DELETE http://localhost:3000/payments/1 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 PUT  http://localhost:3000/orders/99 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
