@@ -6,11 +6,11 @@ POST http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Ryan",
-    "email": "ryanti44@gmail.com",
-    "password": "senac123",
-    "phone": "(16)92019-0291",
-    "CPF": "521.417.198.60"
+    "name": "Daniela", 
+    "email": "dani@gmail.com", 
+    "password": "12345", 
+    "phone": "(16)99999-9999", 
+    "CPF": "598.432.231-88"
 }
 
 ### Leitura de todos os usuários = READ

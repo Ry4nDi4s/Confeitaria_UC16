@@ -7,9 +7,8 @@ const route = Router();
 
 route.post('/', OrderController.store);
 route.get('/', OrderController.index);
-route.get('/:id', verificaToken, verificaRole, OrderController.show);
-route.delete('/:id',verificaToken, verificaRole, OrderController.del);
-route.put('/:id',verificaToken, verificaRole, OrderController.put)
-
+route.get('/:id', verificaToken, OrderController.show);
+route.delete('/:id',verificaToken, verificaRole('OrderDelete'), OrderController.del);
+route.put('/:id',verificaToken, verificaRole('OrderUpdate'), OrderController.put)
 
 export default route;

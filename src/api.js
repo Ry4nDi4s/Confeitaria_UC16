@@ -9,21 +9,19 @@ import OrderRoutes from './routes/order.js';
 import IngredienteRoutes from './routes/Ingrediente.js';
 import PaymentRoutes from "./routes/paymant.js";
 import ReceitaRoutes from "./routes/receita.js";
-import verificaRole from "./middlewares/roles.js";
-
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/users", verificaRole('UserDelete', 'UserUpdate'), UserRoutes);
-app.use('/products',verificaRole('PostProduct', 'ProductDelete', 'ProductUpdate'), ProductRoutes);
+app.use("/users", UserRoutes);
+app.use('/products', ProductRoutes);
 app.use('/carts', CartRoutes); 
-app.use('/orders', verificaRole('OrderUpdate', 'OrderDelete'), OrderRoutes);
-app.use('/ingredientes', verificaRole('IngredientePost', 'IngredienteUpdate', 'IngredienteDelete'), IngredienteRoutes);
-app.use('/payments', verificaToken(), PaymentRoutes);
-app.use('/receitas', verificaRole('ReceitaPost', 'ReceitaUpdate', 'ReceitaDelete'), ReceitaRoutes);
+app.use('/orders', OrderRoutes);
+app.use('/ingredientes', IngredienteRoutes);
+app.use('/payments', verificaToken,PaymentRoutes);
+app.use('/receitas', ReceitaRoutes);
 
 // Middleware de erro simples
 app.use((err, _req, res, _next) => {

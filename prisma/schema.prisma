@@ -194,6 +194,6 @@ model RoleGroup{
   role Role @relation (fields: [roleId], references: [id]) 
   roleId Int
 
-  @@unique([groupId, roleId], name: "grouId_roleId")
+  @@unique([groupId, roleId], name: "groupId_roleId")
 }
 
