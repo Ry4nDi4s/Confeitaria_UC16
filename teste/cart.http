@@ -1,7 +1,10 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoicnlhbnRpNDRAZ21haWwuY29tIiwibmFtZSI6IlJ5YW4iLCJpYXQiOjE3NTk0MzQzMjcsImV4cCI6MTc1OTQ2MzEyN30.Dx5J7AKo63-6x7naZNw36M5pMNv-5wSQ_4ZrcYpvfB8
+
 ### Criando carrinho
 
 POST http://localhost:3000/carts HTTP/1.1
 content-type: application/json
+Authorization: Bearer {{token}}
 
 {
     "quantify":0,
@@ -10,7 +13,6 @@ content-type: application/json
 }       
 
 ### Ler carrinho
-0000
 GET http://localhost:3000/carts HTTP/1.1
 Content-Type: application/json
 

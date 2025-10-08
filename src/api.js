@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import { verificaToken } from "./middlewares/aunt.js";
+import { verificaToken } from "./middlewares/auth.js";
 import UserRoutes from './routes/user.js';
 import ProductRoutes from './routes/product.js';
 import CartRoutes from './routes/cart.js';

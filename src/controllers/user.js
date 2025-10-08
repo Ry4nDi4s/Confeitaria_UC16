@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import prisma from '../prisma.js';
 
@@ -110,7 +110,7 @@ export const UserControler = {
             })
 
             if(!u){
-                res.status(404).json({erro: "erro no Email"})
+                res.status(404).json({erro: "Erro no Email"})
                 return;
             }
 
