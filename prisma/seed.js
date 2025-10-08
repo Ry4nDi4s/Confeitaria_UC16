@@ -50,10 +50,6 @@ async function main() {
   // 1) Cria Roles
   const rolesData = [
     { name: 'ADMIN',   description: 'Acesso total ao sistema'},
-    { name: 'EDITOR',  description: 'Pode criar/editar conteúdos'},
-    { name: 'VIEWER',  description: 'Somente leitura'},
-    { name: 'OWNER',   description: 'Responsável pelo grupo/projeto' },
-    { name: 'deleteHabit',   description: 'Pode deletar um hábito' }
   ];
 
   const roles = {};
@@ -64,9 +60,7 @@ async function main() {
 
   // 2) Cria Groups
   const groupsData = [
-    { name: 'Docentes',        description: 'Professores' },
-    { name: 'Lider de projetos',description: 'Membro do grupo que tem mais facilidade' },
-    { name: 'Estudantes',description: 'Squad do projeto' }
+    { name: 'ADMIN',        description: 'Administrador' },
   ];
 
   const groups = {};
@@ -78,21 +72,12 @@ async function main() {
   // 3) Vincula Roles aos Groups
   // Crie um nome para a unique composta no schema para permitir upsert,
   // ex: @@unique([groupId, roleId], name: "group_role_unique")
-  await connectRoleToGroup({ groupId: groups['Docentes'].id,        roleId: roles.ADMIN.id });
-  await connectRoleToGroup({ groupId: groups['Docentes'].id,        roleId: roles.EDITOR.id });
-  await connectRoleToGroup({ groupId: groups['Docentes'].id,        roleId: roles.VIEWER.id });
-  await connectRoleToGroup({ groupId: groups['Docentes'].id,        roleId: roles.deleteHabit.id });
-
-  await connectRoleToGroup({ groupId: groups['Lider de projetos'].id, roleId: roles.OWNER.id });
-  await connectRoleToGroup({ groupId: groups['Lider de projetos'].id, roleId: roles.EDITOR.id });
-  await connectRoleToGroup({ groupId: groups['Lider de projetos'].id, roleId: roles.VIEWER.id });
-
-  await connectRoleToGroup({ groupId: groups['Estudantes'].id, roleId: roles.VIEWER.id });
+  await connectRoleToGroup({ groupId: groups['ADMIN'].id,        roleId: roles.ADMIN.id });
 
   // 4) (Opcional) Vincula Users a Groups
   // Se já existir User com id 1 e 2, por exemplo:
   try {
-    await connectUserToGroup({ userId: 1, groupId: groups['Docentes'].id });
+    await connectUserToGroup({ userId: 1, groupId: groups['ADMIN'].id });
   } catch {}
 
   console.log('Seed concluído com Roles, Groups, RoleGroup e GroupUser');
