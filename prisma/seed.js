@@ -67,7 +67,7 @@ async function main() {
   const roles = {};
   for (const r of rolesData) {
     const role = await upsertRole(r);
-    roles[role.ADMIN] = role; // roles.ADMIN, roles.EDITOR, etc, os names passados acimas
+    roles[role.name] = role; // roles.ADMIN, roles.EDITOR, etc, os names passados acimas
   }
 
   // 2) Cria Groups
@@ -78,7 +78,7 @@ async function main() {
   const groups = {};
   for (const g of groupsData) {
     const group = await upsertGroup(g);
-    groups[group.ADMIN] = group; // groups['Turma TI43'], etc.
+    groups[group.name] = group; // groups['Turma TI43'], etc.
   }
 
   // 3) Vincula Roles aos Groups
