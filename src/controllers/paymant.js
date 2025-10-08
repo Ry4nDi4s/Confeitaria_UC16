@@ -7,15 +7,11 @@ export const PaymentControler = {
         try{
             const {card, pix, money, value, scheduling} = req.body;
 
-            if (card && !validaCartao(card)) {
+            if (!validaCartao(card)) {
                 return res.status(400).json({error: "Cartão inválido"});
             }
 
-            
-            //if(!validaCARTÃO(card)){
-            //     res.status(201).json({'error':"não existente"})
-            //}
-
+    
             const pay = await prisma.payment.create({
                 data : {card, pix, money, value, scheduling}
             });
