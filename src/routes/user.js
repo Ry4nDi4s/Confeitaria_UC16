@@ -5,7 +5,7 @@ import verificaRole from "../middlewares/roles.js";
 
 const route = Router();
 
-route.post('/', UserControler.store);
+route.post('/', verificaRole('UserDelete'),UserControler.store);
 route.get('/', UserControler.index);
 route.get('/:id',UserControler.show);
 route.delete('/:id', verificaToken, verificaRole('UserDelete'),UserControler.delete);

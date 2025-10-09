@@ -49,6 +49,7 @@ async function connectUserToGroup({ userId, groupId }) {
 async function main() {
   // 1) Cria Roles
   const rolesData = [
+    { name: 'UserPost',     description: 'Adicionar User'},
     { name: 'UserDelete',     description: 'Deletar Usuário'},
     { name: 'UserUpdate',     description: 'Editar Usuário'},
     { name: 'PostProduct',  description: 'Adicionar Produto'},
@@ -84,6 +85,7 @@ async function main() {
   // 3) Vincula Roles aos Groups
   // Crie um nome para a unique composta no schema para permitir upsert,
   // ex: @@unique([groupId, roleId], name: "group_role_unique")
+  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.UserPost.id });
   await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.UserDelete.id });
   await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.UserUpdate.id });
 

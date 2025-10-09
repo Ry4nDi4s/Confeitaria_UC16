@@ -10,4 +10,4 @@ route.get('/:id', ProductController.show);
 route.delete('/:id', verificaToken, verificaRole('ProductDelete'),ProductController.delete);
 route.put('/:id', verificaToken, verificaRole('ProductUpdate'), ProductController.update);
 
-export default route ; 
+export default route;
