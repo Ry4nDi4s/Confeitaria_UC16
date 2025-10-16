@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoicnlhbnRpNDRAZ21haWwuY29tIiwibmFtZSI6IlJ5YW4iLCJpYXQiOjE3NTk5NDQ0MTgsImV4cCI6MTc1OTk3MzIxOH0.YKmzO8L6ZWgOS_PgOndLb4KiVEdcDZ2ZRF9QsWyHvXs
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGFuaUBnbWFpbC5jb20iLCJuYW1lIjoiRGFuaWVsYSIsImlhdCI6MTc2MDAzMTEwMiwiZXhwIjoxNzYwMDU5OTAyfQ.1WCLxYgItOC0gvXMhsqFDCThJZh8qohEGDIG48qquZI
 
 ### Criando Produto
 
@@ -13,7 +13,7 @@ Authorization: Bearer {{token}}
     "stock":5,
     "maturity": "1970-01-01T00:00:00.000Z",
     "foto": "chico",
-    "preco": 5.90
+    "preco": 20
 }
 
 ### Ler todos os produtos
