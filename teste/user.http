@@ -10,7 +10,7 @@ Content-Type: application/json
     "email": "dani@gmail.com", 
     "password": "123@456L23", 
     "phone": "(16)99999-9999", 
-    "CPF": "537.943.568-88"
+    "CPF": ""
 }
 
 ### Leitura de todos os usuários = READ
