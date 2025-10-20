@@ -44,5 +44,11 @@ app.use((err, _req, res, _next) => {
     res.status(500).json({ error: 'Erro interno' });
 });
 
+app.use(cors({
+    origin: 'https://confeitaria-uc16-app.vercel.app/',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }));  
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`HTTP = > http://localhost:${PORT}`));
