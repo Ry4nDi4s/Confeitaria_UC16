@@ -55,7 +55,7 @@ export const PaymentControler = {
             const pay = await prisma.payment.delete({where:{id}});
             res.status(200).json(pay)
         }catch(err){
-            res.status(404).json("não encontrato")};
+            res.status(404).json("não encontrado")};
         },
 
         async put(req, res, next){
