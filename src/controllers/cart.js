@@ -13,7 +13,6 @@ export const CartController = {
         where: {id: Number(produtoId)}
       });
 
-      
       if(!orderkey){
         res.status(301).json({
           'error':'Pedido não encontrado'

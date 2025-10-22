@@ -9,11 +9,33 @@ import OrderRoutes from './routes/order.js';
 import IngredienteRoutes from './routes/Ingrediente.js';
 import PaymentRoutes from "./routes/paymant.js";
 import ReceitaRoutes from "./routes/receita.js";
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+const options = {
+    definition: {
+      openapi: '3.0.0',
+      info: {
+        title: 'API Exemplo',
+        version: '1.0.0',
+        description: 'Documentação da API REST com Swagger',
+      },
+      servers: [
+        {
+          url: 'http://localhost:3000',
+        },
+      ],
+    },
+    apis: ['./src/routes/*.js'], // caminho dos arquivos com os comentários Swagger
+  };
+  
+  const swaggerSpec = swaggerJSDoc(options);
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/users", UserRoutes);
 app.use('/products', ProductRoutes);

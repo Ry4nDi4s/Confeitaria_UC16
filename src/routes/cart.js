@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { CartController } from '../controllers/cart.js';
 import { verificaToken } from '../middlewares/auth.js';
-import verificaRole from '../middlewares/roles.js';
 
 const route = Router();
 

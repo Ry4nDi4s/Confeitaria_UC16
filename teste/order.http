@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoicnlhbnRpNDRAZ21haWwuY29tIiwibmFtZSI6IlJ5YW4iLCJpYXQiOjE3NTk0MzI4MDMsImV4cCI6MTc1OTQ2MTYwM30.fh97bZ30mhu9a_nvZpu-cp_S5xBJbg_fRXb2WGmwqL0
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGFuaUBnbWFpbC5jb20iLCJuYW1lIjoiRGFuaWVsYSIsImlhdCI6MTc2MTE1NjU3NCwiZXhwIjoxNzYxMTg1Mzc0fQ.n_-kUwU2PLTpJo3bf4XAm8laTsKiuJLdEXNIDCtyuqs
 
 ### Criando os pedidos
 POST http://localhost:3000/orders HTTP/1.1
@@ -10,7 +10,7 @@ Content-Type: application/json
     "value": 49.99,
     "quantify": 2,
     "delivery_day":"2025-12-30",
-    "userId":1,
+    "userId":2,
     "paymentId":1
 }
 
