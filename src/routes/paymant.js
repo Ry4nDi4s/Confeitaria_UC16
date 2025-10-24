@@ -1,12 +1,8 @@
 import { Router } from 'express';
 import { PaymentControler } from '../controllers/paymant.js'
 
-/**
- * @swagger
- * tags:
- *   name: Paymant
- *   description: Endpoints para gerenciamento de pagamento
- */
+
+
 const route = Router();
 
 /**
