@@ -168,6 +168,9 @@ route.post('/aunt', UserControler.aunt)
  *                   phone:
  *                     type: string
  *                     example: "(16)99979-9695" 
+ *                   CPF:
+ *                     type: string
+ *                     example: 121.468.932.70
  */
 route.get('/', UserControler.index);
 
