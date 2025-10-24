@@ -167,37 +167,7 @@ route.post('/aunt', UserControler.aunt)
  *                     example: joaosilvao@gmail.com
  *                   phone:
  *                     type: string
- *                     example: "(16)99979-9695"
- *       400:
- *         description: Erros de validação (email, senha, telefone, CPF)
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "Email inválido | Senha fraca | Telefone inválido | CPF inválido"
- *       401:
- *         description: Erro na senha
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: Erro na senha
- *       404:
- *         description: Usuário não encontrado
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "Usuário não encontrado 
+ *                     example: "(16)99979-9695" 
  */
 route.get('/', UserControler.index);
 
