@@ -97,7 +97,8 @@ export const UserControler = {
 
             res.status(200).json(user)
         }catch(error){
-            next.status(404).json({error: "Error"})
+            next.status(404).json({error: "Usuário não encontrado"})
+
         }
     },
 
@@ -125,7 +126,7 @@ export const UserControler = {
                 process.env.JWT_SECRET,
                 {expiresIn: "8h"}
             );
-            return res.json({token});
+            return res.status(200).json({ token });
         }catch(erro){
             next(erro)
         }
