@@ -6,12 +6,7 @@ import verificaRole from '../middlewares/roles.js';
 // Ajustar Verifica Token em product e role
 
 
-/**
- * @swagger
- * tags:
- *   name: Product
- *   description: Endpoints para gerenciamento de produtos
- */
+
 
 const route = Router();
 
@@ -45,10 +40,10 @@ const route = Router();
  *                 example: Produto de teste para demonstração
  *               quantify:
  *                 type: string
- *                 example: 10
+ *                 example: 2
  *               stock:
  *                 type: string
- *                 example: "Em estoque"
+ *                 example: "3"
  *               maturity:
  *                 type: string
  *                 format: date
