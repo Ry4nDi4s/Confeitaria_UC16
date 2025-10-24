@@ -140,7 +140,7 @@ route.post('/', UserControler.store);
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Usuário não encontrado 
+ *                   example: "Usuário não encontrado" 
  */
 route.get('/', UserControler.index);
 
