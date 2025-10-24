@@ -3,11 +3,14 @@ import { ProductController } from '../controllers/product.js';
 import { verificaToken } from '../middlewares/auth.js';
 import verificaRole from '../middlewares/roles.js';
 
-// Ajustar Verifica Token em product e role
 
 
-
-
+/**
+ * @swagger
+ * tags:
+ *   name: Products
+ *   description: Rotas de gerenciamento dos produtos da confeitaria
+ */
 const route = Router();
 
 /**
