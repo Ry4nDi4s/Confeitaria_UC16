@@ -11,6 +11,9 @@ import verificaRole from '../middlewares/roles.js';
  *   name: Products
  *   description: Rotas de gerenciamento dos produtos da confeitaria
  */
+// Ajustar Verifica Token em product e role
+
+
 const route = Router();
 
 /**
