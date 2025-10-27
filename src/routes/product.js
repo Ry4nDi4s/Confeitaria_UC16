@@ -265,7 +265,6 @@ route.delete('/:id', verificaToken, verificaRole('ProductDelete'),ProductControl
  */
 route.put('/:id', verificaToken, verificaRole('ProductUpdate'), ProductController.update);
 
-//alo
 
 
 export default route;

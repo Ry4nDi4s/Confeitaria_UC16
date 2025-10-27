@@ -364,6 +364,5 @@ route.delete('/:id', verificaToken, verificaRole('UserDelete'),UserControler.del
  */
 route.put('/:id', verificaToken, verificaRole('UserUpdate'),UserControler.put);
 
-//alo
 
 export default route;

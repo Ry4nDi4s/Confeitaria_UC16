@@ -235,6 +235,5 @@ route.delete('/:id', verificaToken, verificaRole('ReceitaDelete'),ReceitaControl
  *         description: Receita não encontrada
  */
 route.put('/:id', verificaToken, verificaRole('ReceitaUpdate'),ReceitaControler.put);
-//alo
 
 export default route;
