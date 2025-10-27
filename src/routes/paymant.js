@@ -2,7 +2,12 @@ import { Router } from 'express';
 import { PaymentControler } from '../controllers/paymant.js'
 
 
-
+/**
+ * @swagger
+ * tags:
+ *   name: Payments
+ *   description: Rotas de gerenciamento dos pagamentos da confeitaria
+ */
 const route = Router();
 
 /**

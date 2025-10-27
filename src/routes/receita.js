@@ -236,4 +236,5 @@ route.delete('/:id', verificaToken, verificaRole('ReceitaDelete'),ReceitaControl
  */
 route.put('/:id', verificaToken, verificaRole('ReceitaUpdate'),ReceitaControler.put);
 
+
 export default route;

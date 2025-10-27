@@ -221,4 +221,5 @@ route.delete('/:id', verificaToken, verificaRole('IngredienteDelete'), Ingredien
  */
 route.put('/:id', verificaToken, verificaRole('IngredienteUpdate'), IngredienteController.put)
 
+
 export default route;
