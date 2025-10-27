@@ -10,6 +10,7 @@ import verificaRole from '../middlewares/roles.js';
  *   name: Receitas
  *   description: Rotas de gerenciamento das receitas da confeitaria
  */
+
 const route = Router();
 
 /**
@@ -81,6 +82,7 @@ const route = Router();
  *       400:
  *         description: Erro nos dados enviados
  */
+
 route.post('/', verificaToken,  verificaRole('ReceitaPost'), ReceitaControler.store);
 /**
  * @swagger
@@ -163,6 +165,7 @@ route.get('/', ReceitaControler.index);
  *       404:
  *         description: Receita não encontrada
  */
+
 route.get('/:id', ReceitaControler.show);
 
 /**
