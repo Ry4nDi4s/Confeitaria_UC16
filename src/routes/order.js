@@ -213,6 +213,7 @@ route.delete('/:id',verificaToken, verificaRole('OrderDelete'), OrderController.
  *         description: Erro ao atualizar o pedido
  */
 route.put('/:id',verificaToken, verificaRole('OrderUpdate'), OrderController.put)
+//alo
 
 
 export default route;
