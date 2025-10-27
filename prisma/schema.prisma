@@ -66,6 +66,7 @@ model Product {
   maturity DateTime
   foto String
   preco Float
+  tipo String
 
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime @map("updated_at") @updatedAt
