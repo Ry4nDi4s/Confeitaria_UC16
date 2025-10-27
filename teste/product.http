@@ -1,9 +1,10 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGFuaUBnbWFpbC5jb20iLCJuYW1lIjoiRGFuaWVsYSIsImlhdCI6MTc1OTk1MzE3NywiZXhwIjoxNzU5OTgxOTc3fQ.zC3AAY81hPa8Pd1CIhvw5tQDmEj7kQbdXAnPRlcxCX8
 
 ### Criando Produto
 
 POST http://localhost:3000/products HTTP/1.1
 content-type: application/json
-
+Authorization: Bearer {{token}}
 
 {
     "description": "chocolate",
@@ -39,11 +40,13 @@ Content-Type: application/json
 
 DELETE http://localhost:3000/products/1 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ### Atualizar produto por id
 
 PUT http://localhost:3000/products/1 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "name" : "Morango do amor",

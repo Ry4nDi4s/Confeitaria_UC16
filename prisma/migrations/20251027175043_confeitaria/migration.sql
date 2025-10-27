@@ -36,6 +36,7 @@ CREATE TABLE "products" (
     "maturity" DATETIME NOT NULL,
     "foto" TEXT NOT NULL,
     "preco" REAL NOT NULL,
+    "tipo" TEXT NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" DATETIME NOT NULL
 );

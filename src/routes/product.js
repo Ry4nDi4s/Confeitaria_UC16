@@ -3,10 +3,10 @@ import { ProductController } from '../controllers/product.js';
 import { verificaToken } from '../middlewares/auth.js';
 import verificaRole from '../middlewares/roles.js';
 
-// Ajustar Verifica Token em product e role
+// Ajustar Verifica Token em product e role em post
 
 const route = Router();
-route.post('/', ProductController.store);
+route.post('/', verificaToken, verificaRole('PostProduct'),ProductController.store);
 route.get('/', ProductController.index);
 route.get('/:id', ProductController.show);
 route.delete('/:id', verificaToken, verificaRole('ProductDelete'),ProductController.delete);
