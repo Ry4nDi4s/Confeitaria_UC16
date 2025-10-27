@@ -82,7 +82,6 @@ const route = Router();
  *         description: Erro nos dados enviados
  */
 route.post('/', verificaToken,  verificaRole('ReceitaPost'), ReceitaControler.store);
-
 /**
  * @swagger
  * /receitas:
@@ -130,6 +129,7 @@ route.post('/', verificaToken,  verificaRole('ReceitaPost'), ReceitaControler.st
  *                     type: string
  *                     format: date
  */
+
 route.get('/', ReceitaControler.index);
 
 /**

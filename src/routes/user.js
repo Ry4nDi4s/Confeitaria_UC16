@@ -364,5 +364,4 @@ route.delete('/:id', verificaToken, verificaRole('UserDelete'),UserControler.del
  */
 route.put('/:id', verificaToken, verificaRole('UserUpdate'),UserControler.put);
 
-
 export default route;
