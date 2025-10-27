@@ -143,10 +143,11 @@ route.get('/', CartController.index);
  *                   example: 5
  */
 route.get('/:id', CartController.index);
+
+
 route.delete('/:id', CartController.del);
+
+
 route.put('/:id', CartController.update);
-
-// alo
-
 
 export default route;
