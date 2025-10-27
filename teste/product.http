@@ -12,7 +12,7 @@ Authorization: Bearer {{token}}
     "quantify":2,
     "stock":5,
     "maturity": "1970-01-01T00:00:00.000Z",
-    "foto": "chico",
+    "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0gceWZkYPr0KwatoAcX4PxU-C1CL1SFPwzQ&s",
     "preco": 20
 }
 
