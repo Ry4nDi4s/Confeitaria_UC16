@@ -6,8 +6,6 @@ import verificaRole from '../middlewares/roles.js';
 // Ajustar Verifica Token em product e role
 
 
-
-
 const route = Router();
 
 /**
