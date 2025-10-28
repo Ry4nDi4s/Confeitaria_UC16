@@ -67,7 +67,7 @@ app.use((err, _req, res, _next) => {
 });
 
 app.use(cors({
-    origin: 'https://confeitaria-uc16-app.vercel.app/',
+    origin: ['https://confeitaria-uc16-app.vercel.app/', 'http://localhost:4000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   }));  
