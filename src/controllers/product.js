@@ -1,4 +1,5 @@
 import prisma from "../prisma.js";
+import { ProductType } from '@prisma/client';
 
 // C - CREATE, INSERT, POST, SET, STORE
 
@@ -6,8 +7,7 @@ import prisma from "../prisma.js";
 export const ProductController = {
   async store(req, res, next) {
     try {
-      const { description, name, quantify,stock, maturity, 
-        foto, preco } = req.body;
+      const { description, name, quantify, stock, maturity, foto, preco, tipo } = req.body;
 
       const productCreate = await prisma.product.create({
         data: {
@@ -17,7 +17,8 @@ export const ProductController = {
           stock,
           maturity: new Date(maturity),
           foto,
-          preco: Number(preco)
+          preco: Number(preco),
+          tipo
         },
       });
 
@@ -27,7 +28,7 @@ export const ProductController = {
       next(error);
     }
   },
-  async index(req, res, next) {
+  async index(req, res, _next) {
     let query = {};
     // adicionar and(&&) no quantify,ex nome && quantify
     // Adicionar Like em Where: query
@@ -78,6 +79,7 @@ export const ProductController = {
       if (req.body.quantify) body.quantify = req.body.quantify;
       if (req.body.stock) body.stock = req.body.stock;
       if (req.body.maturity) body.maturity = req.body.maturity;
+      if (req.body.tipo) body.tipo = req.body.tipo;
 
       const id = Number(req.params.id);
 
@@ -92,3 +94,7 @@ export const ProductController = {
     }
   },
 };
+
+function validarTipo(tipo) {
+  return Object.values(ProductType).includes(tipo);
+}

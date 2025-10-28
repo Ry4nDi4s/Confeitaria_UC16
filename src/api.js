@@ -9,20 +9,41 @@ import OrderRoutes from './routes/order.js';
 import IngredienteRoutes from './routes/Ingrediente.js';
 import PaymentRoutes from "./routes/paymant.js";
 import ReceitaRoutes from "./routes/receita.js";
-
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+const options = {
+    definition: {
+      openapi: '3.0.0',
+      info: {
+        title: 'API Exemplo',
+        version: '1.0.0',
+        description: 'Documentação da API REST com Swagger',
+      },
+      servers: [
+        {
+          url: 'http://localhost:3000',
+        },
+      ],
+    },
+    apis: ['./src/routes/*.js'], // caminho dos arquivos com os comentários Swagger
+  };
+  
+  const swaggerSpec = swaggerJSDoc(options);
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use("/users", UserRoutes);
-app.use('/products', verificaToken, ProductRoutes);
+app.use('/products', ProductRoutes);
 app.use('/carts', CartRoutes); 
 app.use('/orders', OrderRoutes);
 app.use('/ingredientes', IngredienteRoutes);
-app.use('/payments', verificaToken, PaymentRoutes);
-app.use('/receitas', verificaToken, ReceitaRoutes);
+app.use('/payments', verificaToken,PaymentRoutes);
+app.use('/receitas', ReceitaRoutes);
 
 // Middleware de erro simples
 app.use((err, _req, res, _next) => {
@@ -44,6 +65,12 @@ app.use((err, _req, res, _next) => {
     }
     res.status(500).json({ error: 'Erro interno' });
 });
+
+app.use(cors({
+    origin: ['https://confeitaria-uc16-app.vercel.app/', 'http://localhost:4000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }));  
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`HTTP = > http://localhost:${PORT}`));
