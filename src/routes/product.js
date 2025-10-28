@@ -9,10 +9,9 @@ import verificaRole from '../middlewares/roles.js';
 /**
  * @swagger
  * tags:
- *   name: Product
- *   description: Endpoints para gerenciamento de produtos
+ *   name: Products
+ *   description: Rotas de gerenciamento dos produtos da confeitaria
  */
-
 const route = Router();
 
 /**
