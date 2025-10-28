@@ -12,7 +12,6 @@ import verificaRole from '../middlewares/roles.js';
  *   name: Products
  *   description: Rotas de gerenciamento dos produtos da confeitaria
  */
-
 const route = Router();
 
 /**

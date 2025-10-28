@@ -44,7 +44,6 @@ const route = Router();
  *           type: integer
  *           example: 1
  */
-
 route.post('/', verificaToken,OrderController.store);
 
 /**

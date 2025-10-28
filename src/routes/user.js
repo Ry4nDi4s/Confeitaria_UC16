@@ -9,7 +9,6 @@ import verificaRole from "../middlewares/roles.js";
  *   name: Users
  *   description: Endpoints para gerenciamento de usuários
  */
-
 const route = Router();
 
 /**
