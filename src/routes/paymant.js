@@ -1,6 +1,5 @@
-import { Router } from 'express';
-import { PaymentControler } from '../controllers/paymant.js'
-
+import { Router } from "express";
+import { PaymentControler } from "../controllers/paymant.js";
 
 /**
  * @swagger
@@ -85,7 +84,7 @@ const route = Router();
  *                   type: string
  *                   example: "Cartão inválido"
  */
-route.post('/', PaymentControler.store);
+route.post("/", PaymentControler.store);
 
 /**
  * @swagger
@@ -140,8 +139,7 @@ route.post('/', PaymentControler.store);
  *                     format: date-time
  *                     example: "2025-10-25T15:30:00Z"
  */
-route.get('/', PaymentControler.index);
-
+route.get("/", PaymentControler.index);
 
 /**
  * @swagger
@@ -189,8 +187,7 @@ route.get('/', PaymentControler.index);
  *       404:
  *         description: Pagamento não encontrado
  */
-route.get('/:id', PaymentControler.show);
-
+route.get("/:id", PaymentControler.show);
 
 /**
  * @swagger
@@ -238,8 +235,7 @@ route.get('/:id', PaymentControler.show);
  *       404:
  *         description: Pagamento não encontrado
  */
-route.delete('/:id', PaymentControler.delete);
-
+route.delete("/:id", PaymentControler.delete);
 
 /**
  * @swagger
@@ -311,8 +307,6 @@ route.delete('/:id', PaymentControler.delete);
  *       404:
  *         description: Error
  */
-route.put('/:id', PaymentControler.put);
-
+route.put("/:id", PaymentControler.put);
 
 export default route;
-

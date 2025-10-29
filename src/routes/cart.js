@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { CartController } from '../controllers/cart.js';
+import { Router } from "express";
+import { CartController } from "../controllers/cart.js";
 
 /**
  * @swagger
@@ -70,7 +70,7 @@ const route = Router();
  *                   type: string
  *                   example: "Pedido não encontrado | Produto não encontrado"
  */
-route.post('/', CartController.store);
+route.post("/", CartController.store);
 
 /**
  * @swagger
@@ -110,7 +110,7 @@ route.post('/', CartController.store);
  *                     type: integer
  *                     example: 5
  */
-route.get('/', CartController.index);
+route.get("/", CartController.index);
 
 /**
  * @swagger
@@ -148,7 +148,7 @@ route.get('/', CartController.index);
  *                   type: integer
  *                   example: 5
  */
-route.get('/:id', CartController.index);
+route.get("/:id", CartController.index);
 
 /**
  * @swagger
@@ -218,7 +218,7 @@ route.get('/:id', CartController.index);
  *                   type: string
  *                   example: "não encontrado"
  */
-route.delete('/:id', CartController.del);
+route.delete("/:id", CartController.del);
 
 /**
  * @swagger
@@ -282,6 +282,6 @@ route.delete('/:id', CartController.del);
  *                   type: string
  *                   example: "Carrinho não encontrado"
  */
-route.put('/:id', CartController.update);
+route.put("/:id", CartController.update);
 
 export default route;

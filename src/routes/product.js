@@ -415,5 +415,4 @@ route.delete('/:id', verificaToken, verificaRole('ProductDelete'),ProductControl
 route.put('/:id', verificaToken, verificaRole('ProductUpdate'), ProductController.update);
 
 
-
 export default route;
