@@ -1,7 +1,7 @@
 import prisma from "../prisma.js";
 
 export default function verificaRole(requiredRole) {
-  const need = Array.isArray(requiredRole) ? requiredRole : requiredRole;
+  const need = Array.isArray(requiredRole) ? requiredRole : [requiredRole];
 
   return async (req, res, next) => {
     try {

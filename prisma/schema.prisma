@@ -6,91 +6,87 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
-
 
 //Gabriel
 model Order {
   id Int @id @default(autoincrement())
 
   which_product String
-  who_order String
-  value Float
-  quantify Int
-  delivery_day DateTime
-  
-  createdAt DateTime @map("created_at") @default (now())
-  updatedAt DateTime @map("updated_at") @updatedAt
+  who_order     String
+  value         Float
+  quantify      Int
+  delivery_day  DateTime
 
-  userId Int @map ("user_id")
-  user  User @relation(fields: [userId], references: [id])  
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  paymentId Int @map ("payment_id")
-  payment  Payment @relation(fields: [paymentId], references: [id])
+  userId Int  @map("user_id")
+  user   User @relation(fields: [userId], references: [id])
+
+  paymentId Int     @map("payment_id")
+  payment   Payment @relation(fields: [paymentId], references: [id])
 
   carts Cart[]
 
   @@map("orders")
 }
 
-
 //iris
 model Payment {
-  id Int  @id @default(autoincrement())
- 
-  card String
-  pix String
-  money Float
-  value Float
+  id Int @id @default(autoincrement())
+
+  card       String
+  pix        String
+  money      Float
+  value      Float
   scheduling String
 
-  createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime  @map("updated_at") @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   order Order[]
 
   @@map("payments")
-}  
-
+}
 
 // Guilherme
 model Product {
   id Int @id @default(autoincrement())
-  
+
   description String
-  name String
-  quantify Int 
-  stock Float
-  maturity DateTime
-  foto String
-  preco Float
-  tipo String
+  name        String
+  quantify    Int
+  stock       Float
+  maturity    DateTime
+  foto        String
+  preco       Float
+  tipo        ProductType
 
-  createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime @map("updated_at") @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  carts Cart[]
+  carts    Cart[]
   receitas Receita[]
 
   @@map("products")
 }
 
-
 // Ryan
 model User {
   id Int @id @default(autoincrement())
 
-  name String
-  email String
+  name     String
+  email    String
   password String
-  phone String
-  CPF String
+  phone    String
+  CPF      String
 
-  createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime @map("updated_at") @updatedAt
-  
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
   orders Order[]
 
   groups GroupUser[]
@@ -98,103 +94,106 @@ model User {
   @@map("users")
 }
 
-
 // Guilherme
-model Cart{
+model Cart {
   id Int @id @default(autoincrement())
 
   quantify Int
 
   // FK - produtos
-  produtoId Int @map("produto_id")
-  produto Product @relation(fields: [produtoId], references: [id])
- 
+  produtoId Int     @map("produto_id")
+  produto   Product @relation(fields: [produtoId], references: [id])
+
   // FK - pedidos
-  orderId Int @map("order_id")
-  order Order @relation(fields: [orderId], references: [id])
+  orderId Int   @map("order_id")
+  order   Order @relation(fields: [orderId], references: [id])
 
   @@map("carts")
 }
 
-
 //iris
-model Receita{
+model Receita {
   id Int @id @default(autoincrement())
 
-  ingredientId Int @map("receita_id")
-  ingrediente Ingrediente @relation(fields: [ingredientId], references: [id])
+  ingredientId Int         @map("receita_id")
+  ingrediente  Ingrediente @relation(fields: [ingredientId], references: [id])
 
-  produtoId Int @map("receitas_id")
-  produto Product @relation(fields: [produtoId], references: [id])
+  produtoId Int     @map("receitas_id")
+  produto   Product @relation(fields: [produtoId], references: [id])
 
   description String
-  name String
-  quantify String
-  stock String
-  maturity DateTime
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  name        String
+  quantify    String
+  stock       String
+  maturity    DateTime
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
   @@map("receitas")
 }
+
 //Gabriel
-model Ingrediente{
+model Ingrediente {
   id Int @id @default(autoincrement())
 
   description String
-  name String
-  quantify Int
-  stock Int
-  maturity DateTime
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  name        String
+  quantify    Int
+  stock       Int
+  maturity    DateTime
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
   receitas Receita[]
 
   @@map("ingredientes")
 }
-model Role{
-  id   Int  @id @default(autoincrement())
+
+model Role {
+  id   Int    @id @default(autoincrement())
   name String @unique
 
   description String
 
   groups RoleGroup[]
-
 }
 
-model Group{
-  id   Int  @id @default(autoincrement())
+model Group {
+  id   Int    @id @default(autoincrement())
   name String @unique
 
   description String
-  
+
   roles RoleGroup[]
   users GroupUser[]
 }
 
-model GroupUser{
+model GroupUser {
   id Int @id @default(autoincrement())
 
-  user User @relation(fields:[ userId],references: [id])
+  user   User @relation(fields: [userId], references: [id])
   userId Int
 
-  group  Group @relation(fields: [groupId], references: [id])
+  group   Group @relation(fields: [groupId], references: [id])
   groupId Int
 
   @@unique([userId, groupId], name: "userId_groupId")
 }
 
-
-model RoleGroup{
+model RoleGroup {
   id Int @id @default(autoincrement())
 
-  group Group @relation(fields:[groupId],references: [id])
+  group   Group @relation(fields: [groupId], references: [id])
   groupId Int
 
-  role Role @relation (fields: [roleId], references: [id]) 
+  role   Role @relation(fields: [roleId], references: [id])
   roleId Int
 
   @@unique([groupId, roleId], name: "groupId_roleId")
 }
 
+enum ProductType {
+  BOLO_FIXO
+  DOCINHOS
+  BOLO_PERSONALIZADO
+}
