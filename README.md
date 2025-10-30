@@ -189,9 +189,7 @@ graph TD;
 - **DELETE /users/{id}** — Remove usuário
 - **POST /users/aunt** — Autentica usuário
 
----
-
----
-### 🧰 Contato
+```
+## 🧰 Contatos
 
 Caso haja alguma dúvida sobre o projeto, Entre em contanto nos nossos perfis!
