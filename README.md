@@ -191,6 +191,7 @@ graph TD;
 
 ---
 
+---
 ### 🧰 Contato
 
 Caso haja alguma dúvida sobre o projeto, Entre em contanto nos nossos perfis!
