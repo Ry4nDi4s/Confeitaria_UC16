@@ -14,6 +14,11 @@ npm run dev
 npx prisma migrate reset
 
 
+Cart
+Endpoints para gerenciamento de carrinho
+
+
+
 POST
 /cart
 Adiciona um item ao carrinho
@@ -63,6 +68,7 @@ Schema
 {
   "error": "Pedido não encontrado | Produto não encontrado"
 }
+No links
 
 GET
 /cart
@@ -100,6 +106,7 @@ Schema
     "produtoId": 5
   }
 ]
+No links
 
 GET
 /cart/{id}
@@ -135,6 +142,7 @@ Schema
   "orderId": 1,
   "produtoId": 5
 }
+No links
 
 DELETE
 /cart/{id}
@@ -207,6 +215,7 @@ Schema
 {
   "error": "não encontrado"
 }
+No links
 
 PUT
 /cart/{id}
@@ -264,7 +273,7 @@ Schema
 {
   "error": "Carrinho não encontrado"
 }
-
+No links
 Ingredientes
 Rotas de gerenciamento de ingredientes
 
@@ -472,6 +481,11 @@ No links
 400	
 Erro ao atualizar ingrediente
 
+No links
+Orders
+Rotas para gerenciamento de pedidos
+
+
 
 POST
 /orders
@@ -619,6 +633,11 @@ Pedido atualizado com sucesso
 No links
 400	
 Erro ao atualizar o pedido
+
+No links
+Payments
+Rotas de gerenciamento dos pagamentos da confeitaria
+
 
 
 POST
@@ -859,6 +878,11 @@ Schema
 No links
 404	
 Error
+
+No links
+Products
+Rotas de gerenciamento dos produtos da confeitaria
+
 
 
 POST
@@ -1182,6 +1206,10 @@ Schema
 {
   "error": "Produto não encontrado"
 }
+No links
+Receitas
+Rotas de gerenciamento das receitas da confeitaria
+
 
 
 POST
@@ -1399,6 +1427,11 @@ Receita atualizada com sucesso
 No links
 404	
 Receita não encontrada
+
+No links
+Users
+Endpoints para gerenciamento de usuários
+
 
 
 POST
