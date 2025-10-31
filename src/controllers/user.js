@@ -82,7 +82,7 @@ export const UserControler = {
         }
     },
 
-    async put(req, res, next) {
+    async put(req, res, _next) {
         try {
             const id = Number(req.params.id)
             let dados = {}
@@ -97,7 +97,7 @@ export const UserControler = {
 
             res.status(200).json(user)
         } catch (error) {
-            next.status(404).json({ error: "Usuário não encontrado" })
+            res.status(404).json({ error: "Usuário não encontrado" })
 
         }
     },
@@ -134,7 +134,7 @@ export const UserControler = {
 
     async auntAdmin(req, res, next) {
         try {
-            const { email, senha, groups } = req.body
+            const { email, senha} = req.body
 
             let u = await prisma.user.findFirst({
                 where: { email: email }
@@ -150,9 +150,8 @@ export const UserControler = {
                 return res.status(401).json({ erro: "Erro na senha" })
             }
 
-            const admin = await prisma.user.compare(groups, u.groups)
-            if (admin =! "ADMIN"){
-                res.status(404).json({ erro: "Você não tem permissão para acessar"})
+            if (u.groups !== "ADMIN"){
+                res.status(403).json({ erro: "Você não tem permissão para acessar"})
             }
 
             // Gerar JWT(payload minimo)
