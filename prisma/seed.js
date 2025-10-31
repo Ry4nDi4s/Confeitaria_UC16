@@ -1,5 +1,6 @@
 // prisma/seed.js
 import { PrismaClient } from '@prisma/client';
+import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 // Helpers idempotentes (usam únicos `name`)
@@ -106,24 +107,35 @@ async function main() {
 
   // 4) (Opcional) Vincula Users a Groups
   // Se já existir User com id 1 e 2, por exemplo:
-
   try {
-    const hash = await bcrypt.hash("12345678o", 10)
-
-    const userCreated = await prisma.user.create({
-      data: {
+    const hash = await bcrypt.hash("12345678o", 10);
+  
+    // Cria o usuário (ou atualiza se já existir)
+    const userCreated = await prisma.user.upsert({
+      where: { id: 1 },
+      update: {},
+      create: {
         name: "Daniela",
         email: "dani@gmail.com",
         password: hash,
         phone: "(16)99999-9999",
-        CPF: "598.432.231-88"
-      }
+        CPF: "593.432.675-44",
+      },
     });
-    await connectUserToGroup({ userId: 1, groupId: groups['ADMIN'].id });
-  } catch { }
-  console.log('Seed concluído com Roles, Groups, RoleGroup e GroupUser');
-}
+  
+    // Conecta o usuário ao grupo ADMIN (idempotente)
+    await connectUserToGroup({
+      userId: userCreated.id,
+      groupId: groups["ADMIN"].id,
+    });
+  
+    console.log('Seed concluído com Roles, Groups, RoleGroup e GroupUser');
+  } catch (error) {
+    console.error("Erro ao executar seed:", error);
+  }}
 
 main()
   .catch((e) => { console.error(e); process.exit(1); })
   .finally(async () => { await prisma.$disconnect(); });
+
+  
