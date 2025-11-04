@@ -1,5 +1,4 @@
 import prisma from "../prisma.js";
-import { ProductType } from '@prisma/client';
 
 // C - CREATE, INSERT, POST, SET, STORE
 
@@ -95,6 +94,3 @@ export const ProductController = {
   },
 };
 
-function validarTipo(tipo) {
-  return Object.values(ProductType).includes(tipo);
-}

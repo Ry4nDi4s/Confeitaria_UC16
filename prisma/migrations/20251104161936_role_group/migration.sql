@@ -1,6 +1,3 @@
--- CreateEnum
-CREATE TYPE "ProductType" AS ENUM ('BOLO_FIXO', 'DOCINHOS', 'BOLO_PERSONALIZADO');
-
 -- CreateTable
 CREATE TABLE "orders" (
     "id" SERIAL NOT NULL,
@@ -41,7 +38,7 @@ CREATE TABLE "products" (
     "maturity" TIMESTAMP(3) NOT NULL,
     "foto" TEXT NOT NULL,
     "preco" DOUBLE PRECISION NOT NULL,
-    "tipo" "ProductType" NOT NULL,
+    "tipo" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 

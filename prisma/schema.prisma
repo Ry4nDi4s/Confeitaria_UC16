@@ -63,7 +63,7 @@ model Product {
   maturity    DateTime
   foto        String
   preco       Float
-  tipo        ProductType
+  tipo        String
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -190,10 +190,4 @@ model RoleGroup {
   roleId Int
 
   @@unique([groupId, roleId], name: "groupId_roleId")
-}
-
-enum ProductType {
-  BOLO_FIXO
-  DOCINHOS
-  BOLO_PERSONALIZADO
 }
