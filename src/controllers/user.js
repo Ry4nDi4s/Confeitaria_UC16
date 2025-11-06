@@ -7,7 +7,7 @@ import prisma from '../prisma.js';
 export const UserControler = {
     async store(req, res, next) {
         try {
-            const { name, email, password, phone, CPF, groups } = req.body
+            const { name, email, password, phone, CPF} = req.body
 
             if (!validarEmail(email)) {
                 return res.status(400).json({ error: "Email inválido" });
@@ -29,7 +29,7 @@ export const UserControler = {
 
             const userCreated = await prisma.user.create({
                 data: {
-                    name, email, password: hash, phone, CPF, groups
+                    name, email, password: hash, phone, CPF
                 }
             });
 
