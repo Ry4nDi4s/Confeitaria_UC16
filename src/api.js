@@ -11,6 +11,14 @@ import PaymentRoutes from "./routes/paymant.js";
 import ReceitaRoutes from "./routes/receita.js";
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import { CategoryController } from "./controllers/category.js";
+import CategoryRoutes from "./routes/category.js";
+import path from "path";
+import { fileURLToPath } from "url";
+ 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 const app = express();
@@ -39,11 +47,13 @@ const options = {
 
 app.use("/users", UserRoutes);
 app.use('/products', ProductRoutes);
+app.use('/categories', CategoryRoutes);
 app.use('/carts', CartRoutes); 
 app.use('/orders', OrderRoutes);
 app.use('/ingredientes', IngredienteRoutes);
 app.use('/payments', verificaToken,PaymentRoutes);
 app.use('/receitas', ReceitaRoutes);
+app.use("/static", express.static(path.join(__dirname, '../static')));
 
 // Middleware de erro simples
 app.use((err, _req, res, _next) => {
