@@ -53,7 +53,7 @@ Authorization: Bearer {{token}}
     "description" : "Muito bom",
     "quantify" : 10,
     "stock" : 250,
-    "matutiy" : "2027-07-09"
+    "matutiy" : "2027-07-09",
     "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0gceWZkYPr0KwatoAcX4PxU-C1CL1SFPwzQ&s",
     "preco": 20,
     "tipo": "Bolo Fixo"
