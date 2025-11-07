@@ -134,38 +134,44 @@ export const UserControler = {
 
     async auntAdmin(req, res, next) {
         try {
-            const { email, senha} = req.body
-
-            let u = await prisma.user.findFirst({
-                where: { email: email }
-            })
-
+            const { email, senha } = req.body;
+    
+            const u = await prisma.user.findFirst({
+                where: { email },
+                include: { 
+                    groups: { 
+                        include: { group: true } // para ter acesso ao nome do grupo
+                    }
+                }
+            });
+    
             if (!u) {
-                res.status(404).json({ erro: "Erro no Email" })
-                return;
+                return res.status(404).json({ erro: "Erro no Email" });
             }
-
-            const ok = await bcrypt.compare(senha, u.password)
+    
+            const ok = await bcrypt.compare(senha, u.password);
             if (!ok) {
-                return res.status(401).json({ erro: "Erro na senha" })
+                return res.status(401).json({ erro: "Erro na senha" });
             }
-
-            if (u.groups !== "ADMIN"){
-                res.status(403).json({ erro: "Você não tem permissão para acessar"})
+    
+            const isAdmin = u.groups.some(gUser => gUser.group.name === "ADMIN");
+    
+            if (!isAdmin) {
+                return res.status(403).json({ erro: "Você não tem permissão para acessar" });
             }
-
-            // Gerar JWT(payload minimo)
+    
             const token = jwt.sign(
-                { sub: u.id, email: u.email, name: u.name },
+                { sub: u.id, email: u.email, name: u.name, groups: "ADMIN" },
                 process.env.JWT_SECRET,
                 { expiresIn: "8h" }
             );
+    
             return res.status(200).json({ token });
         } catch (erro) {
-            next(erro)
+            next(erro);
         }
     }
-}
+}    
 
 function validarCPF(cpf) {
     cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
