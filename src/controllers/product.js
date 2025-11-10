@@ -6,7 +6,7 @@ import prisma from "../prisma.js";
 export const ProductController = {
   async store(req, res, next) {
     try {
-      const { description, name, quantify, stock, maturity, foto, preco, tipo } = req.body;
+      const { description, name, quantify, stock, maturity, foto, preco, tipo, categoryId } = req.body;
 
       const productCreate = await prisma.product.create({
         data: {
@@ -17,7 +17,8 @@ export const ProductController = {
           maturity: new Date(maturity),
           foto,
           preco: Number(preco),
-          tipo
+          tipo,
+          categoryId
         },
       });
 

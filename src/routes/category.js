@@ -9,7 +9,8 @@ CategoryRoutes.post("/", CategoryController.store);
 
 CategoryRoutes.get("/", CategoryController.index);
 
- CategoryRoutes.get("/:id/products", CategoryController.indexProducts);
+
+CategoryRoutes.get("/by-slug/:slug/products", CategoryController.indexProducts);
 
 
 export default CategoryRoutes;
