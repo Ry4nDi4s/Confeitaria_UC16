@@ -19,11 +19,6 @@ export const CategoryController = {
         // const urlBase = 'http://localhost:3000';
         try {
             const categories = (await prisma.category.findMany());
-            // categories.forEach(function (category) {
-            //     if (category.photoUrl != null) {
-            //         category.photoUrl = `${urlBase}${category.photoUrl}`
-            //     }
-            // });
             res.status(200).json(categories);
         }  catch (error) {
             next(error);

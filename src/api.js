@@ -24,6 +24,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use("/static", express.static(path.join(__dirname, '../static')));
 
 const options = {
     definition: {
@@ -53,7 +54,6 @@ app.use('/orders', OrderRoutes);
 app.use('/ingredientes', IngredienteRoutes);
 app.use('/payments', verificaToken,PaymentRoutes);
 app.use('/receitas', ReceitaRoutes);
-app.use("/static", express.static(path.join(__dirname, '../static')));
 
 // Middleware de erro simples
 app.use((err, _req, res, _next) => {
@@ -83,4 +83,7 @@ app.use(cors({
   }));  
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`HTTP = > http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  console.log(`HTTP = > http://localhost:${PORT}`);
+  console.log(`STATIC at ${path.join(__dirname, '../static')}`)
+});
