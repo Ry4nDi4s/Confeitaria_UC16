@@ -24,13 +24,33 @@ export const CategoryController = {
             //         category.photoUrl = `${urlBase}${category.photoUrl}`
             //     }
             // });
-
             res.status(200).json(categories);
         }  catch (error) {
             next(error);
         }
     },
 
-    async indexProducts(req, res, next) {}
+    async indexProducts(req, res, next) {
+        try{
+            const { slug } = req.params;
 
+            const category = await prisma.category.findUnique({
+                where: {slug}
+            })
+
+            if (category == null) {
+                res.status(404).json({error: "Categoria inexistente"})
+                return
+            }
+
+            const products = await prisma.product.findMany({
+                where: {
+                    categoryId: category.id
+                }    
+            });
+            res.status(200).json(products);
+        } catch(error) {
+            next(error)
+        }
+    }
 }
