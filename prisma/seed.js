@@ -119,7 +119,7 @@ async function main() {
         email: "dani@gmail.com",
         password: hash,
         phone: "(16)99999-9999",
-        CPF: "593.432.675-44",
+        CPF: "103.109.728-76",
       },
     });
   
