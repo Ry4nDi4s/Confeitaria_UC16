@@ -93,5 +93,18 @@ export const ProductController = {
       res.status(404).json("Produto não encontrado");
     }
   },
-};
 
+  async showBySlug(req, res, _next) {
+    try {
+      const id = Number(req.params.slug);
+      
+      const product = await prisma.product.findFirstOrThrow({
+        where: { slug },
+      });
+
+      res.status(200).json(product);
+    } catch (err) {
+      res.status(404).json({ error: "Não encontrado" });
+    }
+  },
+};
