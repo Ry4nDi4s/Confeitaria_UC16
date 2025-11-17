@@ -161,6 +161,74 @@ route.get('/', ProductController.index);
 
 /**
  * @swagger
+ * /products/by-slug/{slug}:
+ *   get:
+ *     summary: Busca um produto pelo slug
+ *     description: Retorna um único produto com base no parâmetro `slug` informado na URL.
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: slug
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Slug identificador do produto
+ *         example: "bolo-de-cenoura"
+ *     responses:
+ *       200:
+ *         description: Produto encontrado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 1
+ *                 name:
+ *                   type: string
+ *                   example: "Bolo de cenoura"
+ *                 description:
+ *                   type: string
+ *                   example: "Cobertura de chocolate"
+ *                 quantify:
+ *                   type: integer
+ *                   example: 3
+ *                 stock:
+ *                   type: integer
+ *                   example: 5
+ *                 maturity:
+ *                   type: string
+ *                   format: date
+ *                   example: "2025-12-31"
+ *                 foto:
+ *                   type: string
+ *                   example: "http://site.com/foto.png"
+ *                 preco:
+ *                   type: number
+ *                   format: float
+ *                   example: 59.90
+ *                 tipo:
+ *                   type: string
+ *                   example: "doce"
+ *                 categoryId:
+ *                   type: integer
+ *                   example: 2
+ *       404:
+ *         description: Produto não encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Não encontrado"
+ */
+route.get('/by-slug/:slug', ProductController.showBySlug);
+
+/**
+ * @swagger
  * /products/{id}:
  *   get:
  *     summary: Busca um produto pelo ID
