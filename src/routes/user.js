@@ -139,8 +139,6 @@ route.post('/', UserControler.store);
  */
 route.post('/aunt', UserControler.aunt)
 
-route.post('/auntAdmin', UserControler.auntAdmin)
-
 /**
  * @swagger
  * /users:
