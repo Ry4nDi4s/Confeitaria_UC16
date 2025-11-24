@@ -1,34 +1,38 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGFuaUBnbWFpbC5jb20iLCJuYW1lIjoiRGFuaWVsYSIsImlhdCI6MTc2MTE1NjU3NCwiZXhwIjoxNzYxMTg1Mzc0fQ.n_-kUwU2PLTpJo3bf4XAm8laTsKiuJLdEXNIDCtyuqs
+@token= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsImVtYWlsIjoiZ3VpbGhlcm1lYmVydG9nb0BnbWFpbC5jb20iLCJuYW1lIjoiR3VpbGhlcm1lIEJlcnRvZ28iLCJpYXQiOjE3NjI4OTI3MTYsImV4cCI6MTc2MjkyMTUxNn0.5cvQBOqdTs59voCzcd8H3DbWJOb7aCAivYf28dXNpFQ
 
 ### Criando os pedidos
 POST http://localhost:3000/orders HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-    "which_product":"teste",
-    "who_order":"marcius",
+    "which_product":"Bolo Fixo",
+    "who_order":"João",
     "value": 49.99,
     "quantify": 2,
     "delivery_day":"2025-12-30",
-    "userId":2,
+    "userId":7,
     "paymentId":1
 }
 
 ### lendo os pedidos
 GET http://localhost:3000/orders HTTP/1.1
 Content-Type: application/json
-
+Authorization: Bearer {{token}}
 
 ### lendo os pedidos
 GET http://localhost:3000/orders/9 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ### Deletando pedidos
 DELETE  http://localhost:3000/orders/3 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 PUT  http://localhost:3000/orders/99 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 
