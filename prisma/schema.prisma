@@ -64,7 +64,8 @@ model Product {
   foto        String
   preco       Float
   tipo        String
-  slug        String
+  slug        String @unique
+  photoUrl    String?
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
