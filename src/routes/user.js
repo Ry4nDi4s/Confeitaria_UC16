@@ -137,7 +137,7 @@ route.post('/', UserControler.store);
  *                   type: string
  *                   example: "Erro no Email"
  */
-route.post('/aunt', UserControler.auth)
+route.post('/auth', UserControler.auth)
 
 /**
  * @swagger
