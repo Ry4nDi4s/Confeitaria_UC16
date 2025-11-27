@@ -128,7 +128,6 @@ export const UserControler = {
             const grupos = userGroups.map((g) => g.group.name);
             const isAdmin = grupos.includes("ADMIN");
 
-            // Montar payload do JWT
             const payload = {
                 sub: u.id,
                 email: u.email,
@@ -139,12 +138,10 @@ export const UserControler = {
                 payload.groups = grupos; // adiciona groups no JWT só se for admin
             }
 
-            // Gerar token JWT
             const token = jwt.sign(payload, process.env.JWT_SECRET, {
                 expiresIn: "8h",
             });
 
-            // Preparar resposta
             const responseData = { token };
             if (isAdmin) {
                 responseData.groups = grupos; // adiciona groups na resposta só se for admin
