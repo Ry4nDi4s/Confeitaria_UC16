@@ -102,11 +102,11 @@ export const UserControler = {
         }
     },
 
-    async aunt(req, res, next) {
+    async auth(req, res, next) {
         try {
             const { email, senha } = req.body
 
-            let u = await prisma.user.findFirst({
+            const u = await prisma.user.findFirst({
                 where: { email: email }
             })
 
@@ -125,33 +125,33 @@ export const UserControler = {
                 include: { group: true }
             });
 
-            const grupos = userGroups.map(g => g.group.name);
+            const grupos = userGroups.map((g) => g.group.name);
             const isAdmin = grupos.includes("ADMIN");
 
-            if (!isAdmin) {
-                const token = jwt.sign(
-                    { sub: u.id, email: u.email, name: u.name },
-                    process.env.JWT_SECRET,
-                    { expiresIn: "8h" }
-                );
+            // Montar payload do JWT
+            const payload = {
+                sub: u.id,
+                email: u.email,
+                name: u.name,
+            };
 
-                return res.status(200).json({
-                    token,
-                });
+            if (isAdmin) {
+                payload.groups = grupos; // adiciona groups no JWT só se for admin
             }
-            else {
-                // Gerar JWT(payload minimo)
-                const token = jwt.sign(
-                    { sub: u.id, email: u.email, name: u.name, groups: grupos },
-                    process.env.JWT_SECRET,
-                    { expiresIn: "8h" }
-                );
 
-                return res.status(200).json({
-                    token,
-                    groups: grupos
-                });
+            // Gerar token JWT
+            const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                expiresIn: "8h",
+            });
+
+            // Preparar resposta
+            const responseData = { token };
+            if (isAdmin) {
+                responseData.groups = grupos; // adiciona groups na resposta só se for admin
             }
+
+            return res.status(200).json(responseData);
+
         } catch (erro) {
             next(erro);
         }
