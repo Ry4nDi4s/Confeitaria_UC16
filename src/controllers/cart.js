@@ -6,25 +6,25 @@ export const CartController = {
       const { quantify, orderId, produtoId } = req.body;
 
       let orderkey = await prisma.cart.findFirst({
-        where: {id: Number(orderId)}
+        where: { id: Number(orderId) },
       });
 
       let produtokey = await prisma.product.findFirst({
-        where: {id: Number(produtoId)}
+        where: { id: Number(produtoId) },
       });
 
-      if(!orderkey){
+      if (!orderkey) {
         res.status(301).json({
-          'error':'Pedido não encontrado'
+          error: "Pedido não encontrado",
         });
-        return
+        return;
       }
-      
-      if(!produtokey){
+
+      if (!produtokey) {
         res.status(301).json({
-          'error':'Produto não encontrado'
+          error: "Produto não encontrado",
         });
-        return
+        return;
       }
 
       const cartCreate = await prisma.cart.create({
@@ -36,7 +36,7 @@ export const CartController = {
       });
 
       res.status(201).json(cartCreate);
-    }catch(error) {
+    } catch (error) {
       next(error);
     }
   },
@@ -82,18 +82,18 @@ export const CartController = {
 
   async update(req, res, _next) {
     try {
-        let body = {};
-        const id = Number(req.params.id);
+      let body = {};
+      const id = Number(req.params.id);
 
-         if (req.body.quantity) body.quantity = (req.body.quantity);
+      if (req.body.quantity) body.quantity = req.body.quantity;
 
       let cart = await prisma.cart.update({
         where: { id },
-        data: body
+        data: body,
       });
 
       res.status(200).json(cart);
-    } catch(err){
+    } catch (err) {
       res.status(404).json("Carrinho não encontrado");
     }
   },

@@ -6,7 +6,17 @@ import prisma from "../prisma.js";
 export const ProductController = {
   async store(req, res, next) {
     try {
-      const { description, name, quantify, stock, maturity, foto, preco, tipo, categoryId } = req.body;
+      const {
+        description,
+        name,
+        quantify,
+        stock,
+        maturity,
+        foto,
+        preco,
+        tipo,
+        categoryId,
+      } = req.body;
 
       const productCreate = await prisma.product.create({
         data: {
@@ -18,7 +28,7 @@ export const ProductController = {
           foto,
           preco: Number(preco),
           tipo,
-          categoryId
+          categoryId,
         },
       });
 
@@ -32,12 +42,14 @@ export const ProductController = {
     let query = {};
     // adicionar and(&&) no quantify,ex nome && quantify
     // Adicionar Like em Where: query
-    if (req.query.description) query = { description: { contains: req.query.description } };
+    if (req.query.description)
+      query = { description: { contains: req.query.description } };
     if (req.query.name) query = { name: { contains: req.query.name } };
-    if (req.query.quantify) query = { quantify: { contains: req.query.quantify } };
+    if (req.query.quantify)
+      query = { quantify: { contains: req.query.quantify } };
 
     const products = await prisma.product.findMany({
-      where: query
+      where: query,
     });
     res.status(200).json(products);
   },
@@ -97,7 +109,7 @@ export const ProductController = {
   async showBySlug(req, res, _next) {
     try {
       const id = Number(req.params.slug);
-      
+
       const product = await prisma.product.findFirstOrThrow({
         where: { slug },
       });
