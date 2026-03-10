@@ -10,44 +10,71 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//Gabriel
-model Order {
-  id Int @id @default(autoincrement())
-
-  which_product String
-  who_order     String
-  value         Float
-  quantify      Int
-  delivery_day  DateTime
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  userId Int  @map("user_id")
-  user   User @relation(fields: [userId], references: [id])
-
-  paymentId Int     @map("payment_id")
-  payment   Payment @relation(fields: [paymentId], references: [id])
-
-  carts Cart[]
-
-  @@map("orders")
+enum OrderStatus {
+  PRONTO
+  PREPARANDO_O_PEDIDO
+  PAGAMENTO_EM_ANDAMENTO
+  NAO_PAGO
+  CANCELADO
 }
 
-//iris
+model Order {
+  id            Int         @id @default(autoincrement())
+  delivery      Boolean      @default(false)
+  subvalue      Decimal
+  delivery_day  DateTime?  
+  ReadyAt  DateTime?
+
+  createdAt    DateTime    @default(now()) @map("created_at")
+  updatedAt    DateTime    @updatedAt @map("updated_at")
+  
+  userId       Int         @map("user_id")
+  user         User        @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade) // who_order agora será esta linha
+
+  paymentId    Int         @map("payment_id") @unique
+  payment      Payment     @relation(fields: [paymentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+
+  items        OrderItem[] // AQUI VAI SER OS VARIOS ITEMS QUE A PESSOA PODE COMPRAR, SENDO O ANTIGO "which_product"
+  carts        Cart[]
+
+  status OrderStatus @default(PAGAMENTO_EM_ANDAMENTO) // AQUI O BANCO VAI DEIXAR O PEDIDO COMO "PAGAMENTO_EM_ANDAMENTO" SENDO PADRÃO
+  
+  @@map("orders")
+  @@index([userId]) // @@index serve para buscas mais rápidas
+  @@index([paymentId]) // @@index serve para buscas mais rápidas
+}
+
+model OrderItem {
+  id         Int      @id @default(autoincrement())
+  quantity   Int
+  unitPrice  Decimal
+
+  orderId    Int      @map("order_id")
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  productId  Int      @map("product_id")
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@map("order_items")
+  @@index([orderId]) // @@index serve para buscas mais rápidas
+  @@index([productId]) // @@index serve para buscas mais rápidas
+}
+
 model Payment {
   id Int @id @default(autoincrement())
 
-  card       String
-  pix        String
-  money      Float
-  value      Float
-  scheduling String
+  paidWithPix   Boolean
+  paidWithMoney Boolean 
+  value         Decimal
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  order Order[]
+  order Order?
 
   @@map("payments")
 }
@@ -89,7 +116,6 @@ model Category {
   products Product[]
 }
 
-// Ryan
 model User {
   id Int @id @default(autoincrement())
 
@@ -126,7 +152,6 @@ model Cart {
   @@map("carts")
 }
 
-//iris
 model Receita {
   id Int @id @default(autoincrement())
 
@@ -138,8 +163,8 @@ model Receita {
 
   description String
   name        String
-  quantify    String
-  stock       String
+  quantify    Int
+  stock       Int
   maturity    DateTime
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
@@ -147,7 +172,6 @@ model Receita {
   @@map("receitas")
 }
 
-//Gabriel
 model Ingrediente {
   id Int @id @default(autoincrement())
 
