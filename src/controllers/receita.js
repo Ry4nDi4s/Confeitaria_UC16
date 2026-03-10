@@ -14,7 +14,7 @@ export const ReceitaControler = {
       //}
 
       //new
-      let i = await prisma.ingredient.findfirts({
+      let i = await prisma.ingrediente.findFirst({
         where: { id: Number(ingredientId) },
       });
       //new
@@ -24,7 +24,7 @@ export const ReceitaControler = {
       }
 
       //new
-      let p = await prisma.produto.findfirts({
+      let p = await prisma.product.findFirst({
         where: { id: Number(produtoId) },
       });
       //new

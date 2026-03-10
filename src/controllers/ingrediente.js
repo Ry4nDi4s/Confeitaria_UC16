@@ -19,7 +19,7 @@ export const IngredienteController = {
     }
   },
 
-  async index(req, res, next) {
+  async index(req, res, _next) {
     let query = {};
 
     if (req.query.name) query = { name: req.query.name };

@@ -59,11 +59,9 @@ export const OrderController = {
 
     if (req.query.value) query = { value: req.query.value };
     if (req.query.quantify) query = { quantify: req.query.quantify };
-    if (req.query.delivery_day)
-      query = { delivery_day: req.query.delivery_day };
-    if (req.query.which_product)
-      query = { which_product: req.query.which_product };
-
+    if (req.query.delivery_day) query = { delivery_day: req.query.delivery_day };
+    if (req.query.which_product) query = { which_product: req.query.which_product };
+    
     query.userId = req.logado.id;
 
     const orders = await prisma.order.findMany({

@@ -42,7 +42,6 @@ const options = {
 
 const swaggerSpec = swaggerJSDoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 app.use("/users", UserRoutes);
 app.use("/products", ProductRoutes);
 app.use("/categories", CategoryRoutes);
