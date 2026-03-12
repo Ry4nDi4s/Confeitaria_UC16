@@ -11,19 +11,21 @@ datasource db {
 }
 
 enum OrderStatus {
-  PRONTO
-  PREPARANDO_O_PEDIDO
-  PAGAMENTO_EM_ANDAMENTO
-  NAO_PAGO
-  CANCELADO
+  AGUARDANDO_PAGAMENTO    
+  PAGO                  
+  PREPARANDO             
+  PRONTO                   
+  ENVIADO                  
+  ENTREGUE                 
+  CANCELADO                
 }
 
 model Order {
   id            Int         @id @default(autoincrement())
-  delivery      Boolean      @default(false)
-  subvalue      Decimal
-  delivery_day  DateTime?  
-  ReadyAt  DateTime?
+  Delivery      Boolean      @default(false)
+  subtotal      Decimal
+  DeliveryDay   DateTime?  
+  ReadyAt       DateTime?
 
   createdAt    DateTime    @default(now()) @map("created_at")
   updatedAt    DateTime    @updatedAt @map("updated_at")
@@ -38,10 +40,11 @@ model Order {
   items        OrderItem[] // AQUI VAI SER OS VARIOS ITEMS QUE A PESSOA PODE COMPRAR, SENDO O ANTIGO "which_product"
   carts        Cart[]
 
-  status OrderStatus @default(PAGAMENTO_EM_ANDAMENTO) // AQUI O BANCO VAI DEIXAR O PEDIDO COMO "PAGAMENTO_EM_ANDAMENTO" SENDO PADRÃO
+  status OrderStatus @default(AGUARDANDO_PAGAMENTO) // AQUI O BANCO VAI DEIXAR O PEDIDO COMO "AGUARDANDO_PAGAMENTO" SENDO PADRÃO
   
   @@map("orders")
-  @@index([userId]) // @@index serve para buscas mais rápidas
+  @@index([status, createdAt])
+  @@index([userId, createdAt]) // @@index serve para buscas mais rápidas
   @@index([paymentId]) // @@index serve para buscas mais rápidas
 }
 
@@ -81,29 +84,33 @@ model Payment {
 
 // Guilherme
 model Product {
-  id Int @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
 
   description String
   name        String
   quantify    Int
-  stock       Float
+  stock       Decimal   @db.Decimal(10, 3)
   maturity    DateTime
   foto        String
-  preco       Float
+  preco       Decimal   @db.Decimal(10, 2)
   tipo        String
-  slug        String @unique
+  slug        String    @unique
   photoUrl    String?
 
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive    Boolean   @default(true)
 
-  carts    Cart[]
-  receitas Receita[]
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
 
-  categoryId Int?      @map("category_id")
-  category   Category? @relation(fields: [categoryId], references: [id])
+  carts       Cart[]
+  receitas    Receita[]
+
+  categoryId  Int?      @map("category_id")
+  category    Category? @relation(fields: [categoryId], references: [id])
 
   @@map("products")
+  @@index([categoryId])
+  @@index([isActive])
 }
 
 model Category {
@@ -145,9 +152,8 @@ model Cart {
   produtoId Int     @map("produto_id")
   produto   Product @relation(fields: [produtoId], references: [id])
 
-  // FK - pedidos
-  orderId Int   @map("order_id")
-  order   Order @relation(fields: [orderId], references: [id])
+  userId       Int         @map("user_id")
+  user         User        @relation(fields: [userId], references: [id])
 
   @@map("carts")
 }
