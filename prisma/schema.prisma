@@ -11,67 +11,66 @@ datasource db {
 }
 
 enum OrderStatus {
-  AGUARDANDO_PAGAMENTO    
-  PAGO                  
-  PREPARANDO             
-  PRONTO                   
-  ENVIADO                  
-  ENTREGUE                 
-  CANCELADO                
+  AGUARDANDO_PAGAMENTO
+  PAGO
+  PREPARANDO
+  PRONTO
+  ENVIADO
+  ENTREGUE
+  CANCELADO
 }
 
 model Order {
-  id            Int         @id @default(autoincrement())
-  Delivery      Boolean      @default(false)
-  subtotal      Decimal
-  DeliveryDay   DateTime?  
-  ReadyAt       DateTime?
+  id          Int       @id @default(autoincrement())
+  Delivery    Boolean   @default(false)
+  subtotal    Decimal
+  DeliveryDay DateTime?
+  ReadyAt     DateTime?
 
-  createdAt    DateTime    @default(now()) @map("created_at")
-  updatedAt    DateTime    @updatedAt @map("updated_at")
-  
-  userId       Int         @map("user_id")
-  user         User        @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade) // who_order agora será esta linha
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  paymentId    Int         @map("payment_id") @unique
-  payment      Payment     @relation(fields: [paymentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  userId Int  @map("user_id")
+  user   User @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade) // who_order agora será esta linha
 
+  paymentId Int     @unique @map("payment_id")
+  payment   Payment @relation(fields: [paymentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
-  items        OrderItem[] // AQUI VAI SER OS VARIOS ITEMS QUE A PESSOA PODE COMPRAR, SENDO O ANTIGO "which_product"
-  carts        Cart[]
+  items OrderItem[] // AQUI VAI SER OS VARIOS ITEMS QUE A PESSOA PODE COMPRAR, SENDO O ANTIGO "which_product"
+  carts Cart[]
 
   status OrderStatus @default(AGUARDANDO_PAGAMENTO) // AQUI O BANCO VAI DEIXAR O PEDIDO COMO "AGUARDANDO_PAGAMENTO" SENDO PADRÃO
-  
-  @@map("orders")
+
   @@index([status, createdAt])
   @@index([userId, createdAt]) // @@index serve para buscas mais rápidas
   @@index([paymentId]) // @@index serve para buscas mais rápidas
+  @@map("orders")
 }
 
 model OrderItem {
-  id         Int      @id @default(autoincrement())
-  quantity   Int
-  unitPrice  Decimal
+  id        Int     @id @default(autoincrement())
+  quantity  Int
+  unitPrice Decimal
 
-  orderId    Int      @map("order_id")
-  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  orderId Int   @map("order_id")
+  order   Order @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
-  productId  Int      @map("product_id")
-  product    Product  @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  productId Int     @map("product_id")
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("order_items")
   @@index([orderId]) // @@index serve para buscas mais rápidas
   @@index([productId]) // @@index serve para buscas mais rápidas
+  @@map("order_items")
 }
 
 model Payment {
   id Int @id @default(autoincrement())
 
   paidWithPix   Boolean
-  paidWithMoney Boolean 
+  paidWithMoney Boolean
   value         Decimal
 
   createdAt DateTime @default(now()) @map("created_at")
@@ -84,42 +83,43 @@ model Payment {
 
 // Guilherme
 model Product {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   description String
   name        String
   quantify    Int
-  stock       Decimal   @db.Decimal(10, 3)
+  stock       Decimal  @db.Decimal(10, 3)
   maturity    DateTime
   foto        String
-  preco       Decimal   @db.Decimal(10, 2)
+  preco       Decimal  @db.Decimal(10, 2)
   tipo        String
-  slug        String    @unique
+  slug        String   @unique
   photoUrl    String?
 
-  isActive    Boolean   @default(true)
+  isActive Boolean @default(true)
 
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  carts       Cart[]
-  receitas    Receita[]
+  carts    Cart[]
+  receitas Receita[]
 
-  categoryId  Int?      @map("category_id")
-  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?        @map("category_id")
+  category   Category?   @relation(fields: [categoryId], references: [id])
+  orderItems OrderItem[]
 
-  @@map("products")
   @@index([categoryId])
   @@index([isActive])
+  @@map("products")
 }
 
 model Category {
   id Int @id @default(autoincrement())
 
-  name String
+  name     String
   photoUrl String?
-  slug String @unique
-  
+  slug     String  @unique
+
   products Product[]
 }
 
@@ -138,6 +138,7 @@ model User {
   orders Order[]
 
   groups GroupUser[]
+  carts  Cart[]
 
   @@map("users")
 }
@@ -152,8 +153,10 @@ model Cart {
   produtoId Int     @map("produto_id")
   produto   Product @relation(fields: [produtoId], references: [id])
 
-  userId       Int         @map("user_id")
-  user         User        @relation(fields: [userId], references: [id])
+  userId  Int    @map("user_id")
+  user    User   @relation(fields: [userId], references: [id])
+  order   Order? @relation(fields: [orderId], references: [id])
+  orderId Int?
 
   @@map("carts")
 }
