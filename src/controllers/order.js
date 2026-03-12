@@ -3,29 +3,32 @@ export const OrderController = {
   async store(req, res, next) {
     try {
       const {
-        which_product,
-        who_order,
-        value,
-        quantify,
-        delivery_day,
+        Delivery,
+        subtotal,
+        DeliveryDay,
+        ReadyAt,
         userId,
         paymentId,
+        items,
+        status,
       } = req.body;
 
       let data = {
-        which_product,
-        who_order,
-        value,
-        quantify,
-        delivery_day: new Date(delivery_day),
+        Delivery,
+        subtotal,
+        DeliveryDay: new Date(DeliveryDay),
+        ReadyAt: new Date(ReadyAt),
+        items,
+        status,
       };
+      
       if (paymentId) {
         let paymentkey = await prisma.payment.findFirst({
           where: { id: Number(paymentId) },
         });
         if (!paymentkey) {
           res.status(301).json({
-            error: "Pedido informado não existe",
+            error: "Pagamento não encontrado",
           });
           return;
         }
@@ -38,7 +41,7 @@ export const OrderController = {
         });
         if (!userkey) {
           res.status(301).json({
-            error: "Pedido informado não existe",
+            error: "Usuário não existe",
           });
           return;
         }
@@ -54,15 +57,13 @@ export const OrderController = {
       next(err);
     }
   },
-  async index(req, res, next) {
+  async index(req, res, _next) {
     let query = {};
 
-    if (req.query.value) query = { value: req.query.value };
-    if (req.query.quantify) query = { quantify: req.query.quantify };
-    if (req.query.delivery_day) query = { delivery_day: req.query.delivery_day };
-    if (req.query.which_product) query = { which_product: req.query.which_product };
-    
-    query.userId = req.logado.id;
+    if (req.query.Delivery) query = { Delivery: req.query.Delivery };
+    if (req.query.subtotal) query = { subtotal: req.query.subtotal };
+    if (req.query.DeliveryDay) query = { DeliveryDay: req.query.DeliveryDay };
+    if (req.query.ReadyAt) query = { ReadyAt: req.query.ReadyAt };
 
     const orders = await prisma.order.findMany({
       where: query,
@@ -116,7 +117,7 @@ export const OrderController = {
 
       res.status(200).json(o);
     } catch (err) {
-      res.status(400).json({ err: "Não encontrado" });
+      res.status(400).json({ err: "Pedido não encontrado" });
     }
   },
 };

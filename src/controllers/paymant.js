@@ -5,14 +5,10 @@ import prisma from "../prisma.js";
 export const PaymentControler = {
   async store(req, res, _next) {
     try {
-      const { card, pix, money, value, scheduling } = req.body;
-
-      if (!validaCartao(card)) {
-        return res.status(400).json({ error: "Cartão inválido" });
-      }
+      const {paidWithPix, paidWithMoney, value } = req.body;
 
       const pay = await prisma.payment.create({
-        data: { card, pix, money, value, scheduling },
+        data: { paidWithPix, paidWithMoney, value },
       });
       //respondendo 201-criado encapsulado
       res.status(201).json(pay);
@@ -25,10 +21,6 @@ export const PaymentControler = {
     let query = {};
 
     if (req.query.value) query = { value: { contains: req.query.value } };
-    if (req.query.scheduling)
-      query = { scheduling: { contains: req.query.scheduling } };
-
-    //where.userid=Reg.logado.id
 
     const payments = await prisma.payment.findMany({
       where: query,
@@ -60,13 +52,13 @@ export const PaymentControler = {
     try {
       const id = Number(req.params.id);
       let dados = {};
-      if (req.body.pix) dados.pix = req.body.pix;
-      if (req.body.money) dados.money = req.body.money;
-      if (req.body.card) dados.card = req.body.card;
+      if (req.body.paidWithPix) dados.paidWithPix = req.body.paidWithPix;
+      if (req.body.paidWithMoney) dados.paidWithMoney = req.body.paidWithMoney;
+      if (req.body.value) dados.value = req.body.value;
 
       let payment = await prisma.payment.update({
         where: { id },
-        data: body,
+        data: dados,
       });
 
       res.status(200).json(payment);
@@ -75,25 +67,3 @@ export const PaymentControler = {
     }
   },
 };
-
-function validaCartao(numero) {
-  if (!numero) return false;
-  console.log(numero);
-
-  const digits = numero.replace(/\D/g, "");
-  if (digits.length < 13 || digits.length > 19) return false;
-
-  let soma = 0;
-  let alterna = false;
-
-  for (let i = digits.length - 1; i >= 0; i--) {
-    let n = parseInt(digits[i], 10);
-    if (alterna) {
-      n *= 2;
-      if (n > 9) n -= 9;
-    }
-    soma += n;
-    alterna = !alterna;
-  }
-  return soma % 10 === 0;
-}

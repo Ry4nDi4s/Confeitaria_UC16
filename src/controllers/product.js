@@ -1,3 +1,4 @@
+import { Decimal } from "@prisma/client/runtime/library";
 import prisma from "../prisma.js";
 
 // C - CREATE, INSERT, POST, SET, STORE
@@ -15,6 +16,7 @@ export const ProductController = {
         foto,
         preco,
         tipo,
+        isActive,
         categoryId,
       } = req.body;
 
@@ -26,8 +28,9 @@ export const ProductController = {
           stock,
           maturity: new Date(maturity),
           foto,
-          preco: Number(preco),
+          preco: Decimal(preco),
           tipo,
+          isActive: Boolean(isActive),
           categoryId,
         },
       });
@@ -42,11 +45,10 @@ export const ProductController = {
     let query = {};
     // adicionar and(&&) no quantify,ex nome && quantify
     // Adicionar Like em Where: query
-    if (req.query.description)
-      query = { description: { contains: req.query.description } };
+    if (req.query.description) query = { description: { contains: req.query.description } };
     if (req.query.name) query = { name: { contains: req.query.name } };
-    if (req.query.quantify)
-      query = { quantify: { contains: req.query.quantify } };
+    if (req.query.quantify) query = { quantify: { contains: req.query.quantify } };
+    if (req.query.isActive) query = { isActive: req.query.isActive };
 
     const products = await prisma.product.findMany({
       where: query,
@@ -92,6 +94,7 @@ export const ProductController = {
       if (req.body.stock) body.stock = req.body.stock;
       if (req.body.maturity) body.maturity = req.body.maturity;
       if (req.body.tipo) body.tipo = req.body.tipo;
+      if (req.body.isActive) body.isActive = req.body.isActive;
 
       const id = Number(req.params.id);
 
