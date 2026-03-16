@@ -1,4 +1,6 @@
 import prisma from "../prisma.js";
+import { OrderStatus } from "@prisma/client";
+
 export const OrderController = {
   async store(req, res, next) {
     try {
@@ -7,10 +9,10 @@ export const OrderController = {
         subtotal,
         DeliveryDay,
         ReadyAt,
-        userId,
-        paymentId,
         items,
         status,
+        userId,
+        paymentId,
       } = req.body;
 
       let data = {
@@ -18,10 +20,9 @@ export const OrderController = {
         subtotal,
         DeliveryDay: new Date(DeliveryDay),
         ReadyAt: new Date(ReadyAt),
-        items,
-        status,
+        status: status || OrderStatus.AGUARDANDO_PAGAMENTO,
       };
-      
+
       if (paymentId) {
         let paymentkey = await prisma.payment.findFirst({
           where: { id: Number(paymentId) },
@@ -48,8 +49,45 @@ export const OrderController = {
         data.userId = Number(userId);
       }
 
+      if (!Array.isArray(items) || items.length === 0) {
+        return res.status(400).json({
+            error: "items é obrigatório e deve ser um array não vazio.",
+          });
+      }
+
+      for (let i = 0; i < items.length; i++) {
+        const it = items[i];
+        if (!it?.productId || !it?.quantity || !it?.unitPrice) {
+          return res.status(400).json({
+            error: `Item #${i + 1} inválido: precisa de productId, quantity e unitPrice.`,
+          });
+        }
+        if (Number(it.quantity) <= 0) {
+          return res.status(400).json({ error: `Item #${i + 1}: quantity deve ser > 0.` });
+        }
+      }
+
       const orderCreate = await prisma.order.create({
         data: data,
+      });
+
+      const OrderItem = items.map((validaItem) => ({
+        orderId: orderCreate.id,
+        productId: validaItem.productId,
+        quantity: validaItem.quantity,
+        unitPrice: validaItem.unitPrice,
+      }));
+
+      const ItensCreate = OrderItem.map((item) => ({
+        productId: item.productId,
+        quantity: item.quantity,
+        unitPrice: item.unitPrice,
+      }));
+
+      const Itens_Order = [ ...OrderItem, ...ItensCreate]; // Combina os dois arrays e os "..." serve para espalhar os itens do ItensCreate dentro do array Itens_Order
+
+      await prisma.orderItem.createMany({
+        data: Itens_Order
       });
 
       res.status(201).json(orderCreate);
