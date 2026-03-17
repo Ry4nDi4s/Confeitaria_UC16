@@ -1,3 +1,4 @@
+import { json } from "express";
 import prisma from "../prisma.js";
 
 //c- create, inset, post, set, store
@@ -5,7 +6,19 @@ import prisma from "../prisma.js";
 export const PaymentControler = {
   async store(req, res, _next) {
     try {
-      const {paidWithPix, paidWithMoney, value } = req.body;
+      const { paidWithPix, paidWithMoney, value } = req.body;
+
+      if (!paidWithMoney && !paidWithPix) {
+        res
+          .status(400)
+          .json({ error: "Escolha um forma de pagamento valido!" });
+      }
+
+      if (!value || isNaN.Number(value)) {
+        res
+          .status(400)
+          .json({ error: "Escolha um forma de pagamento valido!" });
+      }
 
       const pay = await prisma.payment.create({
         data: { paidWithPix, paidWithMoney, value },
@@ -41,6 +54,19 @@ export const PaymentControler = {
   async delete(req, res, _next) {
     try {
       const id = Number(req.params.id);
+
+      const pedidoDelete = await prisma.order.findFirst({
+        where: { paymentId: id },
+      });
+
+      if (pedidoDelete) {
+        return res
+          .status(400)
+          .json(
+            "Você não pode deletar um pagamento que já está vinculado a pedido!",
+          );
+      }
+
       const pay = await prisma.payment.delete({ where: { id } });
       res.status(200).json(pay);
     } catch (err) {
@@ -51,6 +77,22 @@ export const PaymentControler = {
   async put(req, res, next) {
     try {
       const id = Number(req.params.id);
+      const pedidoPagamento = await prisma.order.findFirst({
+        where: { paymentId: id },
+      });
+
+      if (pedidoPagamento.status !== "AGUARDANDO_PAGAMENTO") {
+        res.status(400).json("Você não pode editar um pedido já finalizado!");
+      }
+
+      if (pedidoPagamento && req.body.value !== undefined) {
+        const ValorPedido = Number(pedidoPagamento.subtotal);
+        const ValorFinal = Number(req.body, value);
+
+        if (ValorFinal !== ValorPedido) {
+          return res.status(400);
+        }
+      }
       let dados = {};
       if (req.body.paidWithPix) dados.paidWithPix = req.body.paidWithPix;
       if (req.body.paidWithMoney) dados.paidWithMoney = req.body.paidWithMoney;
