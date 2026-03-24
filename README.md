@@ -3,8 +3,6 @@
 ## 👥 Integrantes
 - Ryan Dias
 - Guilherme
-- Gabriel
-- Irís
 
 ---
 
@@ -27,10 +25,6 @@ A aplicação permite que os usuários visualizem e comprem produtos, enquanto o
 - Controle de estoque
 - Visualização de pedidos pendentes e pagamentos
 - Sistema de permissões (ADMIN)
-
----
-
-## 🛠 Tecnologias Utilizadas
 
 ---
 
