@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { CategoryController } from "../controllers/category.js";
 
-
 /**
  * @swagger
  * tags:
@@ -9,7 +8,6 @@ import { CategoryController } from "../controllers/category.js";
  *   description: Endpoints para gerenciamento de categoria
  */
 const CategoryRoutes = Router();
-
 
 /**
  * @swagger
@@ -59,7 +57,6 @@ const CategoryRoutes = Router();
  */
 CategoryRoutes.post("/", CategoryController.store);
 
-
 /**
  * @swagger
  * /category:
@@ -91,7 +88,6 @@ CategoryRoutes.post("/", CategoryController.store);
  *                     example: "/static/categories/photos/boloaniversário.png"
  */
 CategoryRoutes.get("/", CategoryController.index);
-
 
 /**
  * @swagger
@@ -149,6 +145,5 @@ CategoryRoutes.get("/", CategoryController.index);
  *                   example: "Categoria inexistente"
  */
 CategoryRoutes.get("/by-slug/:slug/products", CategoryController.indexProducts);
-
 
 export default CategoryRoutes;

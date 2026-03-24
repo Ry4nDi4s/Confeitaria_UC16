@@ -1,46 +1,62 @@
 import { Decimal } from "@prisma/client/runtime/library";
+import { slugify } from "../utils/slugify.js";
 import prisma from "../prisma.js";
 
 // C - CREATE, INSERT, POST, SET, STORE
 
 // asincrona nome_da_função(recebendo, responder, proximo)
 export const ProductController = {
-  async store(req, res, next) {
-    try {
-      const {
+async store(req, res, next) {
+  try {
+    console.log("BODY RECEBIDO:", req.body);
+
+    const {
+      description,
+      name,
+      quantify,
+      stock,
+      maturity,
+      foto,
+      preco,
+      tipo,
+      isActive,
+      categoryId,
+    } = req.body;
+
+    const baseSlug = slugify(name);
+    let newSlug = baseSlug;
+    let count = 1;
+
+    while (await prisma.product.findUnique({ where: { slug: newSlug } })) {
+      newSlug = `${baseSlug}-${count++}`;
+    }
+
+    console.log("SLUG GERADO:", newSlug);
+
+    const productCreate = await prisma.product.create({
+      data: {
         description,
         name,
-        quantify,
-        stock,
-        maturity,
+        quantify: Number(quantify),
+        stock: Number(stock),
+        maturity: new Date(maturity),
         foto,
-        preco,
+        preco: new Decimal(preco),
         tipo,
-        isActive,
-        categoryId,
-      } = req.body;
+        isActive: Boolean(isActive),
+        categoryId: Number(categoryId),
+        slug: newSlug,
+      },
+    });
 
-      const productCreate = await prisma.product.create({
-        data: {
-          description,
-          name,
-          quantify,
-          stock,
-          maturity: new Date(maturity),
-          foto,
-          preco: Decimal(preco),
-          tipo,
-          isActive: Boolean(isActive),
-          categoryId,
-        },
-      });
+    return res.status(201).json(productCreate);
+    
+  } catch (error) {
+    console.error("ERRO REAL BACKEND:", error);
+    return res.status(500).json({ error: "Erro ao criar produto" });
+  }
+},
 
-      // respondendo 201-criado encapsulado_no_formato_json(productCreate)
-      res.status(201).json(productCreate);
-    } catch (error) {
-      next(error);
-    }
-  },
   async index(req, res, _next) {
     let query = {};
     // adicionar and(&&) no quantify,ex nome && quantify
@@ -90,12 +106,10 @@ export const ProductController = {
       }
 
       if (ProdutoNoPedido) {
-        res
-          .status(400)
-          .json({
-            error:
-              "Você não pode deletar umm produto que está sendo vendido para o cliente!",
-          });
+        res.status(400).json({
+          error:
+            "Você não pode deletar um produto que está sendo vendido para o cliente!",
+        });
       }
 
       const product = await prisma.product.delete({
@@ -136,7 +150,7 @@ export const ProductController = {
 
   async showBySlug(req, res, _next) {
     try {
-      const slug = Number(req.params.slug);
+      const slug = req.params.slug;
 
       const product = await prisma.product.findFirstOrThrow({
         where: { slug: slug },

@@ -7,4 +7,3 @@ node_modules
 /prisma/dev.db
 
 /static
-MANUAL_BACKEND.txt

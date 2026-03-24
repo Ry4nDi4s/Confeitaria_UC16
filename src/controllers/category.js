@@ -2,8 +2,8 @@ import prisma from "../prisma.js";
 
 export const CategoryController = {
   async store(req, res, next) {
-    const { name, slug } = req.body;
     try {
+      const { name, slug } = req.body;
       const photoUrl = `/static/categories/photos/${slug}.png`;
       const category = await prisma.category.create({
         data: { name, slug, photoUrl },
@@ -15,10 +15,9 @@ export const CategoryController = {
   },
 
   async index(req, res, next) {
-    // const urlBase = 'http://localhost:3000';
     try {
       const categories = await prisma.category.findMany();
-      res.status(200).json(categories);
+      return res.status(200).json(categories);
     } catch (error) {
       next(error);
     }
@@ -32,7 +31,7 @@ export const CategoryController = {
         where: { slug },
       });
 
-      if (category == null) {
+      if (category == null || !category) {
         res.status(404).json({ error: "Categoria inexistente" });
         return;
       }

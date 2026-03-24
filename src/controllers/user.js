@@ -102,7 +102,7 @@ export const UserControler = {
 
       let user = await prisma.user.update({
         where: { id },
-        data: body,
+        data: dados,
       });
 
       res.status(200).json(user);
