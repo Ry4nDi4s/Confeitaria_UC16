@@ -6,7 +6,7 @@ import prisma from "../prisma.js";
 
 // asincrona nome_da_função(recebendo, responder, proximo)
 export const ProductController = {
-async store(req, res, next) {
+async store(req, res, _next) {
   try {
     console.log("BODY RECEBIDO:", req.body);
 
