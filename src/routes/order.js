@@ -96,7 +96,7 @@ route.post('/', verificaToken,OrderController.store);
  *       400:
  *         description: Erro nos dados enviados
  */
-route.get('/', verificaToken,OrderController.index);
+route.get('/',OrderController.index);
 
 /**
  * @swagger
@@ -123,7 +123,7 @@ route.get('/', verificaToken,OrderController.index);
  *       400:
  *         description: Pedido não encontrado
  */
-route.get('/:id', verificaToken, OrderController.show);
+route.get('/:id', OrderController.show);
 
 /**
  * @swagger
