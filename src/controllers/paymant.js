@@ -14,10 +14,10 @@ export const PaymentControler = {
           .json({ error: "Escolha um forma de pagamento valido!" });
       }
 
-      if (!value || isNaN.Number(value)) {
+      if (!value || value <= 0) {
         res
           .status(400)
-          .json({ error: "Escolha um forma de pagamento valido!" });
+          .json({ error: "O valor do pagamento é inválido!" });
       }
 
       const pay = await prisma.payment.create({

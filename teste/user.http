@@ -1,4 +1,4 @@
-@token =
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGFuaUBnbWFpbC5jb20iLCJuYW1lIjoiRGFuaWVsYSIsImdyb3VwcyI6WyJBRE1JTiJdLCJpYXQiOjE3NzQ2MzUzMzcsImV4cCI6MTc3NDY2NDEzN30.GEqjzYvQ177m1_t4lXSFHdMFbYRsZ9BhS7XJQe6faEY
 
 ### Criação de usuários = CREATE
 
@@ -6,11 +6,11 @@ POST http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "teste", 
-    "email": "teste@gmail.com", 
+    "name": "João da Silva", 
+    "email": "joao@gmail.com", 
     "password": "123@123W", 
     "phone": "(16)99999-9999", 
-    "CPF": ""
+    "CPF": "666.278.307-28"
 }
 
 ### Leitura de todos os usuários = READ
@@ -30,7 +30,7 @@ Content-Type: application/json
 
 
 ### Delete = Delete
-DELETE http://localhost:3000/users/1 HTTP/1.1
+DELETE http://localhost:3000/users/3 HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

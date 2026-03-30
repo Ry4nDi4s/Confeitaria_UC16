@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsImVtYWlsIjoiZ3VpbGhlcm1lYmVydG9nb0BnbWFpbC5jb20iLCJuYW1lIjoiR3VpbGhlcm1lIEJlcnRvZ28iLCJpYXQiOjE3NjI4OTI3MTYsImV4cCI6MTc2MjkyMTUxNn0.5cvQBOqdTs59voCzcd8H3DbWJOb7aCAivYf28dXNpFQ
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGFuaUBnbWFpbC5jb20iLCJuYW1lIjoiRGFuaWVsYSIsImdyb3VwcyI6WyJBRE1JTiJdLCJpYXQiOjE3NzQ1NTA0NTEsImV4cCI6MTc3NDU3OTI1MX0.s3wesbYMFjpkBU8m7aOg0_HYTNGCyvACF4Wxhm5qONM
 
 ### cadastra um pagamento
 POST http://localhost:3000/payments HTTP/1.1
@@ -6,11 +6,9 @@ content-type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "card": "5290 1560 8424 2344",
-    "pix": "345", 
-    "money": 0, 
-    "value": 0, 
-    "scheduling": "05/09/2025"
+    "paidWithPix": true,
+    "paidWithMoney": true,
+    "value": 99.98
 }
 
 ### busca todo

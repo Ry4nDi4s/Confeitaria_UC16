@@ -1,4 +1,4 @@
-@token= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsImVtYWlsIjoiZ3VpbGhlcm1lYmVydG9nb0BnbWFpbC5jb20iLCJuYW1lIjoiR3VpbGhlcm1lIEJlcnRvZ28iLCJpYXQiOjE3NjI4OTI3MTYsImV4cCI6MTc2MjkyMTUxNn0.5cvQBOqdTs59voCzcd8H3DbWJOb7aCAivYf28dXNpFQ
+@token= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGFuaUBnbWFpbC5jb20iLCJuYW1lIjoiRGFuaWVsYSIsImdyb3VwcyI6WyJBRE1JTiJdLCJpYXQiOjE3NzQ1NTA0NTEsImV4cCI6MTc3NDU3OTI1MX0.s3wesbYMFjpkBU8m7aOg0_HYTNGCyvACF4Wxhm5qONM
 
 ### Criando os pedidos
 POST http://localhost:3000/orders HTTP/1.1
@@ -6,13 +6,21 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "which_product":"Bolo Fixo",
-    "who_order":"João",
-    "value": 49.99,
-    "quantify": 2,
-    "delivery_day":"2025-12-30",
-    "userId":7,
-    "paymentId":1
+        "Delivery": false,
+        "subtotal": 99.98,
+        "DeliveryDay": "2025-12-30",
+        "ReadyAt": "2025-12-30T10:00:00Z",
+        "items": [
+            {
+                "productId": 1,
+                "quantity": 2,
+                "unitPrice": 49.99
+            }
+        ],
+        "status": "AGUARDANDO_PAGAMENTO",
+        "userId": 3,
+        "paymentId": 2,
+        "orderId": 1
 }
 
 ### lendo os pedidos
