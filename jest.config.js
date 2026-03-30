@@ -1,5 +1,4 @@
 export default {
   testEnvironment: "node",
-  roots: ["<rootDir>/tests"],
-  clearMocks: true
+  roots: ["<rootDir>/tests"]
 };
