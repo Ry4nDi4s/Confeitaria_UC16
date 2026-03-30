@@ -18,7 +18,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const app = express();
+export const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/static", express.static(path.join(__dirname, "../static")));
@@ -83,8 +83,10 @@ app.use(
   }),
 );
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`HTTP = > http://localhost:${PORT}`);
-  console.log(`STATIC at ${path.join(__dirname, "../static")}`);
-});
+if (process.env.NODE_ENV !== "test") {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`HTTP => http://localhost:${PORT}`);
+    console.log(`STATIC at ${path.join(__dirname, "../static")}`);
+  });
+}
