@@ -98,7 +98,6 @@ describe("Sistema de Produtos", () => {
   });
 
   test("Listar produtos cadastrados", () => {
-    // Criar produtos
     criarProduto({
       nome: "Brigadeiro",
       categoria: "docinho",
@@ -147,7 +146,6 @@ describe("Sistema de Produtos", () => {
   });
 
   test("Excluir produto com sucesso", () => {
-    // Criar produtos
     const produto1 = criarProduto({
       nome: "Brigadeiro",
       categoria: "docinho",
