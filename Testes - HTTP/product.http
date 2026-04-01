@@ -6,11 +6,11 @@ POST http://localhost:3000/products HTTP/1.1
 content-type: application/json
 
 {
-    "description": "chocolate",
-    "name": "Bolo",
+    "description": "Chocolate até o fim",
+    "name": "Bolo de Chocolate",
     "quantify":2,
     "stock":5,
-    "maturity": "1970-01-01T00:00:00.000Z",
+    "maturity": "2026-04-10T00:00:00.000Z",
     "foto": "https://th.bing.com/th/id/OIP.YvSviWlvwQoWde_Jae4jYwHaE8?w=269&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
     "preco": 20,
     "tipo": "Bolo Fixo",
