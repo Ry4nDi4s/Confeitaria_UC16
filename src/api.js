@@ -69,7 +69,7 @@ const swaggerSpec = swaggerJSDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get("/", (_req, res) => {
-  res.json({ status: "API da Confeitaria online 🍰" });
+  res.json({ status: "API da Confeitaria online" });
 });
 
 app.use("/users", UserRoutes);

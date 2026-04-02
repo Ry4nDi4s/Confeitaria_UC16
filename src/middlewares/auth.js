@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 export function verificaToken(req, res, next) {
   const aunt = req.headers.authorization || "";
   const token = aunt.startsWith("Bearer ") ? aunt.slice(7) : null;
-
   if (!token) {
     return res.status(401).json({ erro: "Token não enviado" });
   }

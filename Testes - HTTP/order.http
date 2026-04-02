@@ -1,4 +1,4 @@
-@token= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGFuaUBnbWFpbC5jb20iLCJuYW1lIjoiRGFuaWVsYSIsImdyb3VwcyI6WyJBRE1JTiJdLCJpYXQiOjE3NzQ4OTg0MDIsImV4cCI6MTc3NDkyNzIwMn0.ktneXtcmokaC29HL_1hl388P1jXz68plLUZD00HLOoM
+@token= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGFuaUBnbWFpbC5jb20iLCJuYW1lIjoiRGFuaWVsYSIsImdyb3VwcyI6WyJBRE1JTiJdLCJpYXQiOjE3NzUwNzMzMjEsImV4cCI6MTc3NTEwMjEyMX0.Upnxbel9-Dgaqrk1wkGYA8KLYvyjhAZ9lODTeGBRqvQ
 
 ### Criando os pedidos
 POST http://localhost:3000/orders HTTP/1.1
@@ -8,7 +8,7 @@ Authorization: Bearer {{token}}
 {
         "Delivery": false,
         "subtotal": 99.98,
-        "DeliveryDay": "2025-12-30",
+        "DeliveryDay": null,
         "ReadyAt": "2025-12-30T10:00:00Z",
         "items": [
             {
@@ -18,9 +18,8 @@ Authorization: Bearer {{token}}
             }
         ],
         "status": "AGUARDANDO_PAGAMENTO",
-        "userId": 3,
-        "paymentId": 2,
-        "orderId": 1
+        "userId": 2,
+        "paymentId": 1,
 }
 
 ### lendo os pedidos
