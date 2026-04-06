@@ -46,4 +46,16 @@ export const CategoryController = {
       next(error);
     }
   },
+
+  async delete(req, res, next) {
+    try {
+      const { id } = req.params;
+      await prisma.category.delete({
+        where: { id: parseInt(id) },
+      });
+      res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+},
 };

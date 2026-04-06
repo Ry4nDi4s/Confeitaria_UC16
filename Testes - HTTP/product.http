@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGFuaUBnbWFpbC5jb20iLCJuYW1lIjoiRGFuaWVsYSIsImlhdCI6MTc1OTk1MzE3NywiZXhwIjoxNzU5OTgxOTc3fQ.zC3AAY81hPa8Pd1CIhvw5tQDmEj7kQbdXAnPRlcxCX8
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZGFuaUBnbWFpbC5jb20iLCJuYW1lIjoiRGFuaWVsYSIsImdyb3VwcyI6WyJBRE1JTiJdLCJpYXQiOjE3NzUxNTAyMzIsImV4cCI6MTc3NTE3OTAzMn0.c826qU1aWouaIdZJT5yyg9MkAmCKCg8N3UhDIsLO4so
 
 ### Criando Produto
 
@@ -6,11 +6,11 @@ POST http://localhost:3000/products HTTP/1.1
 content-type: application/json
 
 {
-    "description": "chocolate",
-    "name": "Bolo",
+    "description": "Chocolate até o fim",
+    "name": "Bolo de Chocolate",
     "quantify":2,
     "stock":5,
-    "maturity": "1970-01-01T00:00:00.000Z",
+    "maturity": "2026-04-10T00:00:00.000Z",
     "foto": "https://th.bing.com/th/id/OIP.YvSviWlvwQoWde_Jae4jYwHaE8?w=269&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
     "preco": 20,
     "tipo": "Bolo Fixo",
@@ -40,23 +40,25 @@ Content-Type: application/json
 
 ### Deletar 
 
-DELETE http://localhost:3000/products/2 HTTP/1.1
+DELETE http://localhost:3000/products/9 HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ### Atualizar produto por id
 
-PUT http://localhost:3000/products/1 HTTP/1.1
+PUT http://localhost:3000/products/4 HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name" : "Morango do amor",
-    "description" : "Muito bom",
-    "quantify" : 10,
-    "stock" : 250,
-    "matutiy" : "2027-07-09",
-    "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0gceWZkYPr0KwatoAcX4PxU-C1CL1SFPwzQ&s",
+    "description": "Chocolate até o fim",
+    "name": "Bolo de Chocolate",
+    "quantify":2,
+    "stock":5,
+    "maturity": "2026-04-10T00:00:00.000Z",
+    "foto": "https://th.bing.com/th/id/OIP.YvSviWlvwQoWde_Jae4jYwHaE8?w=269&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
     "preco": 20,
-    "tipo": "Bolo Fixo"
+    "tipo": "Bolo Fixo",
+    "categoryId":1,
+    "slug":"bolos-fixos"
 }

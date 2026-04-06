@@ -51,8 +51,8 @@ export const OrderController = {
 
       if (!Array.isArray(items) || items.length === 0) {
         return res.status(400).json({
-            error: "items é obrigatório e deve ser um array não vazio.",
-          });
+          error: "items é obrigatório e deve ser um array não vazio.",
+        });
       }
 
       for (let i = 0; i < items.length; i++) {
@@ -63,7 +63,9 @@ export const OrderController = {
           });
         }
         if (Number(it.quantity) <= 0) {
-          return res.status(400).json({ error: `Item #${i + 1}: quantity deve ser > 0.` });
+          return res
+            .status(400)
+            .json({ error: `Item #${i + 1}: quantity deve ser > 0.` });
         }
       }
 
@@ -84,10 +86,10 @@ export const OrderController = {
         unitPrice: item.unitPrice,
       }));
 
-      const Itens_Order = [ ...OrderItem, ...ItensCreate]; // Combina os dois arrays e os "..." serve para espalhar os itens do ItensCreate dentro do array Itens_Order
+      const Itens_Order = [...OrderItem, ...ItensCreate]; // Combina os dois arrays e os "..." serve para espalhar os itens do ItensCreate dentro do array Itens_Order
 
       await prisma.orderItem.createMany({
-        data: Itens_Order
+        data: Itens_Order,
       });
 
       res.status(201).json(orderCreate);
@@ -105,6 +107,12 @@ export const OrderController = {
 
     const orders = await prisma.order.findMany({
       where: query,
+      
+    include: {
+      items: true,
+      user: true,
+      payment: true,
+    },
     });
     res.status(200).json(orders);
   },

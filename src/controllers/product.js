@@ -1,4 +1,3 @@
-import { Decimal } from "@prisma/client/runtime/library";
 import { slugify } from "../utils/slugify.js";
 import prisma from "../prisma.js";
 
@@ -41,7 +40,7 @@ async store(req, res, _next) {
         stock: Number(stock),
         maturity: new Date(maturity),
         foto,
-        preco: new Decimal(preco),
+        preco: Number(preco),
         tipo,
         isActive: Boolean(isActive),
         categoryId: Number(categoryId),

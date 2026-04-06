@@ -89,6 +89,8 @@ CategoryRoutes.post("/", CategoryController.store);
  */
 CategoryRoutes.get("/", CategoryController.index);
 
+CategoryRoutes.delete("/:id", CategoryController.delete);
+
 /**
  * @swagger
  * /category/by-slug/{slug}/products:
