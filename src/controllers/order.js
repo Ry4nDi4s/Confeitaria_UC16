@@ -81,16 +81,7 @@ export const OrderController = {
         unitPrice: validaItem.unitPrice,
       }));
 
-      const ItensCreate = OrderItem.map((item) => ({
-        productId: item.productId,
-        quantity: item.quantity,
-        unitPrice: item.unitPrice,
-      }));
-
-      const Itens_Order = [...OrderItem, ...ItensCreate]; // Combina os dois arrays e os "..." serve para espalhar os itens do ItensCreate dentro do array Itens_Order
-
       await prisma.orderItem.createMany({
-        //data: Itens_Order,
         data: OrderItem,
       });
 
