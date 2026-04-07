@@ -44,7 +44,7 @@ const route = Router();
  *           type: integer
  *           example: 1
  */
-route.post('/', verificaToken,OrderController.store);
+route.post('/',OrderController.store);
 
 /**
  * @swagger

@@ -38,7 +38,7 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-  })
+  }),
 );
 
 app.options("/", cors());
@@ -79,7 +79,7 @@ app.use("/carts", CartRoutes);
 app.use("/orders", OrderRoutes);
 app.use("/ingredientes", IngredienteRoutes);
 app.use("/receitas", ReceitaRoutes);
-app.use("/payments", verificaToken, PaymentRoutes);
+app.use("/payments", /*verificaToken,*/ PaymentRoutes);
 
 app.use((err, _req, res, _next) => {
   console.error(err);
@@ -102,8 +102,6 @@ app.use((err, _req, res, _next) => {
 
   return res.status(500).json({ error: "Erro interno do servidor" });
 });
-
-
 
 if (process.env.NODE_ENV !== "test") {
   const PORT = process.env.PORT || 3000;

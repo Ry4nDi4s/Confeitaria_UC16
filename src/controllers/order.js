@@ -3,6 +3,7 @@ import { OrderStatus } from "@prisma/client";
 
 export const OrderController = {
   async store(req, res, next) {
+    console.log(`Enviando:`, req.body);
     try {
       const {
         Delivery,
@@ -89,7 +90,8 @@ export const OrderController = {
       const Itens_Order = [...OrderItem, ...ItensCreate]; // Combina os dois arrays e os "..." serve para espalhar os itens do ItensCreate dentro do array Itens_Order
 
       await prisma.orderItem.createMany({
-        data: Itens_Order,
+        //data: Itens_Order,
+        data: OrderItem,
       });
 
       res.status(201).json(orderCreate);
@@ -107,12 +109,12 @@ export const OrderController = {
 
     const orders = await prisma.order.findMany({
       where: query,
-      
-    include: {
-      items: true,
-      user: true,
-      payment: true,
-    },
+
+      include: {
+        items: true,
+        user: true,
+        payment: true,
+      },
     });
     res.status(200).json(orders);
   },
