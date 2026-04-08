@@ -188,6 +188,7 @@ async function main() {
         create: {
           name: category.name,
           slug: category.slug,
+          photoUrl: `/static/categories/photos/${category.slug}.png`
         },
       });
     }

@@ -79,7 +79,7 @@ app.use("/carts", CartRoutes);
 app.use("/orders", OrderRoutes);
 app.use("/ingredientes", IngredienteRoutes);
 app.use("/receitas", ReceitaRoutes);
-app.use("/payments", /*verificaToken,*/ PaymentRoutes);
+app.use("/payments", verificaToken, PaymentRoutes);
 
 app.use((err, _req, res, _next) => {
   console.error(err);
