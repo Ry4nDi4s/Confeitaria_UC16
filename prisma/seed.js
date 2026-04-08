@@ -14,7 +14,7 @@ async function upsertRole({ name, description }) {
   return prisma.role.upsert({
     where: { name },
     update: { description },
-    create: { name, description }
+    create: { name, description },
   });
 }
 
@@ -22,7 +22,7 @@ async function upsertGroup({ name, description }) {
   return prisma.group.upsert({
     where: { name },
     update: { description },
-    create: { name, description }
+    create: { name, description },
   });
 }
 
@@ -35,10 +35,10 @@ async function connectRoleToGroup({ groupId, roleId }) {
       // Porém o upsert requer um unique. Alternativa: try/catch create.
       // Para usar upsert puro, crie um unique artificial:
       // @@unique([groupId, roleId], name: "group_role_unique")
-      groupId_roleId: { groupId, roleId } // nomeamos a unique como "groupId_roleId"
+      groupId_roleId: { groupId, roleId }, // nomeamos a unique como "groupId_roleId"
     },
     update: {},
-    create: { groupId, roleId }
+    create: { groupId, roleId },
   });
 }
 
@@ -46,30 +46,30 @@ async function connectRoleToGroup({ groupId, roleId }) {
 async function connectUserToGroup({ userId, groupId }) {
   return prisma.groupUser.upsert({
     where: {
-      userId_groupId: { userId, groupId } // idem: nomeie a unique
+      userId_groupId: { userId, groupId }, // idem: nomeie a unique
     },
     update: {},
-    create: { userId, groupId }
+    create: { userId, groupId },
   });
 }
 
 async function main() {
   // 1) Cria Roles
   const rolesData = [
-    { name: 'UserPost', description: 'Adicionar User' },
-    { name: 'UserDelete', description: 'Deletar Usuário' },
-    { name: 'UserUpdate', description: 'Editar Usuário' },
-    { name: 'PostProduct', description: 'Adicionar Produto' },
-    { name: 'ProductDelete', description: 'Deletar Produto' },
-    { name: 'ProductUpdate', description: 'Editar Produto' },
-    { name: 'IngredientePost', description: 'Adicionar Ingrediente' },
-    { name: 'IngredienteUpdate', description: 'Editar Ingrediente' },
-    { name: 'IngredienteDelete', description: 'Deletar Ingrediente' },
-    { name: 'ReceitaPost', description: 'Adicionar Receita' },
-    { name: 'ReceitaUpdate', description: 'Editar Receita' },
-    { name: 'ReceitaDelete', description: 'Deletar Receita' },
-    { name: 'OrderUpdate', description: 'Editar Order' },
-    { name: 'OrderDelete', description: 'Deletar Order' },
+    { name: "UserPost", description: "Adicionar User" },
+    { name: "UserDelete", description: "Deletar Usuário" },
+    { name: "UserUpdate", description: "Editar Usuário" },
+    { name: "PostProduct", description: "Adicionar Produto" },
+    { name: "ProductDelete", description: "Deletar Produto" },
+    { name: "ProductUpdate", description: "Editar Produto" },
+    { name: "IngredientePost", description: "Adicionar Ingrediente" },
+    { name: "IngredienteUpdate", description: "Editar Ingrediente" },
+    { name: "IngredienteDelete", description: "Deletar Ingrediente" },
+    { name: "ReceitaPost", description: "Adicionar Receita" },
+    { name: "ReceitaUpdate", description: "Editar Receita" },
+    { name: "ReceitaDelete", description: "Deletar Receita" },
+    { name: "OrderUpdate", description: "Editar Order" },
+    { name: "OrderDelete", description: "Deletar Order" },
   ];
 
   const roles = {};
@@ -79,9 +79,7 @@ async function main() {
   }
 
   // 2) Cria Groups
-  const groupsData = [
-    { name: 'ADMIN', description: 'Administrador' },
-  ];
+  const groupsData = [{ name: "ADMIN", description: "Administrador" }];
 
   const groups = {};
   for (const g of groupsData) {
@@ -92,30 +90,72 @@ async function main() {
   // 3) Vincula Roles aos Groups
   // Crie um nome para a unique composta no schema para permitir upsert,
   // ex: @@unique([groupId, roleId], name: "group_role_unique")
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.UserPost.id });
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.UserDelete.id });
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.UserUpdate.id });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.UserPost.id,
+  });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.UserDelete.id,
+  });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.UserUpdate.id,
+  });
 
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.PostProduct.id });
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.ProductDelete.id });
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.ProductUpdate.id });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.PostProduct.id,
+  });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.ProductDelete.id,
+  });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.ProductUpdate.id,
+  });
 
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.IngredientePost.id });
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.IngredienteUpdate.id });
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.IngredienteDelete.id });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.IngredientePost.id,
+  });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.IngredienteUpdate.id,
+  });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.IngredienteDelete.id,
+  });
 
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.ReceitaPost.id });
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.ReceitaUpdate.id });
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.ReceitaDelete.id });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.ReceitaPost.id,
+  });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.ReceitaUpdate.id,
+  });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.ReceitaDelete.id,
+  });
 
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.OrderUpdate.id });
-  await connectRoleToGroup({ groupId: groups['ADMIN'].id, roleId: roles.OrderDelete.id });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.OrderUpdate.id,
+  });
+  await connectRoleToGroup({
+    groupId: groups["ADMIN"].id,
+    roleId: roles.OrderDelete.id,
+  });
 
   // 4) (Opcional) Vincula Users a Groups
   // Se já existir User com id 1 e 2, por exemplo:
   try {
     const hash = await bcrypt.hash("12345678o", 10);
-  
+
     // Cria o usuário (ou atualiza se já existir)
     const userCreated = await prisma.user.upsert({
       where: { id: 1 },
@@ -128,20 +168,41 @@ async function main() {
         CPF: "103.109.728-76",
       },
     });
-  
+
     // Conecta o usuário ao grupo ADMIN (idempotente)
     await connectUserToGroup({
       userId: userCreated.id,
       groupId: groups["ADMIN"].id,
     });
-  
-    console.log('Seed concluído com Roles, Groups, RoleGroup e GroupUser');
+
+    const categories = [
+      { name: "Bolos Fixos", slug: "bolos_fixos" },
+      { name: "Bolo Personalizado", slug: "bolo_personalizado" },
+      { name: "Docinhos", slug: "docinhos" },
+    ];
+
+    for (const category of categories) {
+      await prisma.category.upsert({
+        where: { slug: category.slug },
+        update: {},
+        create: {
+          name: category.name,
+          slug: category.slug,
+        },
+      });
+    }
+
+    console.log("Seed concluído com Roles, Groups, RoleGroup e GroupUser");
   } catch (error) {
     console.error("Erro ao executar seed:", error);
-  }}
+  }
+}
 
 main()
-  .catch((e) => { console.error(e); process.exit(1); })
-  .finally(async () => { await prisma.$disconnect(); });
-
-  
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
