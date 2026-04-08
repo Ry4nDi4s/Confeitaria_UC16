@@ -32,10 +32,14 @@ model Order {
   paymentId Int     @unique @map("payment_id")
   payment   Payment @relation(fields: [paymentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
-  user User[]
+  userId Int  @map("user_id")
+  user   User @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
   items  OrderItem[] // AQUI VAI SER OS VARIOS ITEMS QUE A PESSOA PODE COMPRAR, SENDO O ANTIGO "which_product"
   status OrderStatus @default(AGUARDANDO_PAGAMENTO) // AQUI O BANCO VAI DEIXAR O PEDIDO COMO "AGUARDANDO_PAGAMENTO" SENDO PADRÃO
+  
+  cart   Cart?       @relation(fields: [cartId], references: [id])
+  cartId Int?
 
   @@index([status, createdAt])
   @@index([paymentId]) // @@index serve para buscas mais rápidas
@@ -95,11 +99,12 @@ model Product {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  categoryId Int @map("category_id")
-  category Category @relation(fields: [categoryId], references: [id])
+  categoryId Int      @map("category_id")
+  category   Category @relation(fields: [categoryId], references: [id])
 
   receitas   Receita[]
   orderItems OrderItem[]
+  carts      Cart[]
 
   @@index([isActive])
   @@map("products")
@@ -129,7 +134,8 @@ model User {
 
   orders Order[]
   groups GroupUser[]
-  
+  carts  Cart?
+
   @@map("users")
 }
 
@@ -145,8 +151,8 @@ model Cart {
 
   order Order[]
 
-  user User @relation(fields: [userId], references: [id])
-  userId Int @map("user_id")
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique @map("user_id")
 
   @@map("carts")
 }
