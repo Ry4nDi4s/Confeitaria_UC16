@@ -4,9 +4,12 @@ export const CategoryController = {
   async store(req, res, next) {
     try {
       const { name, slug } = req.body;
-      const photoUrl = `/static/categories/photos/${slug}.png`;
       const category = await prisma.category.create({
-        data: { name, slug, photoUrl },
+        data: { 
+          name, 
+          slug, 
+          photoUrl:
+          `/static/categories/photos/${slug}.png` },
       });
       res.status(201).json(category);
     } catch (error) {
