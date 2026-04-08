@@ -3,7 +3,6 @@
 ### Criando os pedidos
 POST http://localhost:3000/orders HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer {{token}}
 
 {
         "Delivery": false,
@@ -19,7 +18,7 @@ Authorization: Bearer {{token}}
         ],
         "status": "AGUARDANDO_PAGAMENTO",
         "userId": 2,
-        "paymentId": 1,
+        "paymentId": 1
 }
 
 ### lendo os pedidos
@@ -40,5 +39,3 @@ Authorization: Bearer {{token}}
 PUT  http://localhost:3000/orders/99 HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{token}}
-
-

@@ -2,94 +2,76 @@ import prisma from "../prisma.js";
 import { OrderStatus } from "@prisma/client";
 
 export const OrderController = {
-  async store(req, res, next) {
-    console.log(`Enviando:`, req.body);
-    try {
-      const {
+async store(req, res, next) {
+  try {
+    const {
+      Delivery,
+      DeliveryDay,
+      ReadyAt,
+      items,
+      status,
+      userId,
+      paymentId,
+    } = req.body;
+
+    if (!userId || !paymentId) {
+      return res.status(400).json({ error: "userId e paymentId são obrigatórios" });
+    }
+
+    if (!items || items.length === 0) {
+      return res.status(400).json({ error: "items é obrigatório" });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { id: Number(userId) },
+    });
+    if (!user) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+
+    const payment = await prisma.payment.findUnique({
+      where: { id: Number(paymentId) },
+    });
+    if (!payment) {
+      return res.status(404).json({ error: "Pagamento não encontrado" });
+    }
+
+    // calcula subtotal
+    let subtotal = 0;
+    for (const item of items) {
+      subtotal += item.quantity * item.unitPrice;
+    }
+
+    // cria pedido
+    const order = await prisma.order.create({
+      data: {
         Delivery,
+        DeliveryDay: DeliveryDay ? new Date(DeliveryDay) : null,
+        ReadyAt: ReadyAt ? new Date(ReadyAt) : null,
         subtotal,
-        DeliveryDay,
-        ReadyAt,
-        items,
-        status,
+        status: status || OrderStatus.AGUARDANDO_PAGAMENTO,
         userId,
         paymentId,
-      } = req.body;
+      },
+    });
 
-      let data = {
-        Delivery,
-        subtotal,
-        DeliveryDay: new Date(DeliveryDay),
-        ReadyAt: new Date(ReadyAt),
-        status: status || OrderStatus.AGUARDANDO_PAGAMENTO,
-      };
-
-      if (paymentId) {
-        let paymentkey = await prisma.payment.findFirst({
-          where: { id: Number(paymentId) },
-        });
-        if (!paymentkey) {
-          res.status(301).json({
-            error: "Pagamento não encontrado",
-          });
-          return;
-        }
-        data.paymentId = Number(paymentId);
-      }
-
-      if (userId) {
-        let userkey = await prisma.user.findFirst({
-          where: { id: Number(userId) },
-        });
-        if (!userkey) {
-          res.status(301).json({
-            error: "Usuário não existe",
-          });
-          return;
-        }
-        data.userId = Number(userId);
-      }
-
-      if (!Array.isArray(items) || items.length === 0) {
-        return res.status(400).json({
-          error: "items é obrigatório e deve ser um array não vazio.",
-        });
-      }
-
-      for (let i = 0; i < items.length; i++) {
-        const it = items[i];
-        if (!it?.productId || !it?.quantity || !it?.unitPrice) {
-          return res.status(400).json({
-            error: `Item #${i + 1} inválido: precisa de productId, quantity e unitPrice.`,
-          });
-        }
-        if (Number(it.quantity) <= 0) {
-          return res
-            .status(400)
-            .json({ error: `Item #${i + 1}: quantity deve ser > 0.` });
-        }
-      }
-
-      const orderCreate = await prisma.order.create({
-        data: data,
+    // cria itens do pedido
+    for (const item of items) {
+      await prisma.orderItem.create({
+        data: {
+          orderId: order.id,
+          productId: item.productId,
+          quantity: item.quantity,
+          unitPrice: item.unitPrice,
+        },
       });
-
-      const OrderItem = items.map((validaItem) => ({
-        orderId: orderCreate.id,
-        productId: validaItem.productId,
-        quantity: validaItem.quantity,
-        unitPrice: validaItem.unitPrice,
-      }));
-
-      await prisma.orderItem.createMany({
-        data: OrderItem,
-      });
-
-      res.status(201).json(orderCreate);
-    } catch (err) {
-      next(err);
     }
-  },
+
+    return res.status(201).json(order);
+  } catch (err) {
+    next(err);
+  }
+},
   async index(req, res, _next) {
     let query = {};
 
@@ -129,15 +111,20 @@ export const OrderController = {
 
   async del(req, res, _next) {
     try {
-      const id = Number(req.params.id);
-      const o = await prisma.order.delete({
-        where: {
-          id: id,
-          userId: req.logado.id,
-        },
-      });
+    const id = Number(req.params.id);
+    const order = await prisma.order.findFirst({
+      where: { id, userId: req.logado.id },
+    });
 
-      res.status(200).json(o);
+    if (!order) {
+      return res.status(404).json({ error: "Pedido não encontrado" });
+    }
+
+    await prisma.order.delete({
+      where: { id },
+    });
+
+      res.status(200).json(order);
     } catch (err) {
       res.status(404).json({ err: "Pedido não encontrado" });
     }
@@ -146,12 +133,13 @@ export const OrderController = {
   async put(req, res, _next) {
     try {
       let body = {};
-      const id = Number(req.params, id);
-      const o = await prisma.order.put({
+      const id = Number(req.params.id);
+      const o = await prisma.order.update({
         where: {
           id: id,
           userId: req.logado.id,
         },
+        data: body,
       });
 
       res.status(200).json(o);
